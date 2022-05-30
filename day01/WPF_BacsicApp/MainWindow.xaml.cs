@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace WPF_BacsicApp
+namespace WPF_BasicApp
 {
 	/// <summary>
 	/// MainWindow.xaml에 대한 상호 작용 논리
@@ -12,9 +12,6 @@ namespace WPF_BacsicApp
 			InitializeComponent();
 		}
 
-		private void btnClick_Click(object sender, RoutedEventArgs e)
-		{
-			MessageBox.Show("Hello, WPF!!", "First WPF");
-		}
+		
 	}
 }
