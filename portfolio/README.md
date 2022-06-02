@@ -1,7 +1,7 @@
 # WPF 포트폴리오
 
 ## Naver 영화검색
-- WPF
+- WPF(.NET Framwork 4.7.2 / C#)
   - MahApp.Metro Design
   - Naver OpenAPI
   - Youtube OpenAPI
