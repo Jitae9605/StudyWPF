@@ -1,6 +1,6 @@
 # WPF 포트폴리오
 
-@@ Naver 영화검색
+## Naver 영화검색
 - WPF
   - MahApp.Metro Design
   - Naver OpenAPI
