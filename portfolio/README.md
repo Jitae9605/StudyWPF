@@ -1,6 +1,6 @@
-# WPF 포트폴리오([클릭](https://github.com/Jitae9605/StudyWPF/blob/main/README.md))
+# WPF 포트폴리오 
 
-## Naver 영화검색
+## Naver 영화검색 ([이전으로](https://github.com/Jitae9605/StudyWPF/blob/main/README.md))
 - WPF(.NET Framwork 4.7.2 / C#)
   - MahApp.Metro Design
   - Naver OpenAPI
