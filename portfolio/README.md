@@ -20,3 +20,11 @@
     
  ![YoutubeTrailerPlay](https://github.com/Jitae9605/StudyWPF/blob/main/capture/Trailer_lalaland.png?raw=true)
  검색영화 예고편 실행화면
+
+<br/>
+
+## Naver 뉴스검색
+- WPF(.NET Framwork 4.7.2 / C#)
+  - MahApp.Metro Metro UI/Modern UI
+  - Newtonsoft.json
+  - Naver OpenAPI
