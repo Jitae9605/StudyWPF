@@ -31,4 +31,4 @@
 
 </br>
 
-![NaverNewsSearch](https://github.com/Jitae9605/StudyWPF/blob/main/portfolio/WpfPortfolio/WPFNaverNewsSearch/resource/NaverNewsSearch.png?raw=true)
+![NaverNewsSearch](https://github.com/Jitae9605/StudyWPF/blob/main/portfolio/WpfPortfolio/WPFNaverNewsSearch/resource/NaverNewsSearch1.png?raw=true)
