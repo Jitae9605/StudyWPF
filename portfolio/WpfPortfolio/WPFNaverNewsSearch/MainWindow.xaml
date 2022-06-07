@@ -14,6 +14,7 @@
             <RowDefinition Height="20"/>
             <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -29,13 +30,11 @@
                  mah:TextBoxHelper.UseFloatingWatermark="True"
                  mah:TextBoxHelper.ClearTextButton="True"
                  KeyDown="txtSearch_KeyDown"/>
-            <ComboBox x:Name="cobViewNum" Width="80" Margin="10">
-                <ComboBoxItem>
-                    <TextBlock Text="10개씩"/>
-                    <TextBlock Text="20개씩"/>
-                    <TextBlock Text="50개씩"/>
-                    <TextBlock Text="100개씩"/>
-                </ComboBoxItem>
+            <ComboBox x:Name="cobViewNum" Width="115" Margin="5,10,0,10" SelectionChanged="cobViewNum_SelectionChanged">
+                <ComboBoxItem Content="10개씩 보기" DataContext="10" IsSelected="True"/>
+                <ComboBoxItem Content="30개씩 보기" DataContext="30"/>
+                <ComboBoxItem Content="50개씩 보기" DataContext="50"/>
+                <ComboBoxItem Content="100개씩 보기" DataContext="100"/>
             </ComboBox>
         </StackPanel>
         
@@ -49,5 +48,14 @@
                 <DataGridTextColumn Binding="{Binding PubDate}" Header="뉴스게시일" Width="115"/>
             </DataGrid.Columns>
         </DataGrid>
+
+        <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button x:Name="btnPreb" Width="100" Height="40" Margin="3,1,3,1" Content="이전" 
+                    Style="{StaticResource MahApps.Styles.Button.MetroSquare.Accent}"
+                    Click="btnPreb_Click"/>
+            <Button x:Name="btnNext" Width="100" Height="40" Margin="3,1,3,1" Content="다음" 
+                    Style="{StaticResource MahApps.Styles.Button.MetroSquare.Accent}"
+                    Click="btnNext_Click"/>
+        </StackPanel>
     </Grid>
 </mah:MetroWindow>

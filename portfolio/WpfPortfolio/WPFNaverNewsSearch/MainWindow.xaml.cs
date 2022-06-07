@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -25,6 +26,7 @@ namespace WPFNaverNewsSearch
 	/// </summary>
 	public partial class MainWindow : MetroWindow
 	{
+		string temp;
 		public MainWindow()
 		{
 			InitializeComponent();
@@ -46,17 +48,18 @@ namespace WPFNaverNewsSearch
 		/// <summary>
 		/// 네이버로 부터 검색결과 내용을 받아오는 메서드
 		/// </summary>
-		private void SerchNaverNews()
+		public void SerchNaverNews()
 		{
 			string clientID = "dJX_GSQ1yGgk6k91iJj0";
 			string clientSecret = "HrLgNkRzqP";
 			string keyword = txtSearch.Text;
-			string Viewdisplay = "10";
+			string Viewdisplay = temp;
 			string pageNum = "0";
 			string ViewNum = (Convert.ToInt32(pageNum) * Convert.ToInt32(Viewdisplay) + 1).ToString();
 			string base_url = $"https://openapi.naver.com/v1/search/news.json?start={ViewNum}&display={Viewdisplay}&query={keyword}";
 			string result;
 
+			
 			WebRequest request = null;
 			WebResponse response = null;
 			Stream stream = null;
@@ -107,10 +110,11 @@ namespace WPFNaverNewsSearch
 
 				NewsItem news = new NewsItem()
 				{
-					Title = item["title"].ToString(),
+					Title = Regex.Replace( item["title"].ToString(),@"<(.|\n)*?>",string.Empty),
+					//Title = item["title"].ToString(),
 					OriginalLink = item["originallink"].ToString(),
 					Link = item["link"].ToString(),
-					Description = item["description"].ToString(),
+					Description = Regex.Replace(item["description"].ToString(), @"<(.|\n)*?>", string.Empty),
 					PubDate = temp.ToString("yyyy-MM-dd HH:mm"), // 게시일 형식변경
 				};
 
@@ -127,6 +131,31 @@ namespace WPFNaverNewsSearch
 			string link = (dgrResult.SelectedItem as NewsItem).Link;
 			Process.Start(link);
 		}
+
+		private void cobViewNum_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+			ComboBox currentComboBox = sender as ComboBox;
+			if (currentComboBox != null)
+			{
+				ComboBoxItem currentItem = currentComboBox.SelectedItem as ComboBoxItem;
+				if (currentItem != null)
+				{
+					temp = currentItem.DataContext.ToString();
+				}
+				
+			}
+			
+		}
+
+		private void btnPreb_Click(object sender, RoutedEventArgs e)
+		{
+
+		}
+
+		private void btnNext_Click(object sender, RoutedEventArgs e)
+		{
+
+		}
 	}
 
 	internal class NewsItem
@@ -141,9 +170,9 @@ namespace WPFNaverNewsSearch
 
 // 추가할만한 기능
 //	- 뉴스 스크랩기능
-//	- 다음 결과보기(1~10 , 11 ~ 20 ... ) + << < 1,2,3,4,5 > >> 만들기
-//	- 뷰 갯수 지정기능 추가(10개보기, 50개 보기 ... )
+//	- 다음 결과보기 <<   >> 만들기
+//	- 뷰 갯수 지정기능 추가(10개보기, 50개 보기 ... )	-완료
 //	- 창크기고정
-//	- 타이틀등에 <b>.. 다빼기
+//	- 타이틀등에 <b>.. 다빼기 - 완료
 //	- 아이콘
 //	- 
