@@ -26,7 +26,10 @@ namespace WPFNaverNewsSearch
 	/// </summary>
 	public partial class MainWindow : MetroWindow
 	{
-		string temp;
+		string curr_cisplayNum;
+		string curr_view = "0";
+		int result_total = 0;
+
 		public MainWindow()
 		{
 			InitializeComponent();
@@ -40,6 +43,8 @@ namespace WPFNaverNewsSearch
 		{
 			if(e.Key == Key.Enter)
 			{
+				curr_view = "0";
+				result_total = 0;
 				//Commons.ShowMessageAsync("실행", "뉴스검색 실행!");
 				SerchNaverNews();
 			}
@@ -53,8 +58,8 @@ namespace WPFNaverNewsSearch
 			string clientID = "dJX_GSQ1yGgk6k91iJj0";
 			string clientSecret = "HrLgNkRzqP";
 			string keyword = txtSearch.Text;
-			string Viewdisplay = temp;
-			string pageNum = "0";
+			string Viewdisplay = curr_cisplayNum;
+			string pageNum = curr_view;
 			string ViewNum = (Convert.ToInt32(pageNum) * Convert.ToInt32(Viewdisplay) + 1).ToString();
 			string base_url = $"https://openapi.naver.com/v1/search/news.json?start={ViewNum}&display={Viewdisplay}&query={keyword}";
 			string result;
@@ -97,6 +102,8 @@ namespace WPFNaverNewsSearch
 			var parsedJson = JObject.Parse(result); // string to json
 
 			int total = Convert.ToInt32(parsedJson["total"]); // 전체 검색 결과수
+			result_total = total;
+			stsResult.Content = $"검색결과 : {result_total}개 / 현재 페이지 : {(Convert.ToInt32(curr_view) * Convert.ToInt32(curr_cisplayNum)) + 1} ~ {(Convert.ToInt32(curr_view) + 1) * Convert.ToInt32(curr_cisplayNum)}";
 			int display = Convert.ToInt32(parsedJson["display"]); // 10
 
 			List<NewsItem> newsItems = new List<NewsItem>();
@@ -140,7 +147,7 @@ namespace WPFNaverNewsSearch
 				ComboBoxItem currentItem = currentComboBox.SelectedItem as ComboBoxItem;
 				if (currentItem != null)
 				{
-					temp = currentItem.DataContext.ToString();
+					curr_cisplayNum = currentItem.DataContext.ToString();
 				}
 				
 			}
@@ -149,12 +156,24 @@ namespace WPFNaverNewsSearch
 
 		private void btnPreb_Click(object sender, RoutedEventArgs e)
 		{
-
+			if (Convert.ToInt32(curr_view) > 0)
+			{
+				curr_view = (Convert.ToInt32(curr_view) - 1).ToString();
+				SerchNaverNews();
+			}
+			else
+				return;
 		}
 
 		private void btnNext_Click(object sender, RoutedEventArgs e)
 		{
-
+			if (Convert.ToInt32(curr_view) * Convert.ToInt32(curr_cisplayNum) < result_total)
+			{
+				curr_view = (Convert.ToInt32(curr_view) + 1).ToString();
+				SerchNaverNews();
+			}
+			else
+				return;
 		}
 	}
 
@@ -170,9 +189,8 @@ namespace WPFNaverNewsSearch
 
 // 추가할만한 기능
 //	- 뉴스 스크랩기능
-//	- 다음 결과보기 <<   >> 만들기
-//	- 뷰 갯수 지정기능 추가(10개보기, 50개 보기 ... )	-완료
-//	- 창크기고정
+//	- 다음 결과보기 <<   >> 만들기	- 완료
+//	- 뷰 갯수 지정기능 추가(10개보기, 50개 보기 ... )	- 완료
 //	- 타이틀등에 <b>.. 다빼기 - 완료
 //	- 아이콘
 //	- 

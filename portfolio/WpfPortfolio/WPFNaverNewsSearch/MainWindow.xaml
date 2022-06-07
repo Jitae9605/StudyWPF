@@ -8,7 +8,7 @@
     xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
     xmlns:local="clr-namespace:WPFNaverNewsSearch"
     mc:Ignorable="d"
-    Title="Naver NewsSearch v1.0" Height="450" Width="800">
+    Title="Naver NewsSearch v1.0" Height="450" Width="800" Icon="resource/Naver_News.ico">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
@@ -57,5 +57,11 @@
                     Style="{StaticResource MahApps.Styles.Button.MetroSquare.Accent}"
                     Click="btnNext_Click"/>
         </StackPanel>
+
+        <StatusBar Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3">
+            <StatusBarItem Content="Naver News Search App"/>
+            <Separator Style="{StaticResource MahApps.Styles.Separator.StatusBar}"/>
+            <StatusBarItem x:Name="stsResult"/>
+        </StatusBar>
     </Grid>
 </mah:MetroWindow>

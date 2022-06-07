@@ -211,5 +211,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resource\NaverNewsSearch.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resource\Naver_News.ico" />
+    <Resource Include="resource\Naver_News.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
