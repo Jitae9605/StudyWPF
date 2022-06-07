@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -50,7 +51,10 @@ namespace WPFNaverNewsSearch
 			string clientID = "dJX_GSQ1yGgk6k91iJj0";
 			string clientSecret = "HrLgNkRzqP";
 			string keyword = txtSearch.Text;
-			string base_url = $"https://openapi.naver.com/v1/search/news.json?start=1&display=100&query={keyword}";
+			string Viewdisplay = "10";
+			string pageNum = "0";
+			string ViewNum = (Convert.ToInt32(pageNum) * Convert.ToInt32(Viewdisplay) + 1).ToString();
+			string base_url = $"https://openapi.naver.com/v1/search/news.json?start={ViewNum}&display={Viewdisplay}&query={keyword}";
 			string result;
 
 			WebRequest request = null;
@@ -85,9 +89,61 @@ namespace WPFNaverNewsSearch
 				response.Close();
 			}
 
-			MessageBox.Show(result);
+			//MessageBox.Show(result); // 네이버 뉴스 검색결과의 꼴(json) 확인(한번 확인하고 스샷찍기)
 
-			//var parsedJson = JObject.Parse(result);         // string to json
+			var parsedJson = JObject.Parse(result); // string to json
+
+			int total = Convert.ToInt32(parsedJson["total"]); // 전체 검색 결과수
+			int display = Convert.ToInt32(parsedJson["display"]); // 10
+
+			List<NewsItem> newsItems = new List<NewsItem>();
+
+			var items = parsedJson["items"];
+			var json_array = (JArray)items;
+
+			foreach (var item in json_array)
+			{
+				var temp = DateTime.Parse(item["pubDate"].ToString());	
+
+				NewsItem news = new NewsItem()
+				{
+					Title = item["title"].ToString(),
+					OriginalLink = item["originallink"].ToString(),
+					Link = item["link"].ToString(),
+					Description = item["description"].ToString(),
+					PubDate = temp.ToString("yyyy-MM-dd HH:mm"), // 게시일 형식변경
+				};
+
+				newsItems.Add(news);
+			}
+			this.DataContext = newsItems;
+			
+		}
+
+		private void dgrResult_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
+		{
+			if (dgrResult.SelectedItem == null) return;	// 두번째 검색부터 생기는 오류를 제거
+
+			string link = (dgrResult.SelectedItem as NewsItem).Link;
+			Process.Start(link);
 		}
 	}
+
+	internal class NewsItem
+	{
+		public string Title { get; set; }
+		public string OriginalLink { get; set; }
+		public string Link { get; set; }
+		public string Description { get; set; }
+		public string PubDate { get; set; }
+	}
 }
+
+// 추가할만한 기능
+//	- 뉴스 스크랩기능
+//	- 다음 결과보기(1~10 , 11 ~ 20 ... ) + << < 1,2,3,4,5 > >> 만들기
+//	- 뷰 갯수 지정기능 추가(10개보기, 50개 보기 ... )
+//	- 창크기고정
+//	- 타이틀등에 <b>.. 다빼기
+//	- 아이콘
+//	- 

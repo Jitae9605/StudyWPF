@@ -129,8 +129,8 @@ namespace WpfNaverMovieFinder
 					item["image"].ToString(),
 					Regex.Replace(item["subtitle"].ToString(), @"<(.|\n)*?>", string.Empty),
 					item["pubDate"].ToString(),
-					item["director"].ToString().Replace("|", ", "), // "|" 를 ", "로 교체
-					item["actor"].ToString().Replace("|", ", "),
+					item["director"].ToString().Replace("|", ", ").Trim(',',' '), // "|" 를 ", "로 교체 + 맨 끝의 ", "제거 
+					item["actor"].ToString().Replace("|", ", ").Trim(',', ' '),
 					item["userRating"].ToString());
 				movieItems.Add(movie);
 			}
