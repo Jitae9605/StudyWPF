@@ -20,7 +20,7 @@ namespace WPF_MVVM_App.Models
 
 			set
 			{
-				if (Commons.IsValidEmail(email))
+				if (!Commons.IsValidEmail(value))
 					throw new Exception("Invalid Email");
 				else
 					email = value;
@@ -47,7 +47,13 @@ namespace WPF_MVVM_App.Models
 				return DateTime.Now.Month == date.Month && DateTime.Now.Day == date.Day;
 			}
 		}
-		public bool IsAdult { get; }
+		public bool IsAdult 
+		{ 
+			get
+			{
+				return Commons.CalcAge(date) > 18;
+			}
+		}
 
 		public Person(string firstName, string lastName, string email, DateTime date)
 		{
