@@ -31,12 +31,10 @@
                  KeyDown="txtSearch_KeyDown"/>
             <ComboBox x:Name="cobViewNum" Width="80" Margin="10">
                 <ComboBoxItem>
-                    <StackPanel Orientation="Vertical">
-                        <TextBlock Text="10개씩"/>
-                        <TextBlock Text="20개씩"/>
-                        <TextBlock Text="50개씩"/>
-                        <TextBlock Text="100개씩"/>
-                    </StackPanel>
+                    <TextBlock Text="10개씩"/>
+                    <TextBlock Text="20개씩"/>
+                    <TextBlock Text="50개씩"/>
+                    <TextBlock Text="100개씩"/>
                 </ComboBoxItem>
             </ComboBox>
         </StackPanel>
