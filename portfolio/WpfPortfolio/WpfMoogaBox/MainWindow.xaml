@@ -1,0 +1,43 @@
+﻿<mah:MetroWindow x:Class="WpfMoogaBox.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfMoogaBox"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800" Background="Black">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition/>
+            <RowDefinition Height="65"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+        <Image Source="/Resources/moogabox.png" Margin="30,10,10,0"/>
+
+        <Button x:Name="btnCheckReservation" Grid.Row="1" Grid.Column="0" Margin="30" Height="100" Width="200"
+                Content="예매확인" FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center"
+                Style="{StaticResource MahApps.Styles.Button}" Background="#B71000" Click="btnCheckReservation_Click"/>
+
+        <Button x:Name="btnMakeReservation" Grid.Row="1" Grid.Column="1" Margin="30" Height="100" Width="200"
+                Content="예매" FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center"
+                Style="{StaticResource MahApps.Styles.Button}" Background="#B71000" Click="btnMakeReservation_Click"/>
+
+        <Button x:Name="btnBuyMenu" Grid.Row="1" Grid.Column="2" Margin="30" Height="100" Width="200"
+                Content="매점" FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center"
+                Style="{StaticResource MahApps.Styles.Button}" Background="#B71000" Click="btnBuyMenu_Click"/>
+
+        <StatusBar x:Name="stsResult" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Background="#B71000"/>
+
+
+
+    </Grid>
+    
+</mah:MetroWindow>
