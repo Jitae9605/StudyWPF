@@ -2,7 +2,7 @@
 
 <br/>
     
-## Naver 영화검색 ([이전으로](https://github.com/Jitae9605/StudyWPF/blob/main/README.md))
+## Naver 영화검색 ([이전으로](https://github.com/Jitae9605/StudyWPF#studywpf))
 - WPF(.NET Framwork 4.7.2 / C#)
   - MahApp.Metro Metro UI/Modern UI
   - Newtonsoft.json
