@@ -29,6 +29,21 @@
   - Newtonsoft.json
   - Naver OpenAPI
 
-</br>
+<br/>
 
 ![NaverNewsSearch](https://github.com/Jitae9605/StudyWPF/blob/main/portfolio/WpfPortfolio/WPFNaverNewsSearch/resource/NaverNewsSearch1.png?raw=true)
+
+<br/>
+
+## SmartHome 모니터링앱
+- WPF (.NET Framwork 4.7.2 C#)
+    - MahApp.Metro Metro UI/Modern UI 
+    - Caliburn.Micro
+    - LiveCharts
+    - M2Mqtt
+    - Newtonsoft.Jaon
+    - SQL Server
+
+<br/>
+
+![SmartHomeMonitoringApp](https://github.com/Jitae9605/StudyWPF/blob/main/capture/MQTT_PrintFakeData.png?raw=true)
