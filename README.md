@@ -17,10 +17,10 @@ C# WPF 학습리포지토리
 ## Day 3
 - 디자인
 - 리소스
-- 네이버 영화 앱 만들기([클릭](https://github.com/Jitae9605/StudyWPF/tree/main/portfolio))
+- 네이버 영화 앱 만들기([클릭](https://github.com/Jitae9605/StudyWPF/tree/main/portfolio#naver-%EC%98%81%ED%99%94%EA%B2%80%EC%83%89-%EC%9D%B4%EC%A0%84%EC%9C%BC%EB%A1%9C))
 
 ## Day 4
-- 네이버 영화 앱 마무리([클릭](https://github.com/Jitae9605/StudyWPF/tree/main/portfolio))
+- 네이버 영화 앱 마무리([클릭](https://github.com/Jitae9605/StudyWPF/tree/main/portfolio#naver-%EC%98%81%ED%99%94%EA%B2%80%EC%83%89-%EC%9D%B4%EC%A0%84%EC%9C%BC%EB%A1%9C))
 - 네이버 뉴스검색([클릭](https://github.com/Jitae9605/StudyWPF/tree/main/portfolio#naver-%EB%89%B4%EC%8A%A4%EA%B2%80%EC%83%89))
 
 ## Day 5
@@ -32,7 +32,7 @@ C# WPF 학습리포지토리
 - SmartHome 앱 만들기
 
 ## Day 7
-- SmartHome 시스템 만들기
+- SmartHome 시스템 만들기([클릭](https://github.com/Jitae9605/StudyWPF/tree/main/portfolio#smarthome-%EB%AA%A8%EB%8B%88%ED%84%B0%EB%A7%81%EC%95%B1))
   - MQTT Publish 프로그램
   - MQTT Broker 설정
   - MQTT Monitoring 프로그램
