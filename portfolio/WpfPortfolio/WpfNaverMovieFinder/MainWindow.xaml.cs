@@ -56,7 +56,7 @@ namespace WpfNaverMovieFinder
 				Commons.ShowMessageAsync("검색", "영화검색 완료!!");
 				IsFavorite = false;
 			}
-			catch(Exception ex)
+			catch (Exception ex)
 			{
 				Commons.ShowMessageAsync("예외", $"예외발생 : {ex} ");
 
@@ -88,14 +88,14 @@ namespace WpfNaverMovieFinder
 				request.Headers.Add("X-Naver-Client-Id", clientID); // 중요!
 				request.Headers.Add("X-Naver-Client-Secret", clientSecret); // 중요!!
 
-				response = request.GetResponse();	// 요청한것에 대한 응답을 받는다.
+				response = request.GetResponse();   // 요청한것에 대한 응답을 받는다.
 
-				stream = response.GetResponseStream();	// 요청한것에 대한 응답을 스트림으로 부터 받아온다.
+				stream = response.GetResponseStream();  // 요청한것에 대한 응답을 스트림으로 부터 받아온다.
 				reader = new StreamReader(stream);
 
 				result = reader.ReadToEnd();
 			}
-			catch(Exception ex)
+			catch (Exception ex)
 			{
 				throw ex;
 			}
@@ -108,7 +108,7 @@ namespace WpfNaverMovieFinder
 				response.Close();
 			}
 
-			var parsedJson = JObject.Parse(result);			// string to json
+			var parsedJson = JObject.Parse(result);         // string to json
 
 			int total = Convert.ToInt32(parsedJson["total"]);
 			int display = Convert.ToInt32(parsedJson["display"]);
@@ -116,20 +116,20 @@ namespace WpfNaverMovieFinder
 			stsResult.Content = $"{total} 중 {display} 호출 성공!";
 
 			// 데이터그리드에 검색결과 할당
-			var items = parsedJson["items"];	// 결과중 "items"만을 뽑아온다.(Title, image, url 등이 들어있음)
-			var json_array = (JArray)items;		// 이를 JArray형식으로 변환해 json_array에 저장 
+			var items = parsedJson["items"];    // 결과중 "items"만을 뽑아온다.(Title, image, url 등이 들어있음)
+			var json_array = (JArray)items;     // 이를 JArray형식으로 변환해 json_array에 저장 
 
 			List<MovieItem> movieItems = new List<MovieItem>();
 
-			foreach(var item in json_array)
+			foreach (var item in json_array)
 			{
-				MovieItem movie = new MovieItem( 
-					Regex.Replace( item["title"].ToString(),@"<(.|\n)*?>",string.Empty),	// title 에서 html태그(<b>,<\b>...) 삭제
-					item["link"].ToString(),		
+				MovieItem movie = new MovieItem(
+					Regex.Replace(item["title"].ToString(), @"<(.|\n)*?>", string.Empty),   // title 에서 html태그(<b>,<\b>...) 삭제
+					item["link"].ToString(),
 					item["image"].ToString(),
 					Regex.Replace(item["subtitle"].ToString(), @"<(.|\n)*?>", string.Empty),
 					item["pubDate"].ToString(),
-					item["director"].ToString().Replace("|", ", ").Trim(',',' '), // "|" 를 ", "로 교체 + 맨 끝의 ", "제거 
+					item["director"].ToString().Replace("|", ", ").Trim(',', ' '), // "|" 를 ", "로 교체 + 맨 끝의 ", "제거 
 					item["actor"].ToString().Replace("|", ", ").Trim(',', ' '),
 					item["userRating"].ToString());
 				movieItems.Add(movie);
@@ -144,13 +144,13 @@ namespace WpfNaverMovieFinder
 		/// </summary>
 		private void btnAddWatchList_Click(object sender, RoutedEventArgs e)
 		{
-			if(grdResult.SelectedItems.Count == 0)
+			if (grdResult.SelectedItems.Count == 0)
 			{
 				Commons.ShowMessageAsync("오류", "즐겨찾기에 추가 할 영화를 선택해주세요(복수선택 가능)");
 				return;
 			}
 
-			if(IsFavorite == true)
+			if (IsFavorite == true)
 			{
 				Commons.ShowMessageAsync("오류", "이미 즐겨찾기한 영화입니다!");
 				return;
@@ -181,13 +181,13 @@ namespace WpfNaverMovieFinder
 			{
 				using (var ctx = new OpenApiLabEntities())      // App.config에 있음
 				{
-					ctx.Set<TblFavoriteMovies>().AddRange(list);	// insert문 대체
-					ctx.SaveChanges();	// = commit 대체
+					ctx.Set<TblFavoriteMovies>().AddRange(list);    // insert문 대체
+					ctx.SaveChanges();  // = commit 대체
 				}
 				Commons.ShowMessageAsync("저장", "즐겨찾기 추가 성공!!");
 			}
 
-			catch(Exception ex)
+			catch (Exception ex)
 			{
 				Commons.ShowMessageAsync("예외", $"예외발생 : {ex}");
 			}
@@ -213,10 +213,10 @@ namespace WpfNaverMovieFinder
 				this.DataContext = list;
 				stsResult.Content = $"즐겨찾기 {list.Count}개 조회";
 				Commons.ShowMessageAsync("즐겨찾기", "즐겨찾기 조회 완료");
-				IsFavorite = true;	//db에서 왔음
+				IsFavorite = true;  //db에서 왔음
 
 			}
-			catch(Exception ex)
+			catch (Exception ex)
 			{
 				Commons.ShowMessageAsync("예외", $"예외발생 : {ex}");
 				IsFavorite = false;
@@ -228,13 +228,13 @@ namespace WpfNaverMovieFinder
 		/// </summary>
 		private void btnDelWatchList_Click(object sender, RoutedEventArgs e)
 		{
-			if(IsFavorite == false)
+			if (IsFavorite == false)
 			{
 				Commons.ShowMessageAsync("오류", "즐겨찾기 내용이 아니면 삭제할 수 없습니다.");
 				return;
 			}
 
-			if(grdResult.SelectedItems.Count == 0)
+			if (grdResult.SelectedItems.Count == 0)
 			{
 				Commons.ShowMessageAsync("오류", "삭제할 영화를 선택하세요.");
 				return;
@@ -247,11 +247,11 @@ namespace WpfNaverMovieFinder
 					// DB에서의 삭제처리
 					var delItem = ctx.TblFavoriteMovies.Find(item.idx);
 					ctx.Entry(delItem).State = System.Data.Entity.EntityState.Deleted;  // 객체상태를 삭제로 변경
-					ctx.SaveChanges();	// = 커밋
+					ctx.SaveChanges();  // = 커밋
 				}
 			}
 
-			btnViewWatchList_Click(sender, e);	// 즐겨찾기보기 버튼클릭 이벤트 실행
+			btnViewWatchList_Click(sender, e);  // 즐겨찾기보기 버튼클릭 이벤트 실행
 		}
 
 		/// <summary>
@@ -259,21 +259,21 @@ namespace WpfNaverMovieFinder
 		/// </summary>
 		private void btnWatchTrailer_Click(object sender, RoutedEventArgs e)
 		{
-			if(grdResult.SelectedItems.Count == 0)
+			if (grdResult.SelectedItems.Count == 0)
 			{
 				Commons.ShowMessageAsync("유튜브영화", "영화를 선택하세요");
 				return;
 			}
-			
-			if(grdResult.SelectedItems.Count > 1)
+
+			if (grdResult.SelectedItems.Count > 1)
 			{
 				Commons.ShowMessageAsync("유튜브영화", "영화를 하나만 선택하세요.");
 				return;
 			}
 
-			string movieName = "";	// string empty
+			string movieName = "";  // string empty
 
-			if(IsFavorite == true)  // 즐겨찾기 DB검색한 값
+			if (IsFavorite == true)  // 즐겨찾기 DB검색한 값
 			{
 				movieName = (grdResult.SelectedItem as TblFavoriteMovies).Title;
 			}
@@ -282,10 +282,10 @@ namespace WpfNaverMovieFinder
 				movieName = (grdResult.SelectedItem as MovieItem).Title;
 			}
 
-			var trailerWindow = new TrailerWindow(movieName);	// 영화제목을 파라미터로 받는 생성자
-			trailerWindow.Owner = this;		// 메인 윈도우
+			var trailerWindow = new TrailerWindow(movieName);   // 영화제목을 파라미터로 받는 생성자
+			trailerWindow.Owner = this;     // 메인 윈도우
 			trailerWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-			trailerWindow.ShowDialog();		// 모달창
+			trailerWindow.ShowDialog();     // 모달창
 
 
 		}
@@ -296,13 +296,13 @@ namespace WpfNaverMovieFinder
 		/// </summary>
 		private void grdResult_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
 		{
-			if(grdResult.SelectedItem is MovieItem)	// 네이버 API에서 온값인 경우
+			if (grdResult.SelectedItem is MovieItem)    // 네이버 API에서 온값인 경우
 			{
 				var movie = grdResult.SelectedItem as MovieItem;
 
 				if (string.IsNullOrEmpty(movie.Image))
 				{
-					imgPoster.Source = new BitmapImage(new Uri("/resource/No_Picture.jpg",UriKind.RelativeOrAbsolute));
+					imgPoster.Source = new BitmapImage(new Uri("/resource/No_Picture.jpg", UriKind.RelativeOrAbsolute));
 				}
 				else
 				{
@@ -310,7 +310,7 @@ namespace WpfNaverMovieFinder
 				}
 			}
 
-			if(grdResult.SelectedItem is TblFavoriteMovies)                // 즐겨찾기 DB에서 온값인 경우
+			if (grdResult.SelectedItem is TblFavoriteMovies)                // 즐겨찾기 DB에서 온값인 경우
 			{
 				var movie = grdResult.SelectedItem as TblFavoriteMovies;
 
@@ -338,23 +338,24 @@ namespace WpfNaverMovieFinder
 		/// </summary>
 		private void btnNaverTrailer_Click(object sender, RoutedEventArgs e)
 		{
-			if(grdResult.SelectedItems.Count == 0)
+			if (grdResult.SelectedItems.Count == 0)
 			{
 				Commons.ShowMessageAsync("네이버 영화", "영화를 선택하세요.");
 				return;
 			}
 
-			if(grdResult.SelectedItems.Count > 1)
+			if (grdResult.SelectedItems.Count > 1)
 			{
 				Commons.ShowMessageAsync("네이버 영화", "영화를 하나만 선택하세요.");
 				return;
 			}
 
 			string linkurl = String.Empty;
-			if(IsFavorite == true)
+			if (IsFavorite == true)
 			{
 				linkurl = (grdResult.SelectedItem as TblFavoriteMovies).Link;
-			} else
+			}
+			else
 			{
 				linkurl = (grdResult.SelectedItem as MovieItem).Link;
 

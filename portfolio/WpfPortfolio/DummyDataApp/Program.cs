@@ -1,11 +1,8 @@
 ﻿using Bogus;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using uPLibrary.Networking.M2Mqtt;
 
 
@@ -25,9 +22,9 @@ namespace DummyDataApp
 
 		static void Main(string[] args)
 		{
-			InitializeConfig();		// 구성 초기화
+			InitializeConfig();     // 구성 초기화
 			ConnectMqttBroker();    // 브로커에 접속
-			StartPublish();			// 배포(Publish 발행)
+			StartPublish();         // 배포(Publish 발행)
 		}
 
 		private static void InitializeConfig()
@@ -38,7 +35,7 @@ namespace DummyDataApp
 
 			SensorData = new Faker<SensorInfo>()
 					.RuleFor(r => r.DevId, f => f.PickRandom(Rooms))
-					.RuleFor(r => r.CurrTime, f => f.Date.Past())
+					.RuleFor(r => r.CurrTime, f => f.Date.Recent())
 					.RuleFor(r => r.Temp, f => f.Random.Float(19.0f, 30.9f))
 					.RuleFor(r => r.Humid, f => f.Random.Float(40.0f, 63.9f));
 		}
@@ -51,22 +48,30 @@ namespace DummyDataApp
 				Client.Connect("SAMRTHOME01");
 				Console.WriteLine("접속성공!");
 			}
-			catch(Exception ex)
+			catch (Exception ex)
 			{
 				Console.WriteLine($"접속불기 : {ex}");
-				Environment.Exit(5);	// ERROR_ACCESS_DENIED
+				Environment.Exit(5);    // ERROR_ACCESS_DENIED
 			}
 		}
 
+		// 더미데이터 생성 쓰레드
 		private static void StartPublish()
 		{
 			MqttThread = new Thread(() => LoopPublish());
 			MqttThread.Start();
+
+			//Thread thread2 = new Thread(() => LoopPublish2());
+			//thread2.Start();
+
+			//Thread thread3 = new Thread(() => LoopPublish3());
+			//thread3.Start();
 		}
 
+		// MQTT에 생성된 더미데이터를 전송
 		private static void LoopPublish()
 		{
-			while(true)
+			while (true)
 			{
 				SensorInfo tempValue = SensorData.Generate();
 				CurrValue = JsonConvert.SerializeObject(tempValue, Formatting.Indented);
@@ -75,5 +80,33 @@ namespace DummyDataApp
 				Thread.Sleep(1000);
 			}
 		}
+
+		private static void LoopPublish2()
+		{
+			while (true)
+			{
+				SensorInfo tempValue = SensorData.Generate();
+				tempValue.DevId = Guid.NewGuid().ToString();    // newdata topic DEVID변경
+				CurrValue = JsonConvert.SerializeObject(tempValue, Formatting.Indented);
+				Client.Publish("home/device/newdata/", Encoding.Default.GetBytes(CurrValue));
+				Console.WriteLine($"Published newdata : {CurrValue}");
+				Thread.Sleep(1500);
+			}
+		}
+
+		private static void LoopPublish3()
+		{
+			while (true)
+			{
+				SensorInfo tempValue = SensorData.Generate();
+				tempValue.DevId = "Test";    // testdata topic DEVID변경
+				CurrValue = JsonConvert.SerializeObject(tempValue, Formatting.Indented);
+				Client.Publish("home/device/testdata/", Encoding.Default.GetBytes(CurrValue));
+				Console.WriteLine($"Published testdata : {CurrValue}");
+				Thread.Sleep(2000);
+			}
+		}
+
+
 	}
 }

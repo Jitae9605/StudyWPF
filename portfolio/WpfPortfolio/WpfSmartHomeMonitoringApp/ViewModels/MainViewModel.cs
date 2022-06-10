@@ -1,10 +1,5 @@
 ﻿using Caliburn.Micro;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace WpfSmartHomeMonitoringApp.ViewModels
 {
@@ -12,7 +7,7 @@ namespace WpfSmartHomeMonitoringApp.ViewModels
 	{
 		public MainViewModel()
 		{
-			DisplayName = "SmartHome Mpnitoring v2.0";	// 프로그램 타이틀, 이름
+			DisplayName = "SmartHome Mpnitoring v2.0";  // 프로그램 타이틀, 이름
 		}
 
 		public void LoadDataBaseView()

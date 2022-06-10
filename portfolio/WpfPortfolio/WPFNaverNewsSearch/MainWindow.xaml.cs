@@ -4,20 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace WPFNaverNewsSearch
 {
@@ -41,7 +32,7 @@ namespace WPFNaverNewsSearch
 		/// </summary>
 		private void txtSearch_KeyDown(object sender, KeyEventArgs e)
 		{
-			if(e.Key == Key.Enter)
+			if (e.Key == Key.Enter)
 			{
 				curr_view = "0";
 				result_total = 0;
@@ -64,7 +55,7 @@ namespace WPFNaverNewsSearch
 			string base_url = $"https://openapi.naver.com/v1/search/news.json?start={ViewNum}&display={Viewdisplay}&query={keyword}";
 			string result;
 
-			
+
 			WebRequest request = null;
 			WebResponse response = null;
 			Stream stream = null;
@@ -113,11 +104,11 @@ namespace WPFNaverNewsSearch
 
 			foreach (var item in json_array)
 			{
-				var temp = DateTime.Parse(item["pubDate"].ToString());	
+				var temp = DateTime.Parse(item["pubDate"].ToString());
 
 				NewsItem news = new NewsItem()
 				{
-					Title = Regex.Replace( item["title"].ToString(),@"<(.|\n)*?>",string.Empty),
+					Title = Regex.Replace(item["title"].ToString(), @"<(.|\n)*?>", string.Empty),
 					//Title = item["title"].ToString(),
 					OriginalLink = item["originallink"].ToString(),
 					Link = item["link"].ToString(),
@@ -128,12 +119,12 @@ namespace WPFNaverNewsSearch
 				newsItems.Add(news);
 			}
 			this.DataContext = newsItems;
-			
+
 		}
 
 		private void dgrResult_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
 		{
-			if (dgrResult.SelectedItem == null) return;	// 두번째 검색부터 생기는 오류를 제거
+			if (dgrResult.SelectedItem == null) return; // 두번째 검색부터 생기는 오류를 제거
 
 			string link = (dgrResult.SelectedItem as NewsItem).Link;
 			Process.Start(link);
@@ -149,9 +140,9 @@ namespace WPFNaverNewsSearch
 				{
 					curr_cisplayNum = currentItem.DataContext.ToString();
 				}
-				
+
 			}
-			
+
 		}
 
 		private void btnPreb_Click(object sender, RoutedEventArgs e)

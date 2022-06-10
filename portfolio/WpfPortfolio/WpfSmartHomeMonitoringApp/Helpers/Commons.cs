@@ -6,9 +6,9 @@ namespace WpfSmartHomeMonitoringApp.Helpers
 	{
 		public static string BROKERHOST { get; set; }
 		public static string PUB_TOPIC { get; set; }
-		public static MqttClient MQTT_CLINET  { get; set; }
-		public static string CONNSTRING  { get; set; }
-		public static bool IS_CONNECT  { get; set; }
+		public static MqttClient MQTT_CLINET { get; set; }
+		public static string CONNSTRING { get; set; }
+		public static bool IS_CONNECT { get; set; }
 
 
 	}

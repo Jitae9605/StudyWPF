@@ -3,17 +3,10 @@ using Google.Apis.YouTube.v3;
 using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using WpfNaverMovieFinder.models;
 
 
@@ -24,8 +17,8 @@ namespace WpfNaverMovieFinder
 	/// </summary>
 	public partial class TrailerWindow : MetroWindow
 	{
-		List<YoutubeItem> youtubeItems;	// YoutubeAPI에서 검색된 결과 담을 리스트
-		
+		List<YoutubeItem> youtubeItems; // YoutubeAPI에서 검색된 결과 담을 리스트
+
 		public TrailerWindow()
 		{
 			InitializeComponent();
@@ -84,7 +77,7 @@ namespace WpfNaverMovieFinder
 
 		private void lsvYoutubeSearch_MouseDoubleClick(object sender, MouseButtonEventArgs e)
 		{
-			if(lsvYoutubeSearch.SelectedItems.Count == 0)
+			if (lsvYoutubeSearch.SelectedItems.Count == 0)
 			{
 				Commons.ShowMessageAsync("유튜브", "예고편을 볼 영화를 선택해주세요.");
 				return;
@@ -107,7 +100,7 @@ namespace WpfNaverMovieFinder
 		private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
 		{
 			brsYoutubeWatch.Address = String.Empty;
-			brsYoutubeWatch.Dispose();	// 리소스 해제
+			brsYoutubeWatch.Dispose();  // 리소스 해제
 		}
 	}
 }
