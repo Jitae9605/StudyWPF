@@ -23,7 +23,7 @@
 
 <br/>
 
-## Naver 뉴스검색
+## Naver 뉴스검색 ([이전으로](https://github.com/Jitae9605/StudyWPF#studywpf))
 - WPF(.NET Framwork 4.7.2 / C#)
   - MahApp.Metro Metro UI/Modern UI
   - Newtonsoft.json
@@ -35,7 +35,7 @@
 
 <br/>
 
-## SmartHome 모니터링앱
+## SmartHome 모니터링앱 ([이전으로](https://github.com/Jitae9605/StudyWPF#studywpf))
 - WPF (.NET Framwork 4.7.2 C#)
     - MahApp.Metro Metro UI/Modern UI 
     - Caliburn.Micro
