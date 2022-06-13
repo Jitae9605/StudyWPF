@@ -1,0 +1,43 @@
+﻿<mah:MetroWindow
+    x:Class="WpfMoogaBox.Views.SelectSeatView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    xmlns:local="clr-namespace:WpfMoogaBox.Views"
+    mc:Ignorable="d" 
+    d:DesignHeight="1000" d:DesignWidth="1400" Background="Black">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+        <Grid Margin="15">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition/>
+                <RowDefinition Height="100"/>
+                
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <!--로고 및 뷰설명-->
+            <Image Source="/Resources/moogabox.png" Margin="30,10,10,0"/>
+            <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Content="영화좌석선택" FontWeight="Bold" 
+               Foreground="white" FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            
+        </Grid>
+        
+        
+        
+        <StatusBar Grid.Row="1">
+            
+        </StatusBar>
+            
+    </Grid>
+</mah:MetroWindow>
