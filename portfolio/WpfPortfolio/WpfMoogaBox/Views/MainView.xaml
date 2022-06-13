@@ -7,7 +7,7 @@
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
-        Background="Black" >
+        Background="Black" Width="{Binding MainWidth}" Height="{Binding MainHeight}" >
 
     
     <Grid>
