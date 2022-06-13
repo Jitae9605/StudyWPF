@@ -182,6 +182,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Helpers\Commons.cs" />
     <Compile Include="Helpers\ReservationInfo.cs" />
     <Compile Include="Models\Mv_Info.cs" />
     <Compile Include="Helpers\Selection.cs" />

@@ -14,7 +14,7 @@ namespace WpfMoogaBox.ViewModels
 {
 	public class MakeReservationViewModel : Screen
 	{
-		public static Selection seleted;
+		public Selection seleted;
 		public MakeReservationViewModel()
 		{
 			SelectedMv_img = "\\Resources\\No_Picture.jpg";
@@ -121,6 +121,11 @@ namespace WpfMoogaBox.ViewModels
 		{
 			Cancel(sender, e);
 			var wManager = new WindowManager();
+			if(string.IsNullOrEmpty(seleted.MvName))
+			{
+				Commons.ShowMessageAsync("알림", "먼저 영화와 시간을 선택해주세요");
+				return;
+			}
 
 			ReservationInfo.MvName = seleted.MvName;
 			ReservationInfo.Hall = seleted.Hall;

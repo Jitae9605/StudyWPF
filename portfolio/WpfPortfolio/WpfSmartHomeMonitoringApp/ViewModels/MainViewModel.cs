@@ -75,5 +75,11 @@ namespace WpfSmartHomeMonitoringApp.ViewModels
 				ActivateItemAsync(new DataBaseViewModel());
 			}
 		}
+
+		public void PopInfoView()
+		{
+			var winManger = new WindowManager();
+			winManger.ShowDialogAsync(new CustomInfoViewModel("About"));
+		}
 	}
 }
