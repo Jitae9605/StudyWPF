@@ -24,8 +24,8 @@
                         <MenuItem.Icon>
                             <iconPacks:MaterialDesign Kind="AttachFile"/>
                         </MenuItem.Icon>
-                        
-                        <MenuItem Header="Start">
+
+                        <MenuItem x:Name="PopInfoDialog" Header="Start">
                             <MenuItem.Icon>
                                 <iconPacks:MaterialDesign Kind="PlayCircleFilled"/>
                             </MenuItem.Icon>
@@ -38,7 +38,7 @@
                         </MenuItem>
                         
                         <Separator/>
-                        <MenuItem x:Name="ExitProgram" Header="Exit">
+                        <MenuItem x:Name="Exit_Menu" Header="Exit">
                             <MenuItem.Icon>
                                 <iconPacks:MaterialDesign Kind="ExitToApp"/>
                             </MenuItem.Icon>
@@ -85,14 +85,14 @@
                 <!--툴바-->
                 <ToolBarTray>
                     <ToolBar Style="{StaticResource MahApps.Styles.ToolBar}">
-                        <Button ToolTip="Start MQTT Subscriber">
+                        <Button x:Name="StartSubscribe" ToolTip="Start MQTT Subscriber">
                             <iconPacks:MaterialDesign Kind="PlayCircleFilled"/>
                         </Button>
                         <Button ToolTip="Stop MQTT Subscriber">
                             <iconPacks:MaterialDesign Kind="PauseCircleFilled"/>
                         </Button>
                         <Separator/>
-                        <Button ToolTip="Exit">
+                        <Button x:Name="Exit_Toolbar" ToolTip="Exit">
                             <iconPacks:MaterialDesign Kind="ExitToApp"/>
                         </Button>
                     </ToolBar>

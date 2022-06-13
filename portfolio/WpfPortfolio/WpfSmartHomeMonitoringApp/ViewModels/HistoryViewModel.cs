@@ -1,5 +1,7 @@
 ﻿using Caliburn.Micro;
 using OxyPlot;
+using OxyPlot.Legends;
+using OxyPlot.Series;
 using System;
 using System.Data.SqlClient;
 using System.Linq;
@@ -18,7 +20,7 @@ namespace WpfSmartHomeMonitoringApp.ViewModels
 		private string endDate;
 		private string initEndDate;
 		private int totalCount;
-		private PlotModel smartHomeModel;
+		private PlotModel historyModel; //oxyplot 220613, LJT, smartHomeModel -> historyModel
 
 		public BindableCollection<DivisionModel> Divisions
 		{
@@ -90,13 +92,13 @@ namespace WpfSmartHomeMonitoringApp.ViewModels
 			}
 		}
 
-		public PlotModel SmartHomeModel
+		public PlotModel HistoryModel // 220613, LJT, smartHomeModel -> historyModel
 		{
-			get => smartHomeModel;
+			get => historyModel;
 			set
 			{
-				smartHomeModel = value;
-				NotifyOfPropertyChange(() => SmartHomeModel);
+				historyModel = value;
+				NotifyOfPropertyChange(() => HistoryModel);
 			}
 		}
 
@@ -169,18 +171,64 @@ namespace WpfSmartHomeMonitoringApp.ViewModels
 
 					SqlDataReader reader = cmd.ExecuteReader();
 
-					var i = 0;
+					int i = 0;
+
+				// start of 차트처리 작성 220613 추가
+					// 임시 플롯모델 
+					PlotModel temp = new PlotModel() 
+					{
+						Title = $"{SelectedDivision.DivisionVal} Histories",
+						Subtitle = "using OxyPlot"
+					};
+
+					// 범례추가
+					var l = new Legend
+					{
+						LegendBorder = OxyColors.Black,
+						LegendBackground = OxyColor.FromAColor(200, OxyColors.White),
+						LegendPosition = LegendPosition.RightTop,
+						LegendPlacement = LegendPlacement.Inside
+
+					};
+
+					//온도값을 LineChart로 담을 객체
+					LineSeries seriesTemp = new LineSeries()
+					{
+						Color = OxyColor.FromRgb(255, 100, 100),
+						Title = "Temperature",
+						MarkerType = MarkerType.Circle,
+						MarkerSize = 4
+					};
+
+					// 습도값을 LineChart로 담을 객체
+					LineSeries seriesHumid = new LineSeries()
+					{
+						Color = OxyColor.FromRgb(150,150,255),
+						Title = "Humidity",
+						MarkerType = MarkerType.Triangle,
+						MarkerSize = 3
+					};
+
 					while (reader.Read())
 					{
-						var Tmep = reader["Temp"];
+						//var Tmep = reader["Temp"];
 						// Temp,Humid 차트데이터 생성
+						seriesTemp.Points.Add(new DataPoint(i, Convert.ToDouble(reader["Temp"])));
+						seriesHumid.Points.Add(new DataPoint(i, Convert.ToDouble(reader["Humid"])));
 
 
 						i++;
 					}
 
-					TotalCount = i;
+					TotalCount = i;	// 검색한 데이터 촉 개수
+
+					temp.Series.Add(seriesTemp);
+					temp.Series.Add(seriesHumid);
+					temp.Legends.Add(l);
+					HistoryModel = temp;
 				}
+
+				// end of 차트처리 작성 220613 추가
 				catch (Exception ex)
 				{
 					MessageBox.Show($"Error {ex.Message}");

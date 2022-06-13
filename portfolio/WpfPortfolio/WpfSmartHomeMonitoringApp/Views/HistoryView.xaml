@@ -69,7 +69,7 @@
 
         <Grid Grid.Row="2" Grid.Column="0" Margin="15">
             <!-- 라이브 차트는 무료버전의 경우 값이 많아지면 렉 많이 걸림 ==> Oxy Plot 대체사용 -->
-            <oxy:PlotView Model="{Binding SmartHomeModel}"/>
+            <oxy:PlotView Model="{Binding HistoryModel}"/>
 
         </Grid>
     </Grid>

@@ -182,13 +182,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Helpers\ReservationInfo.cs" />
     <Compile Include="Models\Mv_Info.cs" />
+    <Compile Include="Helpers\Selection.cs" />
     <Compile Include="ViewModels\MainScreenViewModel.cs" />
+    <Compile Include="ViewModels\SelectSeatViewModel.cs" />
     <Compile Include="Views\MainScreenView.xaml.cs">
       <DependentUpon>MainScreenView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MakeReservationView.xaml.cs">
       <DependentUpon>MakeReservationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SelectSeatView.xaml.cs">
+      <DependentUpon>SelectSeatView.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\BuyMenuView.xaml">
       <SubType>Designer</SubType>
@@ -229,6 +235,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\SelectSeatView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -264,13 +274,14 @@
     <Resource Include="Resources\범죄도시2.png" />
     <Resource Include="Resources\쥬라기월드new.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Helpers\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Resources\매점버튼.png" />
     <Resource Include="Resources\예매.png" />
     <Resource Include="Resources\예매조회.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\No_Picture.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

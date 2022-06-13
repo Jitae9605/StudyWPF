@@ -5,166 +5,246 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
     xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:cal="http://caliburnmicro.com"
     xmlns:local="clr-namespace:WpfMoogaBox.Views"
     mc:Ignorable="d" 
-    Height="700" Width="1600" Background="Black"
-    WindowStartupLocation="CenterOwner">
+    Height="1000" Width="1400" Background="Black"
+    WindowStartupLocation="CenterOwner"
+    >
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition/>
-            <RowDefinition Height="70"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200"/>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <!--로고 및 뷰설명-->
-        <Image Source="/Resources/moogabox.png" Margin="30,10,10,0"/>
-        <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Content="영화 및 시간선택" FontWeight="Bold" 
+        <Grid Margin="15">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition/>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="20"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <!--로고 및 뷰설명-->
+            <Image Source="/Resources/moogabox.png" Margin="30,10,10,0"/>
+            <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Content="영화 및 시간선택" FontWeight="Bold" 
                Foreground="white" FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
-        <!--선택사항-->
-        <Border Grid.Row="1" Grid.Column="2" BorderBrush="gray" BorderThickness="2" Margin="15,0,15,15">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="20"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <!--선택한 영화의 이미지-->
-                <Image Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Source="/Resources/닥터new.png" Margin="30,10,10,0"/>
+            <!--선택사항-->
+            <Border Grid.Row="1" Grid.Column="2" BorderBrush="gray" BorderThickness="2" Margin="15,0,15,15">
+                <Grid Margin="15">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="20"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <!--선택한 영화의 이미지-->
+                    <Image x:Name="Selectedimg" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" 
+                       Source="{Binding SelectedMv_img}" Margin="30,10,10,0"/>
 
-                <!--선택사항 라벨-->
-                <Label Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" HorizontalAlignment="Left" VerticalAlignment="Center"
+                    <!--선택사항 라벨-->
+                    <Label Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" HorizontalAlignment="Left" VerticalAlignment="Center"
                        Content="영화이름 :" Foreground="White" FontSize="20"/>
 
-                <Label Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center"
+                    <Label Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center"
                        Content="영화시간 :" Foreground="White" FontSize="20"/>
 
-                <Label Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"
+                    <Label Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"
                        Content="상영관 :" Foreground="White" FontSize="20" />
 
-                <!--영화이름-->
-                <TextBlock Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" HorizontalAlignment="Left" VerticalAlignment="Center"
-                           Text="닥터스트레인지2" Foreground="White" FontSize="20" Margin="5" TextWrapping="Wrap"/>
+                    <!--영화이름-->
+                    <TextBlock Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" HorizontalAlignment="Left" VerticalAlignment="Center"
+                           Text="{Binding SelectedMv.MvName}" Foreground="White" FontSize="17" Margin="5" TextWrapping="Wrap"/>
 
-                <!--영화시간-->
-                <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" Margin="5">
+                    <!--영화시간-->
+                    <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" Margin="5">
 
-                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center"
-                               Text="08:00" Foreground="White" FontSize="20"/>
+                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center"
+                               Text="{Binding SelectedMv.StartTime}" Foreground="White" FontSize="20"/>
 
-                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" 
+                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" 
                                Text=" ~ " Foreground="White" FontSize="20"/>
 
-                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center"
-                               Text="10:00" Foreground="White" FontSize="20"/>
-                </StackPanel>
+                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center"
+                               Text="{Binding SelectedMv.EndTime}" Foreground="White" FontSize="20"/>
+                    </StackPanel>
 
-                <!--상영관-->
-                <StackPanel  Grid.Row="4" Grid.Column="1" Orientation="Horizontal" Margin="5">
-                    <TextBlock Grid.RowSpan="2" HorizontalAlignment="Left" VerticalAlignment="Center"
-                           Text="1" Foreground="White" FontSize="20" />
+                    <!--상영관-->
+                    <StackPanel  Grid.Row="4" Grid.Column="1" Orientation="Horizontal" Margin="5">
+                        <TextBlock Grid.RowSpan="2" HorizontalAlignment="Left" VerticalAlignment="Center"
+                           Text="{Binding SelectedMv.Hall}" Foreground="White" FontSize="20" />
 
-                    <TextBlock Grid.RowSpan="2" HorizontalAlignment="Left" VerticalAlignment="Center"
+                        <TextBlock Grid.RowSpan="2" HorizontalAlignment="Left" VerticalAlignment="Center"
                            Text="관" Foreground="White" FontSize="20" />
-                </StackPanel>
-            </Grid>
-        </Border>
+                    </StackPanel>
+                </Grid>
+            </Border>
 
-        <!--선택부분(버튼,이미지부분)-->
-        <Grid Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2">
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            
-            <!--1번영화-->
-            <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" BorderBrush="Gray" BorderThickness="2" Margin="2" >
-                <Grid >
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="200"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Image Grid.Row="0" Grid.Column="0" Source="/Resources/닥터new.png" Margin="5"/>
-                    <Grid Grid.Row="0" Grid.Column="1">
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Grid.Column="0" Margin="20,15" Orientation="Horizontal" HorizontalAlignment="Center">
-                            <Button Content="{Binding MV_Times[0]}" FontSize="16" FontWeight="Bold" FontFamily="Century Gothic"
-                                    Width="120" Height="60" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,5"/>
-                            <Button Content="{Binding MV_Times[1]}" FontSize="16" FontWeight="Bold" FontFamily="Century Gothic"
-                                    Width="120" Height="60" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,5"/>
-                            <Button Content="{Binding MV_Times[2]}" FontSize="16" FontWeight="Bold" FontFamily="Century Gothic"
-                                    Width="120" Height="60" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,5"/>
-                            <Button Content="시간4" Width="120" Height="60" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,5"/>
-                            <Button Content="시간5" Width="120" Height="60" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,5"/>
-                        </StackPanel>
-                        <StackPanel Grid.Row="1" Grid.Column="0" Margin="20,15" Orientation="Horizontal" HorizontalAlignment="Center">
-                            <Button Content="시간6" Width="120" Height="60" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,5"/>
-                            <Button Content="시간7" Width="120" Height="60" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,5"/>
-                            <Button Content="시간8" Width="120" Height="60" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,5"/>
-                            <Button Content="시간9" Width="120" Height="60" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,5"/>
-                        </StackPanel>
+            <!--선택부분(버튼,이미지부분)-->
+            <Grid Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <!--1번영화-->
+                <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" BorderBrush="Gray" BorderThickness="2" Margin="2" >
+                    <Grid >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="200"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Grid.Row="0" Grid.Column="0" Source="/Resources/닥터new.png" Margin="5"/>
+                        <Grid Grid.Row="0" Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="80"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Label x:Name="MvName1" Grid.Row="0" Grid.Column="1" Content="닥터 스트레인지 : 대혼돈의 멀티버스 "
+                               FontSize="35" Foreground="White" Margin="5" 
+                               HorizontalAlignment="Left" VerticalAlignment="Bottom" FontFamily="Century Gothic"/>
+                            <StackPanel Grid.Row="1" Grid.Column="0" Margin="5,15" Orientation="Horizontal" HorizontalAlignment="Left">
+                                <Button Content="{Binding MV_Times[0].StartTime}" FontSize="16" FontWeight="Bold" FontFamily="Century Gothic"
+                                    Width="120" Height="60" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="25,5"
+                                    cal:Message.Attach="[Event Click] = [Action Clicked($source, MvName1.Content, $eventArgs)]"/>
+                                <Button Content="{Binding MV_Times[1].StartTime}" FontSize="16" FontWeight="Bold" FontFamily="Century Gothic"
+                                    Width="120" Height="60" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="25,5"/>
+                                <Button Content="{Binding MV_Times[2].StartTime}" FontSize="16" FontWeight="Bold" FontFamily="Century Gothic"
+                                    Width="120" Height="60" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="25,5"/>
+                                <Button Content="{Binding MV_Times[3].StartTime}" FontSize="16" FontWeight="Bold" FontFamily="Century Gothic"
+                                    Width="120" Height="60" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="25,5"/>
+
+                            </StackPanel>
+                            <StackPanel Grid.Row="2" Grid.Column="0" Margin="5,15" Orientation="Horizontal" HorizontalAlignment="Left">
+                                <Button Content="{Binding MV_Times[4].StartTime}" FontSize="16" FontWeight="Bold" FontFamily="Century Gothic"
+                                    Width="120" Height="60" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="25,5"/>
+                                <Button Content="{Binding MV_Times[5].StartTime}" FontSize="16" FontWeight="Bold" FontFamily="Century Gothic"
+                                    Width="120" Height="60" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="25,5"/>
+                            </StackPanel>
+                        </Grid>
                     </Grid>
-                </Grid>
-            </Border>
-            
-            <!--2번영화-->
-            <Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" BorderBrush="Gray" BorderThickness="2" Margin="2" >
-                <Grid >
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="200"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Image Grid.Row="0" Grid.Column="0" Source="/Resources/범죄도시2.png" Margin="5"/>
-                    <StackPanel Grid.Row="0" Grid.Column="1" Margin="10" Orientation="Horizontal">
-                        <Button Width="80" Height="50" Content="시간1" />
-                    </StackPanel>
-                </Grid>
-            </Border>
-            
-            <!--3번영화-->
-            <Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" BorderBrush="Gray" BorderThickness="2" Margin="2" >
-                <Grid >
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="200"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Image Grid.Row="0" Grid.Column="0" Source="/Resources/쥬라기월드new.png" Margin="5"/>
-                    <StackPanel Grid.Row="0" Grid.Column="1" Margin="10" Orientation="Horizontal">
-                        <Button Width="80" Height="50" Content="시간1" />
-                    </StackPanel>
-                </Grid>
-            </Border>
-        </Grid>
+                </Border>
+
+                <!--2번영화-->
+                <Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" BorderBrush="Gray" BorderThickness="2" Margin="2" >
+                    <Grid >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="200"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Grid.Row="0" Grid.Column="0" Source="/Resources/범죄도시2.png" Margin="5"/>
+                        <Grid Grid.Row="0" Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="80"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Label x:Name="MvName2" Grid.Row="0" Grid.Column="1" Content="범죄도시2" FontSize="35" Foreground="White" Margin="5" 
+                               HorizontalAlignment="Left" VerticalAlignment="Bottom" FontFamily="Century Gothic"/>
+                            <StackPanel Grid.Row="1" Grid.Column="0" Margin="5,15" Orientation="Horizontal" HorizontalAlignment="Left">
+                                <Button Content="{Binding MV_Times[6].StartTime}" FontSize="16" FontWeight="Bold" FontFamily="Century Gothic"
+                                    Width="120" Height="60" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="25,5"
+                                    cal:Message.Attach="[Event Click] = [Action Clicked($source, MvName2.Content, $eventArgs)]"/>
+                                <Button Content="{Binding MV_Times[7].StartTime}" FontSize="16" FontWeight="Bold" FontFamily="Century Gothic"
+                                    Width="120" Height="60" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="25,5"/>
+                                <Button Content="{Binding MV_Times[8].StartTime}" FontSize="16" FontWeight="Bold" FontFamily="Century Gothic"
+                                    Width="120" Height="60" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="25,5"/>
+                                <Button Content="{Binding MV_Times[9].StartTime}" FontSize="16" FontWeight="Bold" FontFamily="Century Gothic"
+                                    Width="120" Height="60" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="25,5"/>
+
+                            </StackPanel>
+                            <StackPanel Grid.Row="2" Grid.Column="0" Margin="5,15" Orientation="Horizontal" HorizontalAlignment="Left">
+                                <Button Content="{Binding MV_Times[10].StartTime}" FontSize="16" FontWeight="Bold" FontFamily="Century Gothic"
+                                    Width="120" Height="60" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="25,5"/>
+                                <Button Content="{Binding MV_Times[11].StartTime}" FontSize="16" FontWeight="Bold" FontFamily="Century Gothic"
+                                    Width="120" Height="60" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="25,5"/>
+                                <Button Content="{Binding MV_Times[12].StartTime}" FontSize="16" FontWeight="Bold" FontFamily="Century Gothic"
+                                    Width="120" Height="60" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="25,5"/>
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+                </Border>
+
+                <!--3번영화-->
+                <Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" BorderBrush="Gray" BorderThickness="2" Margin="2" >
+                    <Grid >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="200"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Grid.Row="0" Grid.Column="0" Source="/Resources/쥬라기월드new.png" Margin="5"/>
+                        <Grid Grid.Row="0" Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="80"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Label x:Name="MvName3"  Grid.Row="0" Grid.Column="1" Content="쥬라기 월드: 도미니언"
+                               FontSize="35" Foreground="White" Margin="5" 
+                               HorizontalAlignment="Left" VerticalAlignment="Bottom" FontFamily="Century Gothic"/>
+                            <StackPanel Grid.Row="1" Grid.Column="0" Margin="5,15" Orientation="Horizontal" HorizontalAlignment="Left">
+                                <Button Content="{Binding MV_Times[13].StartTime}" FontSize="16" FontWeight="Bold" FontFamily="Century Gothic"
+                                    Width="120" Height="60" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="25,5"
+                                    cal:Message.Attach="[Event Click] = [Action Clicked($source, MvName3.Content, $eventArgs)]"/>
+                                <Button Content="{Binding MV_Times[14].StartTime}" FontSize="16" FontWeight="Bold" FontFamily="Century Gothic"
+                                    Width="120" Height="60" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="25,5"/>
+                                <Button Content="{Binding MV_Times[15].StartTime}" FontSize="16" FontWeight="Bold" FontFamily="Century Gothic"
+                                    Width="120" Height="60" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="25,5"/>
+                                <Button Content="{Binding MV_Times[16].StartTime}" FontSize="16" FontWeight="Bold" FontFamily="Century Gothic"
+                                    Width="120" Height="60" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="25,5"/>
+
+                            </StackPanel>
+                            <StackPanel Grid.Row="2" Grid.Column="0" Margin="5,15" Orientation="Horizontal" HorizontalAlignment="Left">
+                                <Button Content="{Binding MV_Times[17].StartTime}" FontSize="16" FontWeight="Bold" FontFamily="Century Gothic"
+                                    Width="120" Height="60" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="25,5"/>
+                                <Button Content="{Binding MV_Times[18].StartTime}" FontSize="16" FontWeight="Bold" FontFamily="Century Gothic"
+                                    Width="120" Height="60" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="25,5"/>
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+                </Border>
+            </Grid>
 
 
 
 
 
-        <!--확인, 취소버튼-->
-        <StackPanel Grid.Row="2" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Width="150" Height="50" HorizontalAlignment="Center" 
+            <!--확인, 취소버튼-->
+            <StackPanel Grid.Row="2" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Width="150" Height="50" HorizontalAlignment="Center" 
                     Content="확인" Margin="10" FontSize="20" 
-                    Style="{StaticResource MahApps.Styles.Button}" Background="#B71000" />
-            <Button Width="150" Height="50" HorizontalAlignment="Center" 
-                    Content="취소" Margin="10" FontSize="20" 
-                    Style="{StaticResource MahApps.Styles.Button}" Background="#B71000"/>
-        </StackPanel>
+                    Style="{StaticResource MahApps.Styles.Button}" Background="#B71000" 
+                    cal:Message.Attach="[Event Click] = [Action Next($source, $eventArgs)]"
+                />
+                
+                <Button Width="150" Height="50" HorizontalAlignment="Center" 
+                    Content="취소" Margin="10" FontSize="20"
+                    Style="{StaticResource MahApps.Styles.Button}" Background="#B71000" 
+                    cal:Message.Attach="[Event Click] = [Action Cancel($source, $eventArgs)]"
+                />
+            </StackPanel>
 
+            
+
+        </Grid>
+        <!--상태바-->
+        <StatusBar Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Background="#B71000">
+            <StatusBarItem Content="Moogabox v2.0"/>
+            <Separator Style="{StaticResource MahApps.Styles.Separator.StatusBar}"/>
+            <StatusBarItem x:Name="stsResult"/>
+        </StatusBar>
     </Grid>
 </mah:MetroWindow>
