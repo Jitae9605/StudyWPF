@@ -8,13 +8,13 @@ namespace WpfMoogaBox.Helpers
 {
 	public class ReservationInfo
 	{
-		public static string ID { get; set; }
-		public static string MvName { get; set; }
-		public static string Hall { get; set; }
-		public static string SeatNum { get; set; }
-		public static string StartTime { get; set; }
-		public static string EndTime { get; set; }
-		public static string Ccount { get; set; }
-		public static string Mmoney { get; set; }
+		public string ID { get; set; }
+		public string MvName { get; set; }
+		public string Hall { get; set; }
+		public string SeatNum { get; set; }
+		public string StartTime { get; set; }
+		public string EndTime { get; set; }
+		public string Ccount { get; set; }
+		public string Mmoney { get; set; }
 	}
 }

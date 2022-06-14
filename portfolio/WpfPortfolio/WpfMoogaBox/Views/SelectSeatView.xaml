@@ -6,9 +6,11 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
     xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
     xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:cal="http://caliburnmicro.com"
     xmlns:local="clr-namespace:WpfMoogaBox.Views"
     mc:Ignorable="d" 
-    d:DesignHeight="1000" d:DesignWidth="1400" Background="Black">
+    Height="1000" Width="1400" Background="Black" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -17,20 +19,544 @@
         <Grid Margin="15">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
+                <RowDefinition Height="100"/>
                 <RowDefinition/>
                 <RowDefinition Height="100"/>
                 
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200"/>
-                <ColumnDefinition Width="5*"/>
-                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="300"/>
             </Grid.ColumnDefinitions>
             <!--로고 및 뷰설명-->
             <Image Source="/Resources/moogabox.png" Margin="30,10,10,0"/>
             <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Content="영화좌석선택" FontWeight="Bold" 
                Foreground="white" FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             
+            <!-- 스크린 -->
+            <Label Grid.Row="1" Grid.Column="1" Content="              S C R E E N                "
+                   VerticalAlignment="Center" HorizontalAlignment="Center"
+                   FontSize="50" Foreground="Black" Background="White"/>
+
+            <!-- 좌석 선택 -->
+            <Grid Grid.Row="2" Grid.Column="1" Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal" >
+                    <ToggleButton x:Name="btnA01" Content="A01" Width="130" Margin="10" Height="80" HorizontalAlignment="Left"
+                            cal:Message.Attach="[Event Click] = [Action ClickedSeat($source, $eventArgs)]">
+                        <ToggleButton.ContentTemplate>
+                            <DataTemplate>
+                                <StackPanel HorizontalAlignment="Center" Margin="5">
+                                    <iconPacks:PackIconMaterial Kind="SofaSingle" Width="70" Height="40" HorizontalAlignment="Center" Foreground="#B71000"/>
+                                    <Label Content="{Binding}" Foreground="#B71000" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontWeight="Bold" FontSize="15"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ToggleButton.ContentTemplate>
+                        <ToggleButton.Style>
+                            <Style TargetType="{x:Type ToggleButton}">
+                                <Setter Property="Background" Value="Black" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsChecked" Value="true">
+                                        <Setter Property="Background" Value="#B71000" />
+                                        <Setter Property="Foreground" Value="white"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ToggleButton.Style>
+                    </ToggleButton>
+                    <ToggleButton x:Name="btnA02" Content="A02" Width="130" Margin="10" Height="80" HorizontalAlignment="Left"
+                            cal:Message.Attach="[Event Click] = [Action ClickedSeat($source, $eventArgs)]">
+                        <ToggleButton.ContentTemplate>
+                            <DataTemplate>
+                                <StackPanel HorizontalAlignment="Center" Margin="5">
+                                    <iconPacks:PackIconMaterial Kind="SofaSingle" Width="70" Height="40" HorizontalAlignment="Center" Foreground="#B71000"/>
+                                    <Label Content="{Binding}" Foreground="#B71000" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontWeight="Bold" FontSize="15"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ToggleButton.ContentTemplate>
+                        <ToggleButton.Style>
+                            <Style TargetType="{x:Type ToggleButton}">
+                                <Setter Property="Background" Value="Black" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsChecked" Value="true">
+                                        <Setter Property="Background" Value="#B71000" />
+                                        <Setter Property="Foreground" Value="white"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ToggleButton.Style>
+                    </ToggleButton>
+                    <ToggleButton x:Name="btnA03" Content="A03" Width="130" Margin="10" Height="80" HorizontalAlignment="Left"
+                            cal:Message.Attach="[Event Click] = [Action ClickedSeat($source, $eventArgs)]">
+                        <ToggleButton.ContentTemplate>
+                            <DataTemplate>
+                                <StackPanel HorizontalAlignment="Center" Margin="5">
+                                    <iconPacks:PackIconMaterial Kind="SofaSingle" Width="70" Height="40" HorizontalAlignment="Center" Foreground="#B71000"/>
+                                    <Label Content="{Binding}" Foreground="#B71000" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontWeight="Bold" FontSize="15"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ToggleButton.ContentTemplate>
+                        <ToggleButton.Style>
+                            <Style TargetType="{x:Type ToggleButton}">
+                                <Setter Property="Background" Value="Black" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsChecked" Value="true">
+                                        <Setter Property="Background" Value="#B71000" />
+                                        <Setter Property="Foreground" Value="white"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ToggleButton.Style>
+                    </ToggleButton>
+                    <ToggleButton x:Name="btnA04" Content="A04" Width="130" Margin="10" Height="80" HorizontalAlignment="Left"
+                            cal:Message.Attach="[Event Click] = [Action ClickedSeat($source, $eventArgs)]">
+                        <ToggleButton.ContentTemplate>
+                            <DataTemplate>
+                                <StackPanel HorizontalAlignment="Center" Margin="5">
+                                    <iconPacks:PackIconMaterial Kind="SofaSingle" Width="70" Height="40" HorizontalAlignment="Center" Foreground="#B71000"/>
+                                    <Label Content="{Binding}" Foreground="#B71000" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontWeight="Bold" FontSize="15"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ToggleButton.ContentTemplate>
+                        <ToggleButton.Style>
+                            <Style TargetType="{x:Type ToggleButton}">
+                                <Setter Property="Background" Value="Black" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsChecked" Value="true">
+                                        <Setter Property="Background" Value="#B71000" />
+                                        <Setter Property="Foreground" Value="white"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ToggleButton.Style>
+                    </ToggleButton>
+                    <ToggleButton x:Name="btnA05" Content="A05" Width="130" Margin="10" Height="80" HorizontalAlignment="Left"
+                            cal:Message.Attach="[Event Click] = [Action ClickedSeat($source, $eventArgs)]">
+                        <ToggleButton.ContentTemplate>
+                            <DataTemplate>
+                                <StackPanel HorizontalAlignment="Center" Margin="5">
+                                    <iconPacks:PackIconMaterial Kind="SofaSingle" Width="70" Height="40" HorizontalAlignment="Center" Foreground="#B71000"/>
+                                    <Label Content="{Binding}" Foreground="#B71000" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontWeight="Bold" FontSize="15"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ToggleButton.ContentTemplate>
+                        <ToggleButton.Style>
+                            <Style TargetType="{x:Type ToggleButton}">
+                                <Setter Property="Background" Value="Black" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsChecked" Value="true">
+                                        <Setter Property="Background" Value="#B71000" />
+                                        <Setter Property="Foreground" Value="white"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ToggleButton.Style>
+                    </ToggleButton>
+                </StackPanel>
+                <StackPanel Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal" >
+                    <ToggleButton x:Name="btnB01" Content="B01" Width="130" Margin="10" Height="80" HorizontalAlignment="Left"
+                            cal:Message.Attach="[Event Click] = [Action ClickedSeat($source, $eventArgs)]">
+                        <ToggleButton.ContentTemplate>
+                            <DataTemplate>
+                                <StackPanel HorizontalAlignment="Center" Margin="5">
+                                    <iconPacks:PackIconMaterial Kind="SofaSingle" Width="70" Height="40" HorizontalAlignment="Center" Foreground="#B71000"/>
+                                    <Label Content="{Binding}" Foreground="#B71000" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontWeight="Bold" FontSize="15"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ToggleButton.ContentTemplate>
+                        <ToggleButton.Style>
+                            <Style TargetType="{x:Type ToggleButton}">
+                                <Setter Property="Background" Value="Black" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsChecked" Value="true">
+                                        <Setter Property="Background" Value="#B71000" />
+                                        <Setter Property="Foreground" Value="white"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ToggleButton.Style>
+                    </ToggleButton>
+                    <ToggleButton x:Name="btnB02" Content="B02" Width="130" Margin="10" Height="80" HorizontalAlignment="Left"
+                            cal:Message.Attach="[Event Click] = [Action ClickedSeat($source, $eventArgs)]">
+                        <ToggleButton.ContentTemplate>
+                            <DataTemplate>
+                                <StackPanel HorizontalAlignment="Center" Margin="5">
+                                    <iconPacks:PackIconMaterial Kind="SofaSingle" Width="70" Height="40" HorizontalAlignment="Center" Foreground="#B71000"/>
+                                    <Label Content="{Binding}" Foreground="#B71000" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontWeight="Bold" FontSize="15"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ToggleButton.ContentTemplate>
+                        <ToggleButton.Style>
+                            <Style TargetType="{x:Type ToggleButton}">
+                                <Setter Property="Background" Value="Black" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsChecked" Value="true">
+                                        <Setter Property="Background" Value="#B71000" />
+                                        <Setter Property="Foreground" Value="white"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ToggleButton.Style>
+                    </ToggleButton>
+                    <ToggleButton x:Name="btnB03" Content="B03" Width="130" Margin="10" Height="80" HorizontalAlignment="Left"
+                            cal:Message.Attach="[Event Click] = [Action ClickedSeat($source, $eventArgs)]">
+                        <ToggleButton.ContentTemplate>
+                            <DataTemplate>
+                                <StackPanel HorizontalAlignment="Center" Margin="5">
+                                    <iconPacks:PackIconMaterial Kind="SofaSingle" Width="70" Height="40" HorizontalAlignment="Center" Foreground="#B71000"/>
+                                    <Label Content="{Binding}" Foreground="#B71000" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontWeight="Bold" FontSize="15"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ToggleButton.ContentTemplate>
+                        <ToggleButton.Style>
+                            <Style TargetType="{x:Type ToggleButton}">
+                                <Setter Property="Background" Value="Black" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsChecked" Value="true">
+                                        <Setter Property="Background" Value="#B71000" />
+                                        <Setter Property="Foreground" Value="white"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ToggleButton.Style>
+                    </ToggleButton>
+                    <ToggleButton x:Name="btnB04" Content="B04" Width="130" Margin="10" Height="80" HorizontalAlignment="Left"
+                            cal:Message.Attach="[Event Click] = [Action ClickedSeat($source, $eventArgs)]">
+                        <ToggleButton.ContentTemplate>
+                            <DataTemplate>
+                                <StackPanel HorizontalAlignment="Center" Margin="5">
+                                    <iconPacks:PackIconMaterial Kind="SofaSingle" Width="70" Height="40" HorizontalAlignment="Center" Foreground="#B71000"/>
+                                    <Label Content="{Binding}" Foreground="#B71000" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontWeight="Bold" FontSize="15"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ToggleButton.ContentTemplate>
+                        <ToggleButton.Style>
+                            <Style TargetType="{x:Type ToggleButton}">
+                                <Setter Property="Background" Value="Black" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsChecked" Value="true">
+                                        <Setter Property="Background" Value="#B71000" />
+                                        <Setter Property="Foreground" Value="white"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ToggleButton.Style>
+                    </ToggleButton>
+                    <ToggleButton x:Name="btnB05" Content="B05" Width="130" Margin="10" Height="80" HorizontalAlignment="Left"
+                            cal:Message.Attach="[Event Click] = [Action ClickedSeat($source, $eventArgs)]">
+                        <ToggleButton.ContentTemplate>
+                            <DataTemplate>
+                                <StackPanel HorizontalAlignment="Center" Margin="5">
+                                    <iconPacks:PackIconMaterial Kind="SofaSingle" Width="70" Height="40" HorizontalAlignment="Center" Foreground="#B71000"/>
+                                    <Label Content="{Binding}" Foreground="#B71000" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontWeight="Bold" FontSize="15"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ToggleButton.ContentTemplate>
+                        <ToggleButton.Style>
+                            <Style TargetType="{x:Type ToggleButton}">
+                                <Setter Property="Background" Value="Black" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsChecked" Value="true">
+                                        <Setter Property="Background" Value="#B71000" />
+                                        <Setter Property="Foreground" Value="white"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ToggleButton.Style>
+                    </ToggleButton>
+                </StackPanel>
+                <StackPanel Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal" >
+                    <ToggleButton x:Name="btnC01" Content="C01" Width="130" Margin="10" Height="80" HorizontalAlignment="Left"
+                            cal:Message.Attach="[Event Click] = [Action ClickedSeat($source, $eventArgs)]">
+                        <ToggleButton.ContentTemplate>
+                            <DataTemplate>
+                                <StackPanel HorizontalAlignment="Center" Margin="5">
+                                    <iconPacks:PackIconMaterial Kind="SofaSingle" Width="70" Height="40" HorizontalAlignment="Center" Foreground="#B71000"/>
+                                    <Label Content="{Binding}" Foreground="#B71000" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontWeight="Bold" FontSize="15"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ToggleButton.ContentTemplate>
+                        <ToggleButton.Style>
+                            <Style TargetType="{x:Type ToggleButton}">
+                                <Setter Property="Background" Value="Black" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsChecked" Value="true">
+                                        <Setter Property="Background" Value="#B71000" />
+                                        <Setter Property="Foreground" Value="white"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ToggleButton.Style>
+                    </ToggleButton>
+                    <ToggleButton x:Name="btnC02" Content="C02" Width="130" Margin="10" Height="80" HorizontalAlignment="Left"
+                            cal:Message.Attach="[Event Click] = [Action ClickedSeat($source, $eventArgs)]">
+                        <ToggleButton.ContentTemplate>
+                            <DataTemplate>
+                                <StackPanel HorizontalAlignment="Center" Margin="5">
+                                    <iconPacks:PackIconMaterial Kind="SofaSingle" Width="70" Height="40" HorizontalAlignment="Center" Foreground="#B71000"/>
+                                    <Label Content="{Binding}" Foreground="#B71000" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontWeight="Bold" FontSize="15"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ToggleButton.ContentTemplate>
+                        <ToggleButton.Style>
+                            <Style TargetType="{x:Type ToggleButton}">
+                                <Setter Property="Background" Value="Black" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsChecked" Value="true">
+                                        <Setter Property="Background" Value="#B71000" />
+                                        <Setter Property="Foreground" Value="white"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ToggleButton.Style>
+                    </ToggleButton>
+                    <ToggleButton x:Name="btnC03" Content="C03" Width="130" Margin="10" Height="80" HorizontalAlignment="Left"
+                            cal:Message.Attach="[Event Click] = [Action ClickedSeat($source, $eventArgs)]">
+                        <ToggleButton.ContentTemplate>
+                            <DataTemplate>
+                                <StackPanel HorizontalAlignment="Center" Margin="5">
+                                    <iconPacks:PackIconMaterial Kind="SofaSingle" Width="70" Height="40" HorizontalAlignment="Center" Foreground="#B71000"/>
+                                    <Label Content="{Binding}" Foreground="#B71000" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontWeight="Bold" FontSize="15"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ToggleButton.ContentTemplate>
+                        <ToggleButton.Style>
+                            <Style TargetType="{x:Type ToggleButton}">
+                                <Setter Property="Background" Value="Black" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsChecked" Value="true">
+                                        <Setter Property="Background" Value="#B71000" />
+                                        <Setter Property="Foreground" Value="white"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ToggleButton.Style>
+                    </ToggleButton>
+                    <ToggleButton x:Name="btnC04" Content="C04" Width="130" Margin="10" Height="80" HorizontalAlignment="Left"
+                            cal:Message.Attach="[Event Click] = [Action ClickedSeat($source, $eventArgs)]">
+                        <ToggleButton.ContentTemplate>
+                            <DataTemplate>
+                                <StackPanel HorizontalAlignment="Center" Margin="5">
+                                    <iconPacks:PackIconMaterial Kind="SofaSingle" Width="70" Height="40" HorizontalAlignment="Center" Foreground="#B71000"/>
+                                    <Label Content="{Binding}" Foreground="#B71000" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontWeight="Bold" FontSize="15"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ToggleButton.ContentTemplate>
+                        <ToggleButton.Style>
+                            <Style TargetType="{x:Type ToggleButton}">
+                                <Setter Property="Background" Value="Black" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsChecked" Value="true">
+                                        <Setter Property="Background" Value="#B71000" />
+                                        <Setter Property="Foreground" Value="white"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ToggleButton.Style>
+                    </ToggleButton>
+                    <ToggleButton x:Name="btnC05" Content="C05" Width="130" Margin="10" Height="80" HorizontalAlignment="Left"
+                            cal:Message.Attach="[Event Click] = [Action ClickedSeat($source, $eventArgs)]">
+                        <ToggleButton.ContentTemplate>
+                            <DataTemplate>
+                                <StackPanel HorizontalAlignment="Center" Margin="5">
+                                    <iconPacks:PackIconMaterial Kind="SofaSingle" Width="70" Height="40" HorizontalAlignment="Center" Foreground="#B71000"/>
+                                    <Label Content="{Binding}" Foreground="#B71000" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontWeight="Bold" FontSize="15"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ToggleButton.ContentTemplate>
+                        <ToggleButton.Style>
+                            <Style TargetType="{x:Type ToggleButton}">
+                                <Setter Property="Background" Value="Black" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsChecked" Value="true">
+                                        <Setter Property="Background" Value="#B71000" />
+                                        <Setter Property="Foreground" Value="white"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ToggleButton.Style>
+                    </ToggleButton>
+                </StackPanel>
+                <StackPanel Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal" >
+                    <ToggleButton x:Name="btnD01" Content="D01" Width="130" Margin="10" Height="80" HorizontalAlignment="Left"
+                            cal:Message.Attach="[Event Click] = [Action ClickedSeat($source, $eventArgs)]">
+                        <ToggleButton.ContentTemplate>
+                            <DataTemplate>
+                                <StackPanel HorizontalAlignment="Center" Margin="5">
+                                    <iconPacks:PackIconMaterial Kind="SofaSingle" Width="70" Height="40" HorizontalAlignment="Center" Foreground="#B71000"/>
+                                    <Label Content="{Binding}" Foreground="#B71000" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontWeight="Bold" FontSize="15"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ToggleButton.ContentTemplate>
+                        <ToggleButton.Style>
+                            <Style TargetType="{x:Type ToggleButton}">
+                                <Setter Property="Background" Value="Black" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsChecked" Value="true">
+                                        <Setter Property="Background" Value="#B71000" />
+                                        <Setter Property="Foreground" Value="white"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ToggleButton.Style>
+                    </ToggleButton>
+                    <ToggleButton x:Name="btnD02" Content="D02" Width="130" Margin="10" Height="80" HorizontalAlignment="Left"
+                            cal:Message.Attach="[Event Click] = [Action ClickedSeat($source, $eventArgs)]">
+                        <ToggleButton.ContentTemplate>
+                            <DataTemplate>
+                                <StackPanel HorizontalAlignment="Center" Margin="5">
+                                    <iconPacks:PackIconMaterial Kind="SofaSingle" Width="70" Height="40" HorizontalAlignment="Center" Foreground="#B71000"/>
+                                    <Label Content="{Binding}" Foreground="#B71000" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontWeight="Bold" FontSize="15"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ToggleButton.ContentTemplate>
+                        <ToggleButton.Style>
+                            <Style TargetType="{x:Type ToggleButton}">
+                                <Setter Property="Background" Value="Black" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsChecked" Value="true">
+                                        <Setter Property="Background" Value="#B71000" />
+                                        <Setter Property="Foreground" Value="white"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ToggleButton.Style>
+                    </ToggleButton>
+                    <ToggleButton x:Name="btnD03" Content="D03" Width="130" Margin="10" Height="80" HorizontalAlignment="Left"
+                            cal:Message.Attach="[Event Click] = [Action ClickedSeat($source, $eventArgs)]">
+                        <ToggleButton.ContentTemplate>
+                            <DataTemplate>
+                                <StackPanel HorizontalAlignment="Center" Margin="5">
+                                    <iconPacks:PackIconMaterial Kind="SofaSingle" Width="70" Height="40" HorizontalAlignment="Center" Foreground="#B71000"/>
+                                    <Label Content="{Binding}" Foreground="#B71000" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontWeight="Bold" FontSize="15"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ToggleButton.ContentTemplate>
+                        <ToggleButton.Style>
+                            <Style TargetType="{x:Type ToggleButton}">
+                                <Setter Property="Background" Value="Black" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsChecked" Value="true">
+                                        <Setter Property="Background" Value="#B71000" />
+                                        <Setter Property="Foreground" Value="white"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ToggleButton.Style>
+                    </ToggleButton>
+                    <ToggleButton x:Name="btnD04" Content="D04" Width="130" Margin="10" Height="80" HorizontalAlignment="Left"
+                            cal:Message.Attach="[Event Click] = [Action ClickedSeat($source, $eventArgs)]">
+                        <ToggleButton.ContentTemplate>
+                            <DataTemplate>
+                                <StackPanel HorizontalAlignment="Center" Margin="5">
+                                    <iconPacks:PackIconMaterial Kind="SofaSingle" Width="70" Height="40" HorizontalAlignment="Center" Foreground="#B71000"/>
+                                    <Label Content="{Binding}" Foreground="#B71000" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontWeight="Bold" FontSize="15"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ToggleButton.ContentTemplate>
+                        <ToggleButton.Style>
+                            <Style TargetType="{x:Type ToggleButton}">
+                                <Setter Property="Background" Value="Black" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsChecked" Value="true">
+                                        <Setter Property="Background" Value="#B71000" />
+                                        <Setter Property="Foreground" Value="white"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ToggleButton.Style>
+                    </ToggleButton>
+                    <ToggleButton x:Name="btnD05" Content="D05" Width="130" Margin="10" Height="80" HorizontalAlignment="Left"
+                            cal:Message.Attach="[Event Click] = [Action ClickedSeat($source, $eventArgs)]">
+                        <ToggleButton.ContentTemplate>
+                            <DataTemplate>
+                                <StackPanel HorizontalAlignment="Center" Margin="5">
+                                    <iconPacks:PackIconMaterial Kind="SofaSingle" Width="70" Height="40" HorizontalAlignment="Center" Foreground="#B71000"/>
+                                    <Label Content="{Binding}" Foreground="#B71000" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontWeight="Bold" FontSize="15"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ToggleButton.ContentTemplate>
+                        <ToggleButton.Style>
+                            <Style TargetType="{x:Type ToggleButton}">
+                                <Setter Property="Background" Value="Black" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsChecked" Value="true">
+                                        <Setter Property="Background" Value="#B71000" />
+                                        <Setter Property="Foreground" Value="white"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ToggleButton.Style>
+                    </ToggleButton>
+                </StackPanel>
+            </Grid>
+            
+            <!-- 선택 좌석 정보 -->
+            <Grid Grid.Row="2" Grid.Column="2" Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Row="0" Grid.Column="0" Margin="10">
+                    <Label Content="선택좌석" FontSize="18" Foreground="White" VerticalAlignment="Center"/>
+                    <Label Content="{Binding CheckedSeat[0]}" FontSize="18" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="left"/>
+                    <Label Content="{Binding CheckedSeat[1]}" FontSize="18" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="left"/>
+                    <Label Content="{Binding CheckedSeat[2]}" FontSize="18" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="left"/>
+                    <Label Content="{Binding CheckedSeat[3]}" FontSize="18" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="left"/>
+                </StackPanel>
+                <StackPanel Grid.Row="0" Grid.Column="1" Margin="10" Orientation="Horizontal">
+                    <Label Content="{Binding CountSeatNum}" FontSize="18" Foreground="White" />
+                    <Label Content=" 개" FontSize="18" Foreground="White"/>
+                </StackPanel>
+            </Grid>
+            
+            <!-- 선택영화 정보 라벨 -->
+            <Grid Grid.Row="3" Grid.Column="1" Margin="5">
+                <StackPanel Orientation="Horizontal" Margin="1">
+                    <StackPanel Margin="3">
+                        <Label Content="영화제목 :" Foreground="White" FontSize="15"/>
+                        <Label Content="상영관   :" Foreground="White" FontSize="15"/>
+                        <Label Content="상영시간 :" Foreground="White" FontSize="15"/>
+                    </StackPanel>
+                    <StackPanel Margin="3">
+                        <Label Content="{Binding Selected[1]}" Foreground="White" FontSize="15"/>
+                        <Label Content="{Binding Selected[2]}" Foreground="White" FontSize="15"/>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="{Binding Selected[3]}" Foreground="White" FontSize="15"/>
+                            <Label Content=" ~ " Foreground="White" FontSize="15"/>
+                            <Label Content="{Binding Selected[4]}" Foreground="White" FontSize="15"/>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+                
+                
+            </Grid>
+            
+            <!-- 확인/취소버튼 -->
+            <StackPanel Grid.Row="3" Grid.Column="2" Orientation="Horizontal" Margin="10" HorizontalAlignment="Center">
+                <Button Width="130" Height="50" HorizontalAlignment="Center" 
+                    Content="확인" Margin="10" FontSize="20" 
+                    Style="{StaticResource MahApps.Styles.Button}" Background="#B71000" 
+                    cal:Message.Attach="[Event Click] = [Action Next2($source, $eventArgs)]"
+                />
+
+                <Button Width="130" Height="50" HorizontalAlignment="Center" 
+                    Content="취소" Margin="10" FontSize="20"
+                    Style="{StaticResource MahApps.Styles.Button}" Background="#B71000" 
+                    cal:Message.Attach="[Event Click] = [Action Cancel2($source, $eventArgs)]"
+                />
+            </StackPanel>
+
         </Grid>
         
         

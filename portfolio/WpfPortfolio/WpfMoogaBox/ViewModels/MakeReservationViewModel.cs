@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -14,7 +15,8 @@ namespace WpfMoogaBox.ViewModels
 {
 	public class MakeReservationViewModel : Screen
 	{
-		public Selection seleted;
+
+		public Selection seleted = new Selection();
 		public MakeReservationViewModel()
 		{
 			SelectedMv_img = "\\Resources\\No_Picture.jpg";
@@ -30,7 +32,11 @@ namespace WpfMoogaBox.ViewModels
 			SqlDataReader reader = cmd.ExecuteReader();
 
 			MV_Times = new BindableCollection<Mv_Info> { };
-			
+
+			int i = 0;
+
+			CheckTimes = new BindableCollection<bool>();
+
 			while (reader.Read())
 			{
 				
@@ -40,11 +46,29 @@ namespace WpfMoogaBox.ViewModels
 				DateTime RunningTime = DateTime.Parse(reader["RunningTime"].ToString());
 				string MvNum = reader["MvNum"].ToString();
 
+
+				bool CanIEnable = Timeisover(StartTime);
+
+				CheckTimes.Add(CanIEnable);
+				Debug.WriteLine(CheckTimes[i]);
+
 				MV_Times.Add(new Mv_Info(MvName, Hall, StartTime, RunningTime, MvNum));
+				i++;
 			}
 
 			reader.Close();
 			conn.Close();
+		}
+
+		public bool Timeisover(DateTime startTime)
+		{
+			DateTime NowTime = DateTime.Now;
+			if (NowTime.Hour < startTime.Hour || 
+				(NowTime.Hour == startTime.Hour && NowTime.Minute < startTime.Minute))
+				return true;
+			else 
+				return false;
+			
 		}
 
 		public void Clicked(object sender, object mvName,  MouseButtonEventArgs e)
@@ -99,44 +123,63 @@ namespace WpfMoogaBox.ViewModels
 				default:
 					break;
 			}
-
 			reader.Close();
 			conn.Close();
-
-
-
 		}
 
 		public void Cancel(object sender, MouseButtonEventArgs e)
 		{
-			ReservationInfo.MvName = string.Empty;
-			ReservationInfo.Hall = string.Empty;
-			ReservationInfo.StartTime = string.Empty;
-			ReservationInfo.EndTime = string.Empty;
 			Button button = sender as Button;
 			button.IsCancel = true;
 		}
 
 		public void Next(object sender, MouseButtonEventArgs e)
 		{
-			Cancel(sender, e);
-			var wManager = new WindowManager();
 			if(string.IsNullOrEmpty(seleted.MvName))
 			{
 				Commons.ShowMessageAsync("알림", "먼저 영화와 시간을 선택해주세요");
 				return;
 			}
 
-			ReservationInfo.MvName = seleted.MvName;
-			ReservationInfo.Hall = seleted.Hall;
-			ReservationInfo.StartTime = seleted.StartTime;
-			ReservationInfo.EndTime = seleted.EndTime;
-			
+			//string ConnString = "Data Source=PC01;Initial Catalog=MoogaBox;Integrated Security=True";
+			//SqlConnection conn = new SqlConnection(ConnString);
 
-			var result = wManager.ShowDialogAsync(new SelectSeatViewModel());
-			
+			//conn.Open();
+
+			//string SqlQuery = @"INSERT INTO TmpReservation
+			//						      ( ID
+			//						      , MvName
+			//						      , Hall
+			//						      , StartTime
+			//						 VALUES	 
+			//						      ( @ID
+			//						      , @MvName
+			//						      , @Hall
+			//						      , @StartTime";
+
+			//SqlCommand cmd = new SqlCommand(SqlQuery, conn);
+
+			//SqlParameter parmID = new SqlParameter("@ID", "1");
+			//cmd.Parameters.Add(parmID);
+
+			//SqlParameter parmMvName = new SqlParameter("@MvName", seleted.MvName);
+			//cmd.Parameters.Add(parmMvName);
+
+			//SqlParameter parmHall = new SqlParameter("@Hall", seleted.Hall);
+			//cmd.Parameters.Add(parmHall);
+
+			//SqlParameter parmStartTime = new SqlParameter("@StartTime", seleted.StartTime);
+			//cmd.Parameters.Add(parmStartTime);
+
+			string ID = DateTime.Now.ToString("yyMMddHHmmss");
+			string[] ThroughData = new string[] { ID, seleted.MvName, seleted.Hall, seleted.StartTime, seleted.EndTime };
+
+
+			var wManager = new WindowManager();
+
+			Cancel(sender, e);
+			var result = wManager.ShowDialogAsync(new SelectSeatViewModel(ThroughData)) ;
 		}
-
 
 		private BindableCollection<Mv_Info> mV_Times;
 
@@ -154,7 +197,6 @@ namespace WpfMoogaBox.ViewModels
 
 		public Selection SelectedMv
 		{
-			
 			get => selectedMv;
 			set
 			{ 
@@ -163,17 +205,29 @@ namespace WpfMoogaBox.ViewModels
 			}
 		}
 
-
 		private string selectedMv_img;
 
 		public string SelectedMv_img
 		{
-
 			get => selectedMv_img;
 			set
 			{
 				selectedMv_img = value;
 				NotifyOfPropertyChange(() => SelectedMv_img);
+			}
+		}
+
+
+
+		private BindableCollection<bool> checkTimes;
+		public BindableCollection<bool> CheckTimes
+		{
+			get => checkTimes; 
+			set
+			{
+				checkTimes = value;
+				NotifyOfPropertyChange(() => CheckTimes);
+
 			}
 		}
 
