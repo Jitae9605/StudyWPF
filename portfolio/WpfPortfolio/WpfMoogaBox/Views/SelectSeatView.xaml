@@ -49,7 +49,7 @@
                 </Grid.RowDefinitions>
                 <StackPanel Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal" >
                     <ToggleButton x:Name="btnA01" Content="A01" Width="130" Margin="10" Height="80" HorizontalAlignment="Left"
-                            cal:Message.Attach="[Event Click] = [Action ClickedSeat($source, $eventArgs)]">
+                            cal:Message.Attach="[Event Click] = [Action ClickedSeat($source, $eventArgs)]" IsEnabled="{Binding AleadyResed[0]}">
                         <ToggleButton.ContentTemplate>
                             <DataTemplate>
                                 <StackPanel HorizontalAlignment="Center" Margin="5">
@@ -71,7 +71,7 @@
                         </ToggleButton.Style>
                     </ToggleButton>
                     <ToggleButton x:Name="btnA02" Content="A02" Width="130" Margin="10" Height="80" HorizontalAlignment="Left"
-                            cal:Message.Attach="[Event Click] = [Action ClickedSeat($source, $eventArgs)]">
+                            cal:Message.Attach="[Event Click] = [Action ClickedSeat($source, $eventArgs)]" IsEnabled="{Binding AleadyResed[1]}">
                         <ToggleButton.ContentTemplate>
                             <DataTemplate>
                                 <StackPanel HorizontalAlignment="Center" Margin="5">
@@ -93,7 +93,7 @@
                         </ToggleButton.Style>
                     </ToggleButton>
                     <ToggleButton x:Name="btnA03" Content="A03" Width="130" Margin="10" Height="80" HorizontalAlignment="Left"
-                            cal:Message.Attach="[Event Click] = [Action ClickedSeat($source, $eventArgs)]">
+                            cal:Message.Attach="[Event Click] = [Action ClickedSeat($source, $eventArgs)]" IsEnabled="{Binding AleadyResed[2]}">
                         <ToggleButton.ContentTemplate>
                             <DataTemplate>
                                 <StackPanel HorizontalAlignment="Center" Margin="5">
@@ -115,7 +115,7 @@
                         </ToggleButton.Style>
                     </ToggleButton>
                     <ToggleButton x:Name="btnA04" Content="A04" Width="130" Margin="10" Height="80" HorizontalAlignment="Left"
-                            cal:Message.Attach="[Event Click] = [Action ClickedSeat($source, $eventArgs)]">
+                            cal:Message.Attach="[Event Click] = [Action ClickedSeat($source, $eventArgs)]" IsEnabled="{Binding AleadyResed[3]}">
                         <ToggleButton.ContentTemplate>
                             <DataTemplate>
                                 <StackPanel HorizontalAlignment="Center" Margin="5">
@@ -137,7 +137,7 @@
                         </ToggleButton.Style>
                     </ToggleButton>
                     <ToggleButton x:Name="btnA05" Content="A05" Width="130" Margin="10" Height="80" HorizontalAlignment="Left"
-                            cal:Message.Attach="[Event Click] = [Action ClickedSeat($source, $eventArgs)]">
+                            cal:Message.Attach="[Event Click] = [Action ClickedSeat($source, $eventArgs)]" IsEnabled="{Binding AleadyResed[4]}">
                         <ToggleButton.ContentTemplate>
                             <DataTemplate>
                                 <StackPanel HorizontalAlignment="Center" Margin="5">
@@ -161,7 +161,7 @@
                 </StackPanel>
                 <StackPanel Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal" >
                     <ToggleButton x:Name="btnB01" Content="B01" Width="130" Margin="10" Height="80" HorizontalAlignment="Left"
-                            cal:Message.Attach="[Event Click] = [Action ClickedSeat($source, $eventArgs)]">
+                            cal:Message.Attach="[Event Click] = [Action ClickedSeat($source, $eventArgs)]" IsEnabled="{Binding AleadyResed[5]}">
                         <ToggleButton.ContentTemplate>
                             <DataTemplate>
                                 <StackPanel HorizontalAlignment="Center" Margin="5">
@@ -183,7 +183,7 @@
                         </ToggleButton.Style>
                     </ToggleButton>
                     <ToggleButton x:Name="btnB02" Content="B02" Width="130" Margin="10" Height="80" HorizontalAlignment="Left"
-                            cal:Message.Attach="[Event Click] = [Action ClickedSeat($source, $eventArgs)]">
+                            cal:Message.Attach="[Event Click] = [Action ClickedSeat($source, $eventArgs)]" IsEnabled="{Binding AleadyResed[6]}">
                         <ToggleButton.ContentTemplate>
                             <DataTemplate>
                                 <StackPanel HorizontalAlignment="Center" Margin="5">
@@ -205,7 +205,7 @@
                         </ToggleButton.Style>
                     </ToggleButton>
                     <ToggleButton x:Name="btnB03" Content="B03" Width="130" Margin="10" Height="80" HorizontalAlignment="Left"
-                            cal:Message.Attach="[Event Click] = [Action ClickedSeat($source, $eventArgs)]">
+                            cal:Message.Attach="[Event Click] = [Action ClickedSeat($source, $eventArgs)]" IsEnabled="{Binding AleadyResed[7]}">
                         <ToggleButton.ContentTemplate>
                             <DataTemplate>
                                 <StackPanel HorizontalAlignment="Center" Margin="5">
@@ -227,7 +227,7 @@
                         </ToggleButton.Style>
                     </ToggleButton>
                     <ToggleButton x:Name="btnB04" Content="B04" Width="130" Margin="10" Height="80" HorizontalAlignment="Left"
-                            cal:Message.Attach="[Event Click] = [Action ClickedSeat($source, $eventArgs)]">
+                            cal:Message.Attach="[Event Click] = [Action ClickedSeat($source, $eventArgs)]" IsEnabled="{Binding AleadyResed[8]}">
                         <ToggleButton.ContentTemplate>
                             <DataTemplate>
                                 <StackPanel HorizontalAlignment="Center" Margin="5">
@@ -249,7 +249,7 @@
                         </ToggleButton.Style>
                     </ToggleButton>
                     <ToggleButton x:Name="btnB05" Content="B05" Width="130" Margin="10" Height="80" HorizontalAlignment="Left"
-                            cal:Message.Attach="[Event Click] = [Action ClickedSeat($source, $eventArgs)]">
+                            cal:Message.Attach="[Event Click] = [Action ClickedSeat($source, $eventArgs)]" IsEnabled="{Binding AleadyResed[9]}">
                         <ToggleButton.ContentTemplate>
                             <DataTemplate>
                                 <StackPanel HorizontalAlignment="Center" Margin="5">
@@ -273,7 +273,7 @@
                 </StackPanel>
                 <StackPanel Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal" >
                     <ToggleButton x:Name="btnC01" Content="C01" Width="130" Margin="10" Height="80" HorizontalAlignment="Left"
-                            cal:Message.Attach="[Event Click] = [Action ClickedSeat($source, $eventArgs)]">
+                            cal:Message.Attach="[Event Click] = [Action ClickedSeat($source, $eventArgs)]" IsEnabled="{Binding AleadyResed[10]}">
                         <ToggleButton.ContentTemplate>
                             <DataTemplate>
                                 <StackPanel HorizontalAlignment="Center" Margin="5">
@@ -295,7 +295,7 @@
                         </ToggleButton.Style>
                     </ToggleButton>
                     <ToggleButton x:Name="btnC02" Content="C02" Width="130" Margin="10" Height="80" HorizontalAlignment="Left"
-                            cal:Message.Attach="[Event Click] = [Action ClickedSeat($source, $eventArgs)]">
+                            cal:Message.Attach="[Event Click] = [Action ClickedSeat($source, $eventArgs)]" IsEnabled="{Binding AleadyResed[11]}">
                         <ToggleButton.ContentTemplate>
                             <DataTemplate>
                                 <StackPanel HorizontalAlignment="Center" Margin="5">
@@ -317,7 +317,7 @@
                         </ToggleButton.Style>
                     </ToggleButton>
                     <ToggleButton x:Name="btnC03" Content="C03" Width="130" Margin="10" Height="80" HorizontalAlignment="Left"
-                            cal:Message.Attach="[Event Click] = [Action ClickedSeat($source, $eventArgs)]">
+                            cal:Message.Attach="[Event Click] = [Action ClickedSeat($source, $eventArgs)]" IsEnabled="{Binding AleadyResed[12]}">
                         <ToggleButton.ContentTemplate>
                             <DataTemplate>
                                 <StackPanel HorizontalAlignment="Center" Margin="5">
@@ -339,7 +339,7 @@
                         </ToggleButton.Style>
                     </ToggleButton>
                     <ToggleButton x:Name="btnC04" Content="C04" Width="130" Margin="10" Height="80" HorizontalAlignment="Left"
-                            cal:Message.Attach="[Event Click] = [Action ClickedSeat($source, $eventArgs)]">
+                            cal:Message.Attach="[Event Click] = [Action ClickedSeat($source, $eventArgs)]" IsEnabled="{Binding AleadyResed[13]}">
                         <ToggleButton.ContentTemplate>
                             <DataTemplate>
                                 <StackPanel HorizontalAlignment="Center" Margin="5">
@@ -361,7 +361,7 @@
                         </ToggleButton.Style>
                     </ToggleButton>
                     <ToggleButton x:Name="btnC05" Content="C05" Width="130" Margin="10" Height="80" HorizontalAlignment="Left"
-                            cal:Message.Attach="[Event Click] = [Action ClickedSeat($source, $eventArgs)]">
+                            cal:Message.Attach="[Event Click] = [Action ClickedSeat($source, $eventArgs)]" IsEnabled="{Binding AleadyResed[14]}">
                         <ToggleButton.ContentTemplate>
                             <DataTemplate>
                                 <StackPanel HorizontalAlignment="Center" Margin="5">
@@ -385,7 +385,7 @@
                 </StackPanel>
                 <StackPanel Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal" >
                     <ToggleButton x:Name="btnD01" Content="D01" Width="130" Margin="10" Height="80" HorizontalAlignment="Left"
-                            cal:Message.Attach="[Event Click] = [Action ClickedSeat($source, $eventArgs)]">
+                            cal:Message.Attach="[Event Click] = [Action ClickedSeat($source, $eventArgs)]" IsEnabled="{Binding AleadyResed[15]}">
                         <ToggleButton.ContentTemplate>
                             <DataTemplate>
                                 <StackPanel HorizontalAlignment="Center" Margin="5">
@@ -407,7 +407,7 @@
                         </ToggleButton.Style>
                     </ToggleButton>
                     <ToggleButton x:Name="btnD02" Content="D02" Width="130" Margin="10" Height="80" HorizontalAlignment="Left"
-                            cal:Message.Attach="[Event Click] = [Action ClickedSeat($source, $eventArgs)]">
+                            cal:Message.Attach="[Event Click] = [Action ClickedSeat($source, $eventArgs)]" IsEnabled="{Binding AleadyResed[16]}">
                         <ToggleButton.ContentTemplate>
                             <DataTemplate>
                                 <StackPanel HorizontalAlignment="Center" Margin="5">
@@ -429,7 +429,7 @@
                         </ToggleButton.Style>
                     </ToggleButton>
                     <ToggleButton x:Name="btnD03" Content="D03" Width="130" Margin="10" Height="80" HorizontalAlignment="Left"
-                            cal:Message.Attach="[Event Click] = [Action ClickedSeat($source, $eventArgs)]">
+                            cal:Message.Attach="[Event Click] = [Action ClickedSeat($source, $eventArgs)]" IsEnabled="{Binding AleadyResed[17]}">
                         <ToggleButton.ContentTemplate>
                             <DataTemplate>
                                 <StackPanel HorizontalAlignment="Center" Margin="5">
@@ -451,7 +451,7 @@
                         </ToggleButton.Style>
                     </ToggleButton>
                     <ToggleButton x:Name="btnD04" Content="D04" Width="130" Margin="10" Height="80" HorizontalAlignment="Left"
-                            cal:Message.Attach="[Event Click] = [Action ClickedSeat($source, $eventArgs)]">
+                            cal:Message.Attach="[Event Click] = [Action ClickedSeat($source, $eventArgs)]" IsEnabled="{Binding AleadyResed[18]}">
                         <ToggleButton.ContentTemplate>
                             <DataTemplate>
                                 <StackPanel HorizontalAlignment="Center" Margin="5">
@@ -473,7 +473,7 @@
                         </ToggleButton.Style>
                     </ToggleButton>
                     <ToggleButton x:Name="btnD05" Content="D05" Width="130" Margin="10" Height="80" HorizontalAlignment="Left"
-                            cal:Message.Attach="[Event Click] = [Action ClickedSeat($source, $eventArgs)]">
+                            cal:Message.Attach="[Event Click] = [Action ClickedSeat($source, $eventArgs)]" IsEnabled="{Binding AleadyResed[19]}">
                         <ToggleButton.ContentTemplate>
                             <DataTemplate>
                                 <StackPanel HorizontalAlignment="Center" Margin="5">
@@ -545,13 +545,13 @@
             <!-- 확인/취소버튼 -->
             <StackPanel Grid.Row="3" Grid.Column="2" Orientation="Horizontal" Margin="10" HorizontalAlignment="Center">
                 <Button Width="130" Height="50" HorizontalAlignment="Center" 
-                    Content="확인" Margin="10" FontSize="20" 
+                    Content="확인" Margin="10" FontSize="20" Foreground="White"
                     Style="{StaticResource MahApps.Styles.Button}" Background="#B71000" 
                     cal:Message.Attach="[Event Click] = [Action Next2($source, $eventArgs)]"
                 />
 
                 <Button Width="130" Height="50" HorizontalAlignment="Center" 
-                    Content="취소" Margin="10" FontSize="20"
+                    Content="취소" Margin="10" FontSize="20" Foreground="White"
                     Style="{StaticResource MahApps.Styles.Button}" Background="#B71000" 
                     cal:Message.Attach="[Event Click] = [Action Cancel2($source, $eventArgs)]"
                 />

@@ -260,13 +260,13 @@
             <!--확인, 취소버튼-->
             <StackPanel Grid.Row="2" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Center">
                 <Button Width="150" Height="50" HorizontalAlignment="Center" 
-                    Content="확인" Margin="10" FontSize="20" 
+                    Content="확인" Margin="10" FontSize="20"  Foreground="White"
                     Style="{StaticResource MahApps.Styles.Button}" Background="#B71000" 
                     cal:Message.Attach="[Event Click] = [Action Next($source, $eventArgs)]"
                 />
                 
                 <Button Width="150" Height="50" HorizontalAlignment="Center" 
-                    Content="취소" Margin="10" FontSize="20"
+                    Content="취소" Margin="10" FontSize="20" Foreground="White"
                     Style="{StaticResource MahApps.Styles.Button}" Background="#B71000" 
                     cal:Message.Attach="[Event Click] = [Action Cancel($source, $eventArgs)]"
                 />
