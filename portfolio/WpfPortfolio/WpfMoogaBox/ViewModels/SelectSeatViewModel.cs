@@ -104,6 +104,8 @@ namespace WpfMoogaBox.ViewModels
 				}
 			}
 
+			conn.Close();
+			reader.Close();
 
 			return BoolListOfResedSeat;
 

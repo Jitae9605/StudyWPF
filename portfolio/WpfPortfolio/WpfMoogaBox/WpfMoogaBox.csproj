@@ -186,9 +186,13 @@
     <Compile Include="Helpers\ReservationInfo.cs" />
     <Compile Include="Models\Mv_Info.cs" />
     <Compile Include="Helpers\Selection.cs" />
+    <Compile Include="ViewModels\CheckedAllViewModel.cs" />
     <Compile Include="ViewModels\ConfirmResViewModel.cs" />
     <Compile Include="ViewModels\MainScreenViewModel.cs" />
     <Compile Include="ViewModels\SelectSeatViewModel.cs" />
+    <Compile Include="Views\CheckedAllView.xaml.cs">
+      <DependentUpon>CheckedAllView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ConfirmResView.xaml.cs">
       <DependentUpon>ConfirmResView.xaml</DependentUpon>
     </Compile>
@@ -202,6 +206,10 @@
       <DependentUpon>SelectSeatView.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\BuyMenuView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CheckedAllView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -23,5 +23,7 @@ namespace WpfMoogaBox.Helpers
 		{
 			return await ((MetroWindow)Application.Current.MainWindow).ShowMessageAsync(title, message, style, null);
 		}
+
+		
 	}
 }

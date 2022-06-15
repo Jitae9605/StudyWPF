@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using MahApps.Metro.Controls.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using WpfMoogaBox.Helpers;
 
 namespace WpfMoogaBox.ViewModels
 {
@@ -50,8 +52,23 @@ namespace WpfMoogaBox.ViewModels
 			button.IsCancel = true;
 		}
 
-		public void Next3(object sender, MouseButtonEventArgs e)
+		public async void Next3(object sender, MouseButtonEventArgs e)
 		{
+			var result = await Commons.ShowMessageAsync("추가 구매","매점식품을 추가 구매하시겠습니까?", MessageDialogStyle.AffirmativeAndNegative) ;
+			if(result == MessageDialogResult.Affirmative)
+			{
+				var wManager = new WindowManager();
+
+				Cancel3(sender, e);
+				var res = wManager.ShowDialogAsync(new BuyMenuViewModel());
+			}
+			else
+			{
+				var wManager = new WindowManager();
+
+				Cancel3(sender, e);
+				var res = wManager.ShowDialogAsync(new BuyMenuViewModel());
+			}
 			//for (int i = 0; i < SeatCount; i++)
 			//{
 			//	SelectedSeats[i] = CheckedSeat[i];
