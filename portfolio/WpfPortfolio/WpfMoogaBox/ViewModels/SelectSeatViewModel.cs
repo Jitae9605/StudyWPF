@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -145,7 +146,8 @@ namespace WpfMoogaBox.ViewModels
 			
 			CheckedSeat.Add(button.Content.ToString());
 			SeatCount++;
-			CountSeatNum = SeatCount;	
+			CountSeatNum = SeatCount;
+			Thread.Sleep(1);
 		}
 
 		public void Cancel2(object sender, MouseButtonEventArgs e)

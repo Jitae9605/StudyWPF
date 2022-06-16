@@ -175,10 +175,18 @@ namespace WpfMoogaBox.ViewModels
 			string[] ThroughData = new string[] { ID, seleted.MvName, seleted.Hall, seleted.StartTime, seleted.EndTime };
 
 
-			var wManager = new WindowManager();
+			
 
 			Cancel(sender, e);
-			var result = wManager.ShowDialogAsync(new SelectSeatViewModel(ThroughData)) ;
+
+			Cloase(ThroughData);
+			
+		}
+
+		private void Cloase(string[] throughData)
+		{
+			IWindowManager wManager = new WindowManager();
+			var result = wManager.ShowWindowAsync(new SelectSeatViewModel(throughData));
 		}
 
 		private BindableCollection<Mv_Info> mV_Times;
