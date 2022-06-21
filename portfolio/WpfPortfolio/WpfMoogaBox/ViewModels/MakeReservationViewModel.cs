@@ -131,62 +131,30 @@ namespace WpfMoogaBox.ViewModels
 		{
 			Button button = sender as Button;
 			button.IsCancel = true;
+			IWindowManager wManager = new WindowManager();
+			var result = wManager.ShowWindowAsync(new MainScreenViewModel());
+			this.TryCloseAsync();
 		}
 
 		public void Next(object sender, MouseButtonEventArgs e)
 		{
 			if(string.IsNullOrEmpty(seleted.MvName))
 			{
-				Commons.ShowMessageAsync("알림", "먼저 영화와 시간을 선택해주세요");
+				
 				return;
 			}
 
-			//string ConnString = "Data Source=PC01;Initial Catalog=MoogaBox;Integrated Security=True";
-			//SqlConnection conn = new SqlConnection(ConnString);
-
-			//conn.Open();
-
-			//string SqlQuery = @"INSERT INTO TmpReservation
-			//						      ( ID
-			//						      , MvName
-			//						      , Hall
-			//						      , StartTime
-			//						 VALUES	 
-			//						      ( @ID
-			//						      , @MvName
-			//						      , @Hall
-			//						      , @StartTime";
-
-			//SqlCommand cmd = new SqlCommand(SqlQuery, conn);
-
-			//SqlParameter parmID = new SqlParameter("@ID", "1");
-			//cmd.Parameters.Add(parmID);
-
-			//SqlParameter parmMvName = new SqlParameter("@MvName", seleted.MvName);
-			//cmd.Parameters.Add(parmMvName);
-
-			//SqlParameter parmHall = new SqlParameter("@Hall", seleted.Hall);
-			//cmd.Parameters.Add(parmHall);
-
-			//SqlParameter parmStartTime = new SqlParameter("@StartTime", seleted.StartTime);
-			//cmd.Parameters.Add(parmStartTime);
 
 			string ID = DateTime.Now.ToString("yyMMddHHmmss");
-			string[] ThroughData = new string[] { ID, seleted.MvName, seleted.Hall, seleted.StartTime, seleted.EndTime };
-
-
-			
-
-			Cancel(sender, e);
-
-			Cloase(ThroughData);
-			
+			string[] Send_SelectedMVInfo = new string[] { ID, seleted.MvName, seleted.Hall, seleted.StartTime, seleted.EndTime };
+			this.TryCloseAsync();
+			LoadSelectSeatViewModel(Send_SelectedMVInfo);
 		}
 
-		private void Cloase(string[] throughData)
+		private void LoadSelectSeatViewModel(string[] Send_SelectedMVInfo)
 		{
 			IWindowManager wManager = new WindowManager();
-			var result = wManager.ShowWindowAsync(new SelectSeatViewModel(throughData));
+			var result = wManager.ShowWindowAsync(new SelectSeatViewModel(Send_SelectedMVInfo));
 		}
 
 		private BindableCollection<Mv_Info> mV_Times;

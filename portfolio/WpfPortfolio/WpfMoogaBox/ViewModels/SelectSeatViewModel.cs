@@ -22,7 +22,7 @@ namespace WpfMoogaBox.ViewModels
 
 		string[] SelectedSeats = new string[4];
 		int SeatCount = 0;
-		public SelectSeatViewModel(string[] GetData)
+		public SelectSeatViewModel(string[] Get_SelectedMVInfo)
 		{
 			AleadyResed = new BindableCollection<bool>();
 			bool[] AlreadyRes = new bool[20];
@@ -31,19 +31,19 @@ namespace WpfMoogaBox.ViewModels
 
 			Selected = new BindableCollection<string>();
 
-			// string[] ThroughData = new string[] { ID, seleted.MvName, seleted.Hall, seleted.StartTime, seleted.EndTime  };
+			// string[] Get_SelectedMVInfo = new string[] { ID, seleted.MvName, seleted.Hall, seleted.StartTime, seleted.EndTime  };
 
-			Selected.Add(GetData[0].ToString());
-			Selected.Add(GetData[1].ToString());
-			Selected.Add(GetData[2].ToString());
-			Selected.Add(GetData[3].ToString());
-			Selected.Add(GetData[4].ToString());
+			Selected.Add(Get_SelectedMVInfo[0].ToString());
+			Selected.Add(Get_SelectedMVInfo[1].ToString());
+			Selected.Add(Get_SelectedMVInfo[2].ToString());
+			Selected.Add(Get_SelectedMVInfo[3].ToString());
+			Selected.Add(Get_SelectedMVInfo[4].ToString());
 
-			seleted.ID = GetData[0].ToString();
-			seleted.MvName = GetData[1].ToString();
-			seleted.Hall = GetData[2].ToString();
-			seleted.StartTime = GetData[3].ToString();
-			seleted.EndTime = GetData[4].ToString();
+			seleted.ID = Get_SelectedMVInfo[0].ToString();
+			seleted.MvName = Get_SelectedMVInfo[1].ToString();
+			seleted.Hall = Get_SelectedMVInfo[2].ToString();
+			seleted.StartTime = Get_SelectedMVInfo[3].ToString();
+			seleted.EndTime = Get_SelectedMVInfo[4].ToString();
 
 			CheckedSeat = new BindableCollection<string>();
 
@@ -112,11 +112,6 @@ namespace WpfMoogaBox.ViewModels
 
 		}
 
-		public void ChangeColorButton(object sender, MouseButtonEventArgs e)
-		{
-			Button button = sender as Button;
-		}
-
 		public void ClickedSeat(object sender, MouseButtonEventArgs e)
 		{
 			CountSeatNum = new int();
@@ -152,8 +147,10 @@ namespace WpfMoogaBox.ViewModels
 
 		public void Cancel2(object sender, MouseButtonEventArgs e)
 		{
-			Button button = sender as Button;
-			button.IsCancel = true;
+			var wManager = new WindowManager();
+			var result = wManager.ShowWindowAsync(new MakeReservationViewModel());
+			this.TryCloseAsync();
+
 		}
 
 		public void Next2(object sender, MouseButtonEventArgs e)
@@ -164,14 +161,13 @@ namespace WpfMoogaBox.ViewModels
 			}
 
 
-			string[] ThroughData = new string[] { seleted.ID, seleted.MvName, seleted.Hall, seleted.StartTime, seleted.EndTime };
-			string[] ThroughData2 = SelectedSeats;
-			int ThroughData3 = SeatCount;
+			string[] Send_SelectedMVInfo = new string[] { seleted.ID, seleted.MvName, seleted.Hall, seleted.StartTime, seleted.EndTime };
+			string[] Send_SelectedSeats = SelectedSeats;
+			int Send_SeatCount = SeatCount;
+			this.TryCloseAsync();
 
 			var wManager = new WindowManager();
-
-			Cancel2(sender, e);
-			var result = wManager.ShowDialogAsync(new ConfirmResViewModel(ThroughData, ThroughData2, ThroughData3));
+			var result = wManager.ShowWindowAsync(new ConfirmResViewModel(Send_SelectedMVInfo, Send_SelectedSeats, Send_SeatCount));
 		}
 
 		private BindableCollection<string> checkedSeat;

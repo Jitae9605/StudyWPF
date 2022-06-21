@@ -1,7 +1,9 @@
 ﻿using Caliburn.Micro;
+using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,7 +16,7 @@ namespace WpfMoogaBox.ViewModels
 {
 	public class ConfirmResViewModel : Conductor<object>
 	{
-		public ConfirmResViewModel(string[] GetData1, string[] GetData2, int GetData3)
+		public ConfirmResViewModel(string[] Get_SelectedMVInfo, string[] Get_SelectedSeats, int Get_SeatCount)
 		{
 
 			SelectionInfo = new BindableCollection<string>();
@@ -26,20 +28,20 @@ namespace WpfMoogaBox.ViewModels
 
 
 			// 영화정보
-			SelectionInfo.Add(GetData1[0]);
-			SelectionInfo.Add(GetData1[1]);
-			SelectionInfo.Add(GetData1[2]);
-			SelectionInfo.Add(GetData1[3]);
-			SelectionInfo.Add(GetData1[4]);
+			SelectionInfo.Add(Get_SelectedMVInfo[0]);
+			SelectionInfo.Add(Get_SelectedMVInfo[1]);
+			SelectionInfo.Add(Get_SelectedMVInfo[2]);
+			SelectionInfo.Add(Get_SelectedMVInfo[3]);
+			SelectionInfo.Add(Get_SelectedMVInfo[4]);
 
 			// 좌석
 			SelectedSeatfortxtbox = "";
-			for(int i = 0; i < GetData3; i++)
+			for(int i = 0; i < Get_SeatCount; i++)
 			{
-				SelectedSeat.Add(GetData2[i]);
+				SelectedSeat.Add(Get_SelectedSeats[i]);
 				SelectedSeatfortxtbox += SelectedSeat[i];
 
-				if(!(i == GetData3 - 1))
+				if(!(i == Get_SeatCount - 1))
 				{
 					SelectedSeatfortxtbox += " ,";
 				}
@@ -48,42 +50,21 @@ namespace WpfMoogaBox.ViewModels
 
 		public void Cancel3(object sender, MouseButtonEventArgs e)
 		{
-			Button button = sender as Button;
-			button.IsCancel = true;
+			this.TryCloseAsync();
+			var wManager = new WindowManager();
+			string[] Send_SelectedMVInfo = new string[] { SelectionInfo[0], SelectionInfo[1], SelectionInfo[2], SelectionInfo[3], SelectionInfo[4] };
+
+			var res = wManager.ShowWindowAsync(new SelectSeatViewModel(Send_SelectedMVInfo));
 		}
 
-		public async void Next3(object sender, MouseButtonEventArgs e)
+		public void Next3(object sender, MouseButtonEventArgs e)
 		{
-			var result = await Commons.ShowMessageAsync("추가 구매","매점식품을 추가 구매하시겠습니까?", MessageDialogStyle.AffirmativeAndNegative) ;
-			if(result == MessageDialogResult.Affirmative)
-			{
-				var wManager = new WindowManager();
-
-				Cancel3(sender, e);
-				var res = wManager.ShowDialogAsync(new BuyMenuViewModel());
-			}
-			else
-			{
-				var wManager = new WindowManager();
-
-				Cancel3(sender, e);
-				var res = wManager.ShowDialogAsync(new BuyMenuViewModel());
-			}
-			//for (int i = 0; i < SeatCount; i++)
-			//{
-			//	SelectedSeats[i] = CheckedSeat[i];
-			//}
-
-
-			//string[] ThroughData = new string[] { seleted.ID, seleted.MvName, seleted.Hall, seleted.StartTime, seleted.EndTime };
-			//string[] ThroughData2 = SelectedSeats;
-			//int ThroughData3 = SeatCount;
-
-			//var wManager = new WindowManager();
-
-			//Cancel2(sender, e);
-			//var result = wManager.ShowDialogAsync(new ConfirmResViewModel(ThroughData, ThroughData2, ThroughData3));
+			this.TryCloseAsync();
+			// TmpRes..에 저장
+			var wManager = new WindowManager();
+			var res = wManager.ShowWindowAsync(new MessageBox_BuySnackViewModel());
 		}
+
 
 		private BindableCollection<string> selectionInfo;
 		public BindableCollection<string> SelectionInfo

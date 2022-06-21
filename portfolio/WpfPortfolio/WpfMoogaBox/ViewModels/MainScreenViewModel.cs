@@ -13,26 +13,30 @@ namespace WpfMoogaBox.ViewModels
 
 		public void LoadCheckReservationView()
 		{
-
-			ActivateItemAsync(new CheckReservationViewModel());
+			var wManager = new WindowManager();
+			var result = wManager.ShowWindowAsync(new CheckReservationViewModel());
+			CloseMainCustomerMenu();
 		}
 
 		public void LoadMakeReservationView()
 		{
-			//var settings = new Dictionary<string, object>
-			//{
-			//	{ "SizeToContent", SizeToContent.Manual },
-			//	{ "Height" , 100  },
-			//	{ "Width"  , 1500 },
-			//};
-			//ActivateItemAsync(new MakeReservationViewModel());
 			var wManager = new WindowManager();			
-			var result = wManager.ShowDialogAsync(new MakeReservationViewModel());
+			var result = wManager.ShowWindowAsync(new MakeReservationViewModel());
+			CloseMainCustomerMenu();
+
 		}
 
 		public void LoadBuyMenuView()
 		{
-			ActivateItemAsync(new BuyMenuViewModel());
+			var wManager = new WindowManager();
+			var result = wManager.ShowWindowAsync(new BuyMenuViewModel());
+			CloseMainCustomerMenu();
+
+		}
+
+		public void CloseMainCustomerMenu()
+		{
+			this.TryCloseAsync();
 		}
 	}
 }

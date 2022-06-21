@@ -43,6 +43,8 @@
                 </Button.Content>
             </Button>
 
+            <StatusBar  x:Name="stsResult" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Background="#B71000"/>
+
 
         </Grid>
         <!--<ContentControl x:Name="ActiveItem"/>-->

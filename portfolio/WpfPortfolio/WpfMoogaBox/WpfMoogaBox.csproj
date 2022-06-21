@@ -189,6 +189,8 @@
     <Compile Include="ViewModels\CheckedAllViewModel.cs" />
     <Compile Include="ViewModels\ConfirmResViewModel.cs" />
     <Compile Include="ViewModels\MainScreenViewModel.cs" />
+    <Compile Include="ViewModels\MessageBox_BuySnackViewModel.cs" />
+    <Compile Include="ViewModels\PaymentWindowViewModel.cs" />
     <Compile Include="ViewModels\SelectSeatViewModel.cs" />
     <Compile Include="Views\CheckedAllView.xaml.cs">
       <DependentUpon>CheckedAllView.xaml</DependentUpon>
@@ -201,6 +203,12 @@
     </Compile>
     <Compile Include="Views\MakeReservationView.xaml.cs">
       <DependentUpon>MakeReservationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MessageBox_BuySnackView.xaml.cs">
+      <DependentUpon>MessageBox_BuySnackView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PaymentWindowView.xaml.cs">
+      <DependentUpon>PaymentWindowView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SelectSeatView.xaml.cs">
       <DependentUpon>SelectSeatView.xaml</DependentUpon>
@@ -225,10 +233,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\MainView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -236,7 +240,6 @@
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="ViewModels\BuyMenuViewModel.cs" />
     <Compile Include="ViewModels\CheckReservationViewModel.cs" />
-    <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\MakeReservationViewModel.cs" />
     <Compile Include="Views\BuyMenuView.xaml.cs">
       <DependentUpon>BuyMenuView.xaml</DependentUpon>
@@ -244,11 +247,15 @@
     <Compile Include="Views\CheckReservationView.xaml.cs">
       <DependentUpon>CheckReservationView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\MainView.xaml.cs">
-      <DependentUpon>MainView.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
     <Page Include="Views\MakeReservationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MessageBox_BuySnackView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PaymentWindowView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
