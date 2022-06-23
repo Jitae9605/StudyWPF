@@ -13,13 +13,16 @@
 
  <br/>
  
- ![NaverMovieFinder](https://github.com/Jitae9605/StudyWPF/blob/main/capture/matrics.png?raw=true)
- 실행화면
- 
- <br/>
-    
- ![YoutubeTrailerPlay](https://github.com/Jitae9605/StudyWPF/blob/main/capture/Trailer_lalaland.png?raw=true)
- 검색영화 예고편 실행화면
+ |![NaverMovieFinder](https://github.com/Jitae9605/StudyWPF/blob/main/capture/matrics.png?raw=true)|
+|:---:|
+|**실행화면**|
+
+ <br>
+
+|![YoutubeTrailerPlay](https://github.com/Jitae9605/StudyWPF/blob/main/capture/Trailer_lalaland.png?raw=true)|
+|:---:|
+|**검색영화 예고편 실행화면**|
+
 
 <br/>
 
@@ -29,11 +32,14 @@
   - Newtonsoft.json
   - Naver OpenAPI
 
-<br/>
+<br>
 
-![NaverNewsSearch](https://github.com/Jitae9605/StudyWPF/blob/main/portfolio/WpfPortfolio/WPFNaverNewsSearch/resource/NaverNewsSearch1.png?raw=true)
+|![NaverNewsSearch](https://github.com/Jitae9605/StudyWPF/blob/main/portfolio/WpfPortfolio/WPFNaverNewsSearch/resource/NaverNewsSearch1.png?raw=true)|
+|:---:|
+|**실행화면**|
 
-<br/>
+
+<br>
 
 ## SmartHome 모니터링앱 ([이전으로](https://github.com/Jitae9605/StudyWPF#studywpf))
 - WPF (.NET Framwork 4.7.2 C#)
@@ -45,14 +51,26 @@
     - SQL Server
     - OxyPlot.Wpf
 
-<br/>
+<br>
 
-![SmartHomeMonitoringApp](https://github.com/Jitae9605/StudyWPF/blob/main/capture/MQTT_PrintFakeData.png?raw=true)
-데이터베이스로 MQTT수신 데이터 삽입
+|![SmartHomeMonitoringApp](https://github.com/Jitae9605/StudyWPF/blob/main/capture/MQTT_PrintFakeData.png?raw=true)|
+|:---:|
+|**데이터베이스로 MQTT수신 데이터 삽입**|
 
-![RealtimeView](https://github.com/Jitae9605/StudyWPF/blob/main/capture/MQTT_LiveChart.png?raw=true)
-실시간 센서 디스플레이
+<br>
 
-![HistoryView](https://github.com/Jitae9605/StudyWPF/blob/main/capture/MQTT_History.png?raw=true)
-![About](https://github.com/Jitae9605/StudyWPF/blob/main/capture/MQTT_About.png?raw=true)
-센서값 시각화 및 프로그램 정보창
+|![RealtimeView](https://github.com/Jitae9605/StudyWPF/blob/main/capture/MQTT_LiveChart.png?raw=true)|
+|:---:|
+|**실시간 센서 디스플레이**|
+
+<br>
+
+|![HistoryView](https://github.com/Jitae9605/StudyWPF/blob/main/capture/MQTT_History.png?raw=true)|
+|:---:|
+|**센서값 시각화**|
+
+<br>
+
+|![About](https://github.com/Jitae9605/StudyWPF/blob/main/capture/MQTT_About.png?raw=true)|
+|:---:|
+|**프로그램 정보창**|
