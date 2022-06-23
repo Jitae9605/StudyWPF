@@ -43,7 +43,7 @@ C# WPF 학습리포지토리
 - SmartHome 시스템 개발완료
 
 ## portfolio(WPF 포트폴리오)
-### Naver 영화검색 (완성)
+### Naver 영화검색
  - WPF(.NET Framwork 4.7.2 / C#)
   - MahApp.Metro Metro UI/Modern UI
   - Newtonsoft.json
@@ -52,13 +52,13 @@ C# WPF 학습리포지토리
   - CefSharp WebBrowser component
   - EntityFramework DB
 
-### Naver 뉴스검색 (완성)
+### Naver 뉴스검색
 - WPF(.NET Framwork 4.7.2 / C#)
   - MahApp.Metro Metro UI/Modern UI
   - Newtonsoft.json
   - Naver OpenAPI
  
-### SmartHome 모니터링앱 (완성)
+### SmartHome 모니터링앱
 - WPF (.NET Framwork 4.7.2 C#)
     - MahApp.Metro Metro UI/Modern UI 
     - Caliburn.Micro
