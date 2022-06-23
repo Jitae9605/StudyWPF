@@ -8,14 +8,19 @@
   - CefSharp WebBrowser component
   - EntityFramework DB
 
- <br/>
+ <br>
  
- ![NaverMovieFinder](https://github.com/Jitae9605/StudyWPF/blob/main/capture/matrics.png?raw=true)
- 실행화면
+ |![NaverMovieFinder](https://github.com/Jitae9605/StudyWPF/blob/main/capture/matrics.png?raw=true)|
+|:---:|
+|**실행화면**|
+
+ <br>
+
+|![YoutubeTrailerPlay](https://github.com/Jitae9605/StudyWPF/blob/main/capture/Trailer_lalaland.png?raw=true)|
+|:---:|
+|**검색영화 예고편 실행화면**|
+
+
  
- <br/>
-    
- ![YoutubeTrailerPlay](https://github.com/Jitae9605/StudyWPF/blob/main/capture/Trailer_lalaland.png?raw=true)
- 검색영화 예고편 실행화면
 
 
