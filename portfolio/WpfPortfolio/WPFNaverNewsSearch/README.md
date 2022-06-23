@@ -6,6 +6,12 @@
 
 <br>
 
+|![NaverNewsSearch](https://github.com/Jitae9605/StudyWPF/blob/main/capture/NaverNewsFinder.gif?raw=true)|
+|:---:|
+|**시연영상**|
+
+<br>
+
 |![NaverNewsSearch](https://github.com/Jitae9605/StudyWPF/blob/main/portfolio/WpfPortfolio/WPFNaverNewsSearch/resource/NaverNewsSearch1.png?raw=true)|
 |:---:|
 |**실행화면**|
