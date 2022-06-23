@@ -10,13 +10,13 @@
 
  <br>
  
- |![NaverMovieFinder](https://github.com/Jitae9605/StudyWPF/blob/main/capture/matrics.png?raw=true)|
+ |![NaverMovieFinder1](https://github.com/Jitae9605/StudyWPF/blob/main/capture/NaverMovieFinder1.gif?raw=true)|
 |:---:|
-|**실행화면**|
+ |**실행화면**|
 
  <br>
 
-|![YoutubeTrailerPlay](https://github.com/Jitae9605/StudyWPF/blob/main/capture/Trailer_lalaland.png?raw=true)|
+ |![NaverMovieFinder2](https://github.com/Jitae9605/StudyWPF/blob/main/capture/NaverMovieFinder2.gif?raw=true)|
 |:---:|
 |**검색영화 예고편 실행화면**|
 
