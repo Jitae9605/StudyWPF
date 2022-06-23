@@ -45,18 +45,18 @@ C# WPF 학습리포지토리
 ## portfolio(WPF 포트폴리오)
 ### Naver 영화검색
  - WPF(.NET Framwork 4.7.2 / C#)
-  - MahApp.Metro Metro UI/Modern UI
-  - Newtonsoft.json
-  - Naver OpenAPI
-  - Google.Apis.Youtube.v3
-  - CefSharp WebBrowser component
-  - EntityFramework DB
+    - MahApp.Metro Metro UI/Modern UI
+    - Newtonsoft.json
+    - Naver OpenAPI
+    - Google.Apis.Youtube.v3
+    - CefSharp WebBrowser component
+    - EntityFramework DB
 
 ### Naver 뉴스검색
 - WPF(.NET Framwork 4.7.2 / C#)
-  - MahApp.Metro Metro UI/Modern UI
-  - Newtonsoft.json
-  - Naver OpenAPI
+    - MahApp.Metro Metro UI/Modern UI
+    - Newtonsoft.json
+    - Naver OpenAPI
  
 ### SmartHome 모니터링앱
 - WPF (.NET Framwork 4.7.2 C#)
