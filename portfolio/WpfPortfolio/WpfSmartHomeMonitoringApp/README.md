@@ -1,5 +1,5 @@
 
-# SmartHome 모니터링앱 ([이전으로](https://github.com/Jitae9605/StudyWPF#studywpf))
+# SmartHome 모니터링앱 ([이전으로](https://github.com/Jitae9605/StudyWPF#portfoliowpf-%ED%8F%AC%ED%8A%B8%ED%8F%B4%EB%A6%AC%EC%98%A4))
 - WPF (.NET Framwork 4.7.2 C#)
     - MahApp.Metro Metro UI/Modern UI 
     - Caliburn.Micro
