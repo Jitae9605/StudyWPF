@@ -1,4 +1,0 @@
-﻿namespace WPF_BikeShop
-{
-
-}

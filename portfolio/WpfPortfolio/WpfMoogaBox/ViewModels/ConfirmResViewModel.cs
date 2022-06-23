@@ -3,6 +3,7 @@ using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -21,6 +22,8 @@ namespace WpfMoogaBox.ViewModels
 
 			SelectionInfo = new BindableCollection<string>();
 			SelectedSeat = new BindableCollection<string>();
+			SelectedSeatNum = 0;
+			SelectedSeatNum = Get_SeatCount;
 
 			// string[] ThroughData = new string[] { seleted.ID, seleted.MvName, seleted.Hall, seleted.StartTime, seleted.EndTime };
 			// string[] ThroughData2 = SelectedSeats;
@@ -28,20 +31,20 @@ namespace WpfMoogaBox.ViewModels
 
 
 			// 영화정보
-			SelectionInfo.Add(Get_SelectedMVInfo[0]);
-			SelectionInfo.Add(Get_SelectedMVInfo[1]);
-			SelectionInfo.Add(Get_SelectedMVInfo[2]);
-			SelectionInfo.Add(Get_SelectedMVInfo[3]);
-			SelectionInfo.Add(Get_SelectedMVInfo[4]);
+			SelectionInfo.Add(Get_SelectedMVInfo[0]);	// ID
+			SelectionInfo.Add(Get_SelectedMVInfo[1]);	// MvName
+			SelectionInfo.Add(Get_SelectedMVInfo[2]);	// Hall
+			SelectionInfo.Add(Get_SelectedMVInfo[3]);	// StartTime
+			SelectionInfo.Add(Get_SelectedMVInfo[4]);	// EndTime
 
 			// 좌석
 			SelectedSeatfortxtbox = "";
-			for(int i = 0; i < Get_SeatCount; i++)
+			for(int i = 0; i < SelectedSeatNum; i++)
 			{
 				SelectedSeat.Add(Get_SelectedSeats[i]);
 				SelectedSeatfortxtbox += SelectedSeat[i];
 
-				if(!(i == Get_SeatCount - 1))
+				if(!(i == SelectedSeatNum - 1))
 				{
 					SelectedSeatfortxtbox += " ,";
 				}
@@ -59,8 +62,62 @@ namespace WpfMoogaBox.ViewModels
 
 		public void Next3(object sender, MouseButtonEventArgs e)
 		{
+
+			int PriceOfTicket = 8000;
+			string ConnString = "Data Source=PC01;Initial Catalog=MoogaBox;Integrated Security=True";
+			SqlConnection conn = new SqlConnection(ConnString);
+
+			conn.Open();
+
+			string SqlQuery = @"INSERT INTO TmpReservation
+								          ( ID
+								          , MvName
+								          , Hall
+								          , SeatNum
+								          , StartTime
+								          , Ccount
+								          , Mmoney)
+								   VALUES 	 
+								          ( @ID
+								          , @MvName
+								          , @Hall
+								          , @SeatNum
+								          , @StartTime
+								          , @Ccount
+								          , @Mmoney)";
+
+
+			SqlCommand cmd = new SqlCommand(SqlQuery, conn);
+
+			SqlParameter parmID = new SqlParameter("@ID", SelectionInfo[0]);
+			cmd.Parameters.Add(parmID);
+
+			SqlParameter parmMvName = new SqlParameter("@MvName", SelectionInfo[1]);
+			cmd.Parameters.Add(parmMvName);
+
+			SqlParameter parmHall = new SqlParameter("@Hall", SelectionInfo[2]);
+			cmd.Parameters.Add(parmHall);
+
+			SqlParameter parmSeatNum = new SqlParameter("@SeatNum", SelectedSeatfortxtbox);
+			cmd.Parameters.Add(parmSeatNum);
+
+			SqlParameter parmStartTime = new SqlParameter("@StartTime", SelectionInfo[3]);
+			cmd.Parameters.Add(parmStartTime);
+
+			SqlParameter parmCcount = new SqlParameter("@Ccount", SelectedSeatNum);
+			cmd.Parameters.Add(parmCcount);
+
+			SqlParameter parmMmoney = new SqlParameter("@Mmoney", PriceOfTicket);
+			cmd.Parameters.Add(parmMmoney);
+
+
+
+			cmd.ExecuteNonQuery();
+
+			conn.Close();
+
 			this.TryCloseAsync();
-			// TmpRes..에 저장
+			
 			var wManager = new WindowManager();
 			var res = wManager.ShowWindowAsync(new MessageBox_BuySnackViewModel());
 		}
@@ -99,6 +156,18 @@ namespace WpfMoogaBox.ViewModels
 			{
 				selectedSeatfortxtbox = value;
 				NotifyOfPropertyChange(() => SelectedSeatfortxtbox);
+
+			}
+		}
+
+		private int selectedSeatNum;
+		public int SelectedSeatNum
+		{
+			get => selectedSeatNum;
+			set
+			{
+				selectedSeatNum = value;
+				NotifyOfPropertyChange(() => SelectedSeatNum);
 
 			}
 		}

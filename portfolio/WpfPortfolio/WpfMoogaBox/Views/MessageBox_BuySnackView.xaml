@@ -1,0 +1,37 @@
+﻿<mah:MetroWindow 
+    x:Class="WpfMoogaBox.Views.MessageBox_BuySnackView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:WpfMoogaBox.Views"
+    xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:cal="http://caliburnmicro.com"
+    mc:Ignorable="d"
+    Title="추가구매" Height="170" Width="300" Background="Black" WindowStartupLocation="CenterScreen">
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="3*"/>
+
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="1">
+            <Label  Margin="5"
+            Content="매점상품을 추가구매 하시겠습니까?" FontSize="16" FontWeight="Bold" FontFamily="Century gothic" Foreground="White"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Width="50" Height="30" HorizontalAlignment="Center" 
+                    Content="네" Margin="10,5" FontSize="12" Foreground="White"
+                    Style="{StaticResource MahApps.Styles.Button}" Background="#B71000" 
+                    cal:Message.Attach="[Event Click] = [Action NexttoBuySnack($source, $eventArgs)]"
+                />
+                <Button Width="50" Height="30" HorizontalAlignment="Center" 
+                    Content="아니요" Margin="10,5" FontSize="12" Foreground="White"
+                    Style="{StaticResource MahApps.Styles.Button}" Background="#B71000" 
+                    cal:Message.Attach="[Event Click] = [Action CanceltoPaying($source, $eventArgs)]"
+                />
+            </StackPanel>
+            
+        </StackPanel>
+       
+    </Grid>
+</mah:MetroWindow>

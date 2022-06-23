@@ -71,7 +71,6 @@ namespace WpfMoogaBox.ViewModels
 			string SqlQuery = "SELECT Eempty FROM CrJo WHERE MvName = @MvName AND ThNum = @ThNum AND StartTime = @StartTime";
 
 
-
 			SqlCommand cmd = new SqlCommand(SqlQuery, conn);
 
 			SqlParameter parmMvName = new SqlParameter("@MvName", MvName);
