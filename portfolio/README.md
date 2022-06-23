@@ -1,6 +1,4 @@
 # WPF 포트폴리오 
-
-<br/>
     
 ## Naver 영화검색 ([이전으로](https://github.com/Jitae9605/StudyWPF#studywpf))
 - WPF(.NET Framwork 4.7.2 / C#)
