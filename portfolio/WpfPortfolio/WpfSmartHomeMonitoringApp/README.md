@@ -9,19 +9,25 @@
     - SQL Server
     - OxyPlot.Wpf
 
-<br/>
+<br>
 
 |![SmartHomeMonitoringApp](https://github.com/Jitae9605/StudyWPF/blob/main/capture/MQTT_PrintFakeData.png?raw=true)|
 |:---:|
 |**데이터베이스로 MQTT수신 데이터 삽입**|
 
+<br>
+
 |![RealtimeView](https://github.com/Jitae9605/StudyWPF/blob/main/capture/MQTT_LiveChart.png?raw=true)|
 |:---:|
 |**실시간 센서 디스플레이**|
 
+<br>
+
 |![HistoryView](https://github.com/Jitae9605/StudyWPF/blob/main/capture/MQTT_History.png?raw=true)|
 |:---:|
 |**센서값 시각화**|
+
+<br>
 
 |![About](https://github.com/Jitae9605/StudyWPF/blob/main/capture/MQTT_About.png?raw=true)|
 |:---:|
