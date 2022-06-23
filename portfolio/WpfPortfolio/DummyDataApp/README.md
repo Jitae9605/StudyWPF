@@ -5,6 +5,10 @@
   - Newtonsoft.json
   - Bogus
 
+ |![DummyData](https://github.com/Jitae9605/StudyWPF/blob/main/capture/DummyData.gif?raw=true)|
+|:---:|
+|**시연영상**|
+
  |![DummyData](https://github.com/Jitae9605/StudyWPF/blob/main/portfolio/WpfPortfolio/DummyDataApp/Resource/MQTT_GetFakeData.png?raw=true)|
 |:---:|
 |**실행화면**|
