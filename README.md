@@ -52,13 +52,13 @@ C# WPF 학습리포지토리
   - CefSharp WebBrowser component
   - EntityFramework DB
 
-# Naver 뉴스검색 (완성)
+### Naver 뉴스검색 (완성)
 - WPF(.NET Framwork 4.7.2 / C#)
   - MahApp.Metro Metro UI/Modern UI
   - Newtonsoft.json
   - Naver OpenAPI
  
-# SmartHome 모니터링앱 (완성)
+### SmartHome 모니터링앱 (완성)
 - WPF (.NET Framwork 4.7.2 C#)
     - MahApp.Metro Metro UI/Modern UI 
     - Caliburn.Micro
@@ -68,7 +68,7 @@ C# WPF 학습리포지토리
     - SQL Server
     - OxyPlot.Wpf
  
-# 영화예매 및 관리프로그램 (작업중)
+### 영화예매 및 관리프로그램 (작업중)
 - WPF (.NET Framwork 4.7.2 C#)
     - MahApp.Metro Metro UI/Modern UI 
     - Caliburn.Micro
