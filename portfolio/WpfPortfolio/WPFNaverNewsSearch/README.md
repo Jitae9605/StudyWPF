@@ -4,6 +4,8 @@
   - Newtonsoft.json
   - Naver OpenAPI
 
-<br/>
+<br>
 
-![NaverNewsSearch](https://github.com/Jitae9605/StudyWPF/blob/main/portfolio/WpfPortfolio/WPFNaverNewsSearch/resource/NaverNewsSearch1.png?raw=true)
+|![NaverNewsSearch](https://github.com/Jitae9605/StudyWPF/blob/main/portfolio/WpfPortfolio/WPFNaverNewsSearch/resource/NaverNewsSearch1.png?raw=true)|
+|:---:|
+|**실행화면**|
