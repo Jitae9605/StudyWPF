@@ -5,7 +5,7 @@
   - Newtonsoft.json
   - Bogus
 
- |![DummyData](https://github.com/Jitae9605/StudyWPF/blob/main/capture/DummyData.gif?raw=true)|
+ |![DummyData](https://github.com/Jitae9605/StudyWPF/blob/main/capture/DummyData%20(2).gif?raw=true)|
 |:---:|
 |**시연영상**|
 
