@@ -10,13 +10,13 @@
 
  <br>
  
- |![NaverMovieFinder1](https://github.com/Jitae9605/StudyWPF/blob/main/capture/NaverMovieFinder1.gif?raw=true)|
+ |![NaverMovieFinder1](https://github.com/Jitae9605/StudyWPF/blob/main/capture/NaverMovieFinder1%20(2).gif?raw=true)|
 |:---:|
  |**실행화면**|
 
  <br>
 
- |![NaverMovieFinder2](https://github.com/Jitae9605/StudyWPF/blob/main/capture/NaverMovieFinder2.gif?raw=true)|
+ |![NaverMovieFinder2](https://github.com/Jitae9605/StudyWPF/blob/main/capture/NaverMovieFinder2%20(2).gif?raw=true)|
 |:---:|
 |**검색영화 예고편 실행화면**|
 
