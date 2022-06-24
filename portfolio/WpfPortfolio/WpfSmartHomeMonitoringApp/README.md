@@ -11,7 +11,7 @@
 
 <br>
 
-|![SmartHomeMonitoringApp](https://github.com/Jitae9605/StudyWPF/blob/main/capture/SmartHomeMonitoringSystem.gif?raw=true)|
+|![SmartHomeMonitoringApp](https://github.com/Jitae9605/StudyWPF/blob/main/capture/SmartHomeMonitoringSystem%20(2).gif?raw=true)|
 |:---:|
 |**시연영상**|
 
