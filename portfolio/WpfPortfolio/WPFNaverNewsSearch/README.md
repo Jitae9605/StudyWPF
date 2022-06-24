@@ -6,7 +6,7 @@
 
 <br>
 
-|![NaverNewsSearch](https://github.com/Jitae9605/StudyWPF/blob/main/capture/NaverNewsFinder.gif?raw=true)|
+|![NaverNewsSearch](https://github.com/Jitae9605/StudyWPF/blob/main/capture/NaverNewsFinder%20(2).gif?raw=true)|
 |:---:|
 |**시연영상**|
 
