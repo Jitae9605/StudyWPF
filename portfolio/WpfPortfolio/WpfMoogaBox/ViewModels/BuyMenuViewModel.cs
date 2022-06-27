@@ -6,6 +6,13 @@ namespace WpfMoogaBox.ViewModels
 	{
 		public BuyMenuViewModel()
 		{
+			//MenuImageSource
+			//MenuName
+			//MenuPrice
+			//IsSnackListNull
+			//CanclePayment_BuySnack()
+			//LetsPay_BuySnack()
+			//Click_SnackButton()
 		}
 	}
 }
