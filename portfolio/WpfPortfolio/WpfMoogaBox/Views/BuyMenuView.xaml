@@ -44,14 +44,17 @@
                     <Grid Grid.Row="0" Background="#FFE5E5E5">
                         <StackPanel  Orientation="Horizontal" HorizontalAlignment="Center" Margin="5"  >
                             <ToggleButton Content="팝콘" FontSize="20" Foreground="White" Width="150" Height="50" Margin="10,0" 
-                                          Style="{StaticResource MahApps.Styles.Button}" Background="#B71000" IsChecked="{Binding MenuSelect[0]}"
+                                          Style="{DynamicResource MahApps.Styles.ToggleButton}" Background="#B71000" IsChecked="{Binding MenuSelect[0]}"
+                                          
+                                          
                                           cal:Message.Attach="[Event Click] = [Action SnackMenuSelectButton_Popcorn_Click($source, $eventArgs)]"/>
                             <ToggleButton Content="음료" FontSize="20" Foreground="White" Width="150" Height="50" Margin="10,0" 
-                                          Style="{StaticResource MahApps.Styles.Button}" Background="#B71000" IsChecked="{Binding MenuSelect[1]}"
-                                          cal:Message.Attach="[Event Click] = [Action SnackMenuSelectButton_Popcorn_Click($source, $eventArgs)]"/>
+                                          Style="{DynamicResource MahApps.Styles.ToggleButton}" Background="#B71000" IsChecked="{Binding MenuSelect[1]}"
+                                          cal:Message.Attach="[Event Click] = [Action SnackMenuSelectButton_Drink_Click($source, $eventArgs)]"/>
                             <ToggleButton Content="세트" FontSize="20" Foreground="White" Width="150" Height="50" Margin="10,0" 
-                                          Style="{StaticResource MahApps.Styles.Button}" Background="#B71000" IsChecked="{Binding MenuSelect[2]}"
-                                          cal:Message.Attach="[Event Click] = [Action SnackMenuSelectButton_Popcorn_Click($source, $eventArgs)]"/>
+                                          Style="{DynamicResource MahApps.Styles.ToggleButton}" 
+                                          Background="#B71000" IsChecked="{Binding MenuSelect[2]}"
+                                          cal:Message.Attach="[Event Click] = [Action SnackMenuSelectButton_Set_Click($source, $eventArgs)]"/>
                         </StackPanel>
                     </Grid>
 
@@ -70,7 +73,7 @@
                         </Grid.ColumnDefinitions>
                         <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Orientation="Horizontal" 
                                     Margin="10" HorizontalAlignment="Center">
-                            <Button Width="200" Margin="30,0" 
+                            <Button x:Name="first" Width="200" Margin="30,0" 
                                     cal:Message.Attach="[Event Click] = [Action Click_SnackButton($source, $eventArgs)]">
                                 <Button.Content>
                                     <Grid>
@@ -83,7 +86,7 @@
                                                Source="{Binding MenuImageSource[0]}" />
                                         <Label Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" 
                                                Content="{Binding MenuName[0]}" FontSize="15"/>
-                                        <Label Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                                        <Label Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" 
                                                Content="{Binding MenuPrice[0]}" FontSize="15"/>
                                     </Grid>
                                 </Button.Content>
@@ -100,7 +103,7 @@
                                                Source="{Binding MenuImageSource[1]}" />
                                         <Label Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" 
                                                Content="{Binding MenuName[1]}" FontSize="15"/>
-                                        <Label Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                                        <Label Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" 
                                                Content="{Binding MenuPrice[1]}" FontSize="15"/>
                                     </Grid>
                                 </Button.Content>
@@ -117,7 +120,7 @@
                                                Source="{Binding MenuImageSource[2]}" />
                                         <Label Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" 
                                                Content="{Binding MenuName[2]}" FontSize="15"/>
-                                        <Label Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                                        <Label Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" 
                                                Content="{Binding MenuPrice[2]}" FontSize="15"/>
                                     </Grid>
                                 </Button.Content>
@@ -134,7 +137,7 @@
                                                Source="{Binding MenuImageSource[3]}" />
                                         <Label Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" 
                                                Content="{Binding MenuName[3]}" FontSize="15"/>
-                                        <Label Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                                        <Label Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" 
                                                Content="{Binding MenuPrice[3]}" FontSize="15"/>
                                     </Grid>
                                 </Button.Content>
@@ -154,7 +157,7 @@
                                                Source="{Binding MenuImageSource[4]}" />
                                         <Label Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" 
                                                Content="{Binding MenuName[4]}" FontSize="15"/>
-                                        <Label Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                                        <Label Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" 
                                                Content="{Binding MenuPrice[4]}" FontSize="15"/>
                                     </Grid>
                                 </Button.Content>
@@ -171,7 +174,7 @@
                                                Source="{Binding MenuImageSource[5]}" />
                                         <Label Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" 
                                                Content="{Binding MenuName[5]}" FontSize="15"/>
-                                        <Label Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                                        <Label Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" 
                                                Content="{Binding MenuPrice[5]}" FontSize="15"/>
                                     </Grid>
                                 </Button.Content>
@@ -188,7 +191,7 @@
                                                Source="{Binding MenuImageSource[6]}" />
                                         <Label Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" 
                                                Content="{Binding MenuName[6]}" FontSize="15"/>
-                                        <Label Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                                        <Label Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" 
                                                Content="{Binding MenuPrice[6]}" FontSize="15"/>
                                     </Grid>
                                 </Button.Content>
@@ -205,12 +208,13 @@
                                                Source="{Binding MenuImageSource[7]}" />
                                         <Label Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" 
                                                Content="{Binding MenuName[7]}" FontSize="15"/>
-                                        <Label Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                                        <Label Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" 
                                                Content="{Binding MenuPrice[7]}" FontSize="15"/>
                                     </Grid>
                                 </Button.Content>
                             </Button>
                         </StackPanel>
+                        
                         <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" Orientation="Horizontal" 
                                     Margin="10" HorizontalAlignment="Center">
                             <Button Width="200" Margin="30,0" IsEnabled="False">
@@ -225,7 +229,7 @@
                                                Source="{Binding MenuImageSource[8]}" />
                                         <Label Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" 
                                                Content="{Binding MenuName[8]}" FontSize="15"/>
-                                        <Label Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                                        <Label Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" 
                                                Content="{Binding MenuPrice[8]}" FontSize="15"/>
                                     </Grid>
                                 </Button.Content>
@@ -242,7 +246,7 @@
                                                Source="{Binding MenuImageSource[9]}" />
                                         <Label Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" 
                                                Content="{Binding MenuName[9]}" FontSize="15"/>
-                                        <Label Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                                        <Label Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" 
                                                Content="{Binding MenuPrice[9]}" FontSize="15"/>
                                     </Grid>
                                 </Button.Content>
@@ -259,7 +263,7 @@
                                                Source="{Binding MenuImageSource[10]}" />
                                         <Label Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" 
                                                Content="{Binding MenuName[10]}" FontSize="15"/>
-                                        <Label Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                                        <Label Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" 
                                                Content="{Binding MenuPrice[10]}" FontSize="15"/>
                                     </Grid>
                                 </Button.Content>
@@ -276,7 +280,7 @@
                                                Source="{Binding MenuImageSource[11]}" />
                                         <Label Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" 
                                                Content="{Binding MenuName[11]}" FontSize="15"/>
-                                        <Label Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                                        <Label Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" 
                                                Content="{Binding MenuPrice[11]}" FontSize="15"/>
                                     </Grid>
                                 </Button.Content>
@@ -288,17 +292,28 @@
 
 
             <Border Margin="5" Grid.Row="2" Grid.Column="0" BorderThickness="3" BorderBrush="#B71000">
-                <!-- 선택 사항 -->
-                <DataGrid Margin="2"
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="30"/>
+                    </Grid.RowDefinitions>
+                    <DataGrid Margin="2"
                   Style="{StaticResource MahApps.Styles.DataGrid.Azure}"
                   IsReadOnly="True" ItemsSource="{Binding}" AutoGenerateColumns="False">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding Title}" Header="상품명" FontWeight="Bold"/>
-                        <DataGridTextColumn Binding="{Binding SubTitle}" Header="상품번호" />
-                        <DataGridTextColumn Binding="{Binding PubDate}" Header="상품가격" />
-                        <DataGridTextColumn Binding="{Binding Director}" Header="갯수" />
-                    </DataGrid.Columns>
-                </DataGrid>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Title}" Header="상품명" FontWeight="Bold"/>
+                            <DataGridTextColumn Binding="{Binding SubTitle}" Header="상품번호" />
+                            <DataGridTextColumn Binding="{Binding PubDate}" Header="상품가격" />
+                            <DataGridTextColumn Binding="{Binding Director}" Header="갯수" />
+                            <DataGridTextColumn Binding="{Binding sum}" Header="소계" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Label
+                        Grid.Row="1" Foreground="White"
+                        Content="{Binding Sum_All_Food_Price}" HorizontalAlignment="Right" Margin="3" FontSize="12"/>
+                </Grid>
+                <!-- 선택 사항 -->
+                
             </Border>
 
 

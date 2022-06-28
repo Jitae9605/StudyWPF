@@ -299,27 +299,35 @@
     <Resource Include="Resources\쥬라기월드new.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\무가박스 고소 - 수정본.png" />
-    <Resource Include="Resources\무가박스 기본스몰콤보 -수정.png" />
-    <Resource Include="Resources\무가박스 달콤스몰  -수정본.png" />
-    <Resource Include="Resources\무가박스 더블치즈 -수정.png" />
-    <Resource Include="Resources\무가박스 스몰 기본팝콘.png" />
-    <Resource Include="Resources\무가박스 스몰기본 -수정본.png" />
-    <Resource Include="Resources\무가박스 스몰더블 -수정본.png" />
-    <Resource Include="Resources\무가박스 콜라 -수정본.png" />
-    <Resource Include="Resources\무가박스 콤보 1 -수정.png" />
-    <Resource Include="Resources\무가박스 콤보 2 - 수정본.png" />
-    <Resource Include="Resources\무가박스 팝콘 -수정.png" />
-    <Resource Include="Resources\스몰 어니언팝콘 - 수정.png" />
-    <Resource Include="Resources\스몰치즈팝콘 - 수정.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\매점버튼.png" />
     <Resource Include="Resources\예매.png" />
     <Resource Include="Resources\예매조회.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\No_Picture.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Drink.gif" />
+    <Resource Include="Resources\PopCorn.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\고소팝콘%28L%29.png" />
+    <Resource Include="Resources\고소팝콘%28M%29.png" />
+    <Resource Include="Resources\달콤팝콘%28L%29.png" />
+    <Resource Include="Resources\달콤팝콘%28M%29.png" />
+    <Resource Include="Resources\더블치즈팝콘%28L%29.png" />
+    <Resource Include="Resources\더블치즈팝콘%28M%29.png" />
+    <Resource Include="Resources\더블콤보.png" />
+    <Resource Include="Resources\라지콤보.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\바질어니언팝콘%28L%29.png" />
+    <Resource Include="Resources\바질어니언팝콘%28M%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\무성콤보.png" />
+    <Resource Include="Resources\스몰콤보.png" />
+    <Resource Include="Resources\콜라.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
