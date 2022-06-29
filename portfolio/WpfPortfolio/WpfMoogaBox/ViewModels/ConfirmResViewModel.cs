@@ -119,7 +119,7 @@ namespace WpfMoogaBox.ViewModels
 			this.TryCloseAsync();
 			
 			var wManager = new WindowManager();
-			var res = wManager.ShowWindowAsync(new MessageBox_BuySnackViewModel());
+			var res = wManager.ShowWindowAsync(new MessageBox_BuySnackViewModel(SelectionInfo[0]));
 		}
 
 

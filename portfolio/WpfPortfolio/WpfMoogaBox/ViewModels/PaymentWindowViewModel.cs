@@ -9,9 +9,14 @@ namespace WpfMoogaBox.ViewModels
 {
 	public class PaymentWindowViewModel : Conductor<object>
 	{
-		public PaymentWindowViewModel()
+		public PaymentWindowViewModel(string Get_ID)
 		{
-
+			ID = Get_ID;
 		}
+
+
+		public string ID { get; set; }
 	}
+
+	
 }

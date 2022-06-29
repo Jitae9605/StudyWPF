@@ -186,6 +186,7 @@
     <Compile Include="Helpers\ReservationInfo.cs" />
     <Compile Include="Models\Mv_Info.cs" />
     <Compile Include="Helpers\Selection.cs" />
+    <Compile Include="Models\Snack_Info.cs" />
     <Compile Include="ViewModels\CheckedAllViewModel.cs" />
     <Compile Include="ViewModels\ConfirmResViewModel.cs" />
     <Compile Include="ViewModels\MainScreenViewModel.cs" />

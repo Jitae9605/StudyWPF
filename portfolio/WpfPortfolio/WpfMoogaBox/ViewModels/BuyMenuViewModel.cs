@@ -1,18 +1,22 @@
 ﻿using Caliburn.Micro;
 using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Diagnostics;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
+using WpfMoogaBox.Models;
 
 namespace WpfMoogaBox.ViewModels
 {
 	public class BuyMenuViewModel : Conductor<object>
 	{
-		public BuyMenuViewModel()
+		public BuyMenuViewModel(string Get_ID)
 		{
+			ID = Get_ID;
 			MenuImageSource = new BindableCollection<string>();
 			MenuName = new BindableCollection<string>();
 			MenuNum = new BindableCollection<string>();
@@ -22,9 +26,9 @@ namespace WpfMoogaBox.ViewModels
 			MenuInfo_Name = new BindableCollection<string>();
 			MenuInfo_Price = new BindableCollection<string>();
 			MenuInfo_Num = new BindableCollection<string>();
-			Sum_All_Food_Price = "";
-
-
+			Sum_All_Food_Price = "합계 : 0 원";
+			Name_Num_Link = new Dictionary<string, string>();
+			datagridData = new BindableCollection<Snack_Info>();
 
 			// 서버에서 snack에서 다들고 오기
 			string ConnString = "Data Source=PC01;Initial Catalog=MoogaBox;Integrated Security=True";
@@ -50,8 +54,7 @@ namespace WpfMoogaBox.ViewModels
 				MenuInfo_Name.Add(SnackName);
 				MenuInfo_Num.Add(SnackNum);
 				MenuInfo_Price.Add(SnackPrice);
-
-				
+				Name_Num_Link.Add(SnackName, SnackNum);
 			}
 
 			// 처음 상태 = 팝콘 눌려져있는 상태
@@ -91,17 +94,108 @@ namespace WpfMoogaBox.ViewModels
 
 		public void LetsPay_BuySnack(object sender, MouseButtonEventArgs e)
 		{
+			string ConnString = "Data Source=PC01;Initial Catalog=MoogaBox;Integrated Security=True";
+			SqlConnection conn = new SqlConnection(ConnString);
 
+			conn.Open();
+
+			foreach(var item in datagridData)
+			{
+				string SqlQuery = @"INSERT INTO  TmpBuySnack
+									       ( ID
+									       , SnackName
+									       , SnackNum
+									       , BuyPrice
+									       , BuyCount
+									       , SnackPrice)
+									 VALUES	 
+									       ( @ID
+									       , @SnackName
+									       , @SnackNum
+									       , @BuyPrice
+									       , @BuyCount
+									       , @SnackPrice)";
+
+				SqlCommand cmd = new SqlCommand(SqlQuery, conn);
+
+				SqlParameter parmID = new SqlParameter("@ID", ID);
+				cmd.Parameters.Add(parmID);
+
+				SqlParameter parSnackName = new SqlParameter("@SnackName", item.SnackName);
+				cmd.Parameters.Add(parSnackName);
+
+				SqlParameter parmSnackNum = new SqlParameter("@SnackNum", item.SnackNum);
+				cmd.Parameters.Add(parmSnackNum);
+
+				SqlParameter parmBuyPrice = new SqlParameter("@BuyPrice", Convert.ToInt32(item.Sum));
+				cmd.Parameters.Add(parmBuyPrice);
+
+				SqlParameter parmBuyCount = new SqlParameter("@BuyCount", Convert.ToInt32(item.Count));
+				cmd.Parameters.Add(parmBuyCount);
+
+				SqlParameter parmSnackPrice = new SqlParameter("@SnackPrice", Convert.ToInt32(item.SnackPrice));
+				cmd.Parameters.Add(parmSnackPrice);
+
+				cmd.ExecuteNonQuery();
+			}
+
+			this.TryCloseAsync();
+
+			var wManager = new WindowManager();
+			var res = wManager.ShowWindowAsync(new PaymentWindowViewModel(ID));
+
+
+
+		}
+
+		public void Delete_Selected_SnackItem(object sender, object datagrid_in_BuyMenu, MouseButtonEventArgs e)
+		{
+
+			datagridData.Remove(datagrid_in_BuyMenu as Snack_Info);
+
+			int temp_sum = 0;
+			foreach (var item in datagridData)
+			{
+				temp_sum += item.Sum;
+			}
+			Sum_All_Food_Price = "합계 : ";
+			Sum_All_Food_Price += temp_sum.ToString();
+			Sum_All_Food_Price += " 원";
 		}
 
 		public void Click_SnackButton(object sender, MouseButtonEventArgs e)
 		{
+			int Itemcount = 1;
 			Button button = sender as Button;
 			Grid grid = button.Content as Grid;
 			Label MenuNamelv = grid.Children[1] as Label;
 			Label MenuPricelv = grid.Children[2] as Label;
-			MessageBox.Show(MenuNamelv.Content.ToString());
-			MessageBox.Show(MenuPricelv.Content.ToString());
+			string ItemName = MenuNamelv.Content.ToString();
+			string ItemNum =  Name_Num_Link[MenuNamelv.Content.ToString()];
+			int Itemprice = Convert.ToInt32(MenuPricelv.Content.ToString());
+
+			foreach(var item in datagridData)
+			{
+				if (item.SnackNum == ItemNum)
+				{
+					Itemcount = item.Count + 1;
+					datagridData.Remove(item);
+					break;
+				}
+			}
+			
+			Snack_Info Snack_Info = new Snack_Info(ItemName, ItemNum, Itemprice, Itemcount);
+			datagridData.Add(Snack_Info);
+
+			int temp_sum = 0;
+			foreach (var item in datagridData)
+			{
+				temp_sum += item.Sum;
+			}
+			Sum_All_Food_Price = "합계 : ";
+			Sum_All_Food_Price += temp_sum.ToString();
+			Sum_All_Food_Price += " 원";
+
 		}
 
 		public void SnackMenuSelectButton_Popcorn_Click(object sender, MouseButtonEventArgs e)
@@ -180,6 +274,8 @@ namespace WpfMoogaBox.ViewModels
 				IsSnackListNull[j - 4] = false;
 			}
 		}
+
+		
 
 		private BindableCollection<string> menuImageSource;
 		public BindableCollection<string> MenuImageSource
@@ -296,9 +392,39 @@ namespace WpfMoogaBox.ViewModels
 			{
 				sum_All_Food_Price = value;
 				NotifyOfPropertyChange(() => Sum_All_Food_Price);
+				NotifyOfPropertyChange(() => DatagridData);
 
 			}
 		}
+
+		private Dictionary<string, string> name_Num_Link ;
+		public Dictionary<string,string> Name_Num_Link
+		{
+			get => name_Num_Link;
+			set
+			{
+				name_Num_Link = value;
+				NotifyOfPropertyChange(() => Name_Num_Link);
+
+			}
+		}
+
+		private BindableCollection<Snack_Info> datagridData;
+		public BindableCollection<Snack_Info> DatagridData
+		{
+			get => datagridData;
+			set
+			{
+				datagridData = value;
+				NotifyOfPropertyChange(() => DatagridData);
+				NotifyOfPropertyChange(() => Snack_Info);
+				NotifyOfPropertyChange(() => Sum_All_Food_Price);
+
+			}
+		}
+
+		public Snack_Info Snack_Info { get; set; }
+		public string ID { get; set; }
 
 
 	}

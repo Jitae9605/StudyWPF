@@ -147,7 +147,7 @@ namespace WpfMoogaBox.ViewModels
 		public void Cancel2(object sender, MouseButtonEventArgs e)
 		{
 			var wManager = new WindowManager();
-			var result = wManager.ShowWindowAsync(new MakeReservationViewModel());
+			var result = wManager.ShowWindowAsync(new MakeReservationViewModel(seleted.ID));
 			this.TryCloseAsync();
 
 		}

@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using System;
 using System.Collections.Generic;
 using System.Windows;
 
@@ -20,16 +21,18 @@ namespace WpfMoogaBox.ViewModels
 
 		public void LoadMakeReservationView()
 		{
+			string Send_ID = DateTime.Now.ToString("yyMMddHHmmss");
 			var wManager = new WindowManager();			
-			var result = wManager.ShowWindowAsync(new MakeReservationViewModel());
+			var result = wManager.ShowWindowAsync(new MakeReservationViewModel(Send_ID));
 			CloseMainCustomerMenu();
 
 		}
 
 		public void LoadBuyMenuView()
 		{
+			string Send_ID = DateTime.Now.ToString("yyMMddHHmmss");
 			var wManager = new WindowManager();
-			var result = wManager.ShowWindowAsync(new BuyMenuViewModel());
+			var result = wManager.ShowWindowAsync(new BuyMenuViewModel(Send_ID));
 			CloseMainCustomerMenu();
 
 		}

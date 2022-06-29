@@ -17,11 +17,12 @@ namespace WpfMoogaBox.ViewModels
 	{
 
 		public Selection seleted = new Selection();
-		public MakeReservationViewModel()
+		public MakeReservationViewModel(string Get_ID)
 		{
 			SelectedMv_img = "\\Resources\\No_Picture.jpg";
 			string ConnString = "Data Source=PC01;Initial Catalog=MoogaBox;Integrated Security=True";
 			SqlConnection conn = new SqlConnection(ConnString);
+			ID = Get_ID;
 
 			conn.Open();
 
@@ -144,8 +145,6 @@ namespace WpfMoogaBox.ViewModels
 				return;
 			}
 
-
-			string ID = DateTime.Now.ToString("yyMMddHHmmss");
 			string[] Send_SelectedMVInfo = new string[] { ID, seleted.MvName, seleted.Hall, seleted.StartTime, seleted.EndTime };
 			this.TryCloseAsync();
 			LoadSelectSeatViewModel(Send_SelectedMVInfo);
@@ -206,6 +205,20 @@ namespace WpfMoogaBox.ViewModels
 
 			}
 		}
+
+		private string id;
+		public string ID
+		{
+			get => id; 
+			set
+			{
+				id = value;
+				NotifyOfPropertyChange(() => ID);
+
+			}
+		}
+
+		
 
 
 	}

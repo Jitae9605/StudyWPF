@@ -11,9 +11,9 @@ namespace WpfMoogaBox.ViewModels
 {
 	public class MessageBox_BuySnackViewModel : Conductor<object>
 	{
-		public MessageBox_BuySnackViewModel()
+		public MessageBox_BuySnackViewModel(string Get_ID)
 		{
-
+			ID = Get_ID;
 		}
 
 		public void CanceltoPaying(object sender, MouseButtonEventArgs e)
@@ -21,7 +21,7 @@ namespace WpfMoogaBox.ViewModels
 			this.TryCloseAsync();
 			
 			IWindowManager wManager = new WindowManager();
-			var result = wManager.ShowWindowAsync(new PaymentWindowViewModel());
+			var result = wManager.ShowWindowAsync(new PaymentWindowViewModel(ID));
 			
 		}
 
@@ -30,9 +30,13 @@ namespace WpfMoogaBox.ViewModels
 			this.TryCloseAsync();
 			
 			IWindowManager wManager = new WindowManager();
-			var result = wManager.ShowWindowAsync(new BuyMenuViewModel());
+			var result = wManager.ShowWindowAsync(new BuyMenuViewModel(ID));
 			
 		}
-		
+
+		private string iD;
+
+		public string ID 
+		{ get => iD; set => iD = value; }
 	}
 }
