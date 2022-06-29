@@ -13,15 +13,32 @@ namespace WpfMoogaBox.Models
 		public string StartTime { get; set; }
 		public string EndTime { get; set; }
 		public string MvNum { get; set; }
+		public string Seat { get; set; }
+		public int MvPrice { get; set; }
+		public int Count { get; set; }
 
-		public Mv_Info(string mvName, string hall, DateTime startTime, DateTime runningTime, string mvNum)
+		public Mv_Info(string mvName, string hall, DateTime startTime, DateTime runningTime, string mvNum, string seat = "")
 		{
 			MvName = mvName;
 			Hall = hall;
 			StartTime = startTime.ToString("HH:mm");
 			EndTime = (startTime.AddHours(runningTime.Hour).AddMinutes(runningTime.Minute).ToString("HH:mm"));
 			MvNum = mvNum;
+			Seat = seat;
+			MvPrice = 8000;
+			Count = 0;
 		}
+
+		public Mv_Info(string mvName, string hall, DateTime startTime, string seat, int count)
+		{
+			MvName = mvName;
+			Hall = hall;
+			StartTime = startTime.ToString("HH:mm");
+			Seat = seat;
+			MvPrice = 8000;
+			Count = count;
+		}
+
 
 		public Mv_Info() { }
 

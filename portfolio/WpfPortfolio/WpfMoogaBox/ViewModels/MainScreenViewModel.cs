@@ -1,6 +1,7 @@
 ﻿using Caliburn.Micro;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Windows;
 
 namespace WpfMoogaBox.ViewModels
@@ -9,7 +10,20 @@ namespace WpfMoogaBox.ViewModels
 	{
 		public MainScreenViewModel()
 		{
+			string ConnString = "Data Source=PC01;Initial Catalog=MoogaBox;Integrated Security=True";
+			SqlConnection conn = new SqlConnection(ConnString);
 
+			conn.Open();
+
+			string SqlQuery = "DELETE TmpReservation";
+			SqlCommand cmd = new SqlCommand(SqlQuery, conn);
+			cmd.ExecuteNonQuery();
+
+			SqlQuery = "DELETE TmpBuySnack";
+			cmd = new SqlCommand(SqlQuery, conn);
+			cmd.ExecuteNonQuery();
+
+			conn.Close();
 		}
 
 		public void LoadCheckReservationView()

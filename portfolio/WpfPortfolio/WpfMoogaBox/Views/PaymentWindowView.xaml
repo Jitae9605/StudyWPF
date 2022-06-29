@@ -9,7 +9,7 @@
     xmlns:cal="http://caliburnmicro.com"
     xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
     mc:Ignorable="d"
-    Title="결제창" Height="600" Width="600" Background="Black">
+    Title="결제창" Height="600" Width="600" Background="Black" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -21,8 +21,8 @@
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="3"/>
                 <RowDefinition Height="2*"/>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="70"/>
+                <RowDefinition Height="38"/>
+                <RowDefinition Height="65"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="3*"/>
@@ -46,20 +46,21 @@
                 <!-- 영화결제 정보-->
                 <DataGrid Margin="5"
                   Style="{StaticResource MahApps.Styles.DataGrid.Azure}"
-                  IsReadOnly="True" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                  IsReadOnly="True" ItemsSource="{Binding DatagridData_Mv}" AutoGenerateColumns="False">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding Title}" Header="영화제목"/>
-                        <DataGridTextColumn Binding="{Binding SubTitle}" Header="상영관" />
-                        <DataGridTextColumn Binding="{Binding PubDate}" Header="상영시작시간" />
-                        <DataGridTextColumn Binding="{Binding Director}" Header="상영종료시간" />
-                        <DataGridTextColumn Binding="{Binding Actor}" Header="선택 좌석" />
-                        <DataGridTextColumn Binding="{Binding UserRating}" Header="단가" />
+                        <DataGridTextColumn Binding="{Binding MvName}" Header="영화제목" FontWeight="Bold"/>
+                        <DataGridTextColumn Binding="{Binding Hall}" Header="상영관" />
+                        <DataGridTextColumn Binding="{Binding StartTime}" Header="상영시작시간" />
+                        <DataGridTextColumn Binding="{Binding Seat}" Header="선택 좌석" />
+                        <DataGridTextColumn Binding="{Binding MvPrice}" Header="단가" />
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>
             <!-- 영화합계 -->
-            <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="3" Foreground="White" Content="영화합계 : "/>
-            <Label Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="3" Foreground="White" Content="{Binding a}"/>
+            <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Bottom" 
+                   Margin="3" Foreground="White" Content="영화합계 : " FontSize="15"/>
+            <Label Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Bottom" 
+                   Margin="3" Foreground="White" Content="{Binding Sum_Mv}"  FontSize="15"/>
 
 
             <!-- 매점 결제정보 및 합계-->
@@ -72,32 +73,37 @@
                 <!--매점결제 정보-->
                 <DataGrid Margin="5"
                   Style="{StaticResource MahApps.Styles.DataGrid.Azure}"
-                  IsReadOnly="True" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                  IsReadOnly="True" ItemsSource="{Binding DatagridData_Snack}" AutoGenerateColumns="False">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding Title}" Header="상품명" FontWeight="Bold"/>
-                        <DataGridTextColumn Binding="{Binding SubTitle}" Header="상품번호" />
-                        <DataGridTextColumn Binding="{Binding PubDate}" Header="상품가격" />
-                        <DataGridTextColumn Binding="{Binding Director}" Header="갯수" />
+                        <DataGridTextColumn Binding="{Binding SnackName}" Header="상품명" FontWeight="Bold"/>
+                        <DataGridTextColumn Binding="{Binding SnackNum}" Header="상품번호" />
+                        <DataGridTextColumn Binding="{Binding SnackPrice}" Header="상품가격" />
+                        <DataGridTextColumn Binding="{Binding Count}" Header="갯수" />
+                        <DataGridTextColumn Binding="{Binding Sum}" Header="소계" />
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>
             <!-- 매점합계 -->
-            <Label Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="3" Foreground="White" Content="매점합계 : "/>
-            <Label Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="3" Foreground="White" Content="{Binding b}"/>
+            <Label Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Bottom" 
+                   Margin="3" Foreground="White" Content="매점합계 : "  FontSize="15"/>
+            <Label Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Bottom" 
+                   Margin="3" Foreground="White" Content="{Binding Sum_Snack}"  FontSize="15"/>
 
             <!-- 최종합계 -->
-            <Label Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="3" Foreground="White" Content="최종합계 : "/>
-            <Label Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="3" Foreground="White" Content="{Binding c}"/>
+            <Label Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" 
+                   Margin="3" Foreground="White" Content="최종합계 : "  FontSize="15" FontWeight="Bold"/>
+            <Label Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" 
+                   Margin="3" Foreground="White" Content="{Binding Sum_All}"  FontSize="15" FontWeight="Bold"/>
 
             <!-- 확인/취소버튼 -->
-            <StackPanel Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" Margin="0,5" HorizontalAlignment="Center" VerticalAlignment="Top">
+            <StackPanel Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Top">
                 <Button Width="130" Height="50" HorizontalAlignment="Center" 
                     Content="결제" Margin="5" FontSize="20" Foreground="White"
                     Style="{StaticResource MahApps.Styles.Button}" Background="#B71000" 
                     cal:Message.Attach="[Event Click] = [Action LetsPay($source, $eventArgs)]"
                 />
                 <Button Width="130" Height="50" HorizontalAlignment="Center" 
-                    Content="취소" Margin="5" FontSize="20" Foreground="White"
+                    Content="처음으로" Margin="5" FontSize="20" Foreground="White"
                     Style="{StaticResource MahApps.Styles.Button}" Background="#B71000" 
                     cal:Message.Attach="[Event Click] = [Action CanclePayment($source, $eventArgs)]"
                 />

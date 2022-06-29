@@ -143,9 +143,6 @@ namespace WpfMoogaBox.ViewModels
 
 			var wManager = new WindowManager();
 			var res = wManager.ShowWindowAsync(new PaymentWindowViewModel(ID));
-
-
-
 		}
 
 		public void Delete_Selected_SnackItem(object sender, object datagrid_in_BuyMenu, MouseButtonEventArgs e)
