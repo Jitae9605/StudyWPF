@@ -10,20 +10,7 @@ namespace WpfMoogaBox.ViewModels
 	{
 		public MainScreenViewModel()
 		{
-			string ConnString = "Data Source=PC01;Initial Catalog=MoogaBox;Integrated Security=True";
-			SqlConnection conn = new SqlConnection(ConnString);
-
-			conn.Open();
-
-			string SqlQuery = "DELETE TmpReservation";
-			SqlCommand cmd = new SqlCommand(SqlQuery, conn);
-			cmd.ExecuteNonQuery();
-
-			SqlQuery = "DELETE TmpBuySnack";
-			cmd = new SqlCommand(SqlQuery, conn);
-			cmd.ExecuteNonQuery();
-
-			conn.Close();
+			InitScreenMenu();
 		}
 
 		public void LoadCheckReservationView()
@@ -54,6 +41,28 @@ namespace WpfMoogaBox.ViewModels
 		public void CloseMainCustomerMenu()
 		{
 			this.TryCloseAsync();
+		}
+
+
+		/// <summary>
+		/// DB내 임시 테이블 초기화
+		/// </summary>
+		public void InitScreenMenu()
+		{
+			string ConnString = "Data Source=PC01;Initial Catalog=MoogaBox;Integrated Security=True";
+			SqlConnection conn = new SqlConnection(ConnString);
+
+			conn.Open();
+
+			string SqlQuery = "DELETE TmpReservation";
+			SqlCommand cmd = new SqlCommand(SqlQuery, conn);
+			cmd.ExecuteNonQuery();
+
+			SqlQuery = "DELETE TmpBuySnack";
+			cmd = new SqlCommand(SqlQuery, conn);
+			cmd.ExecuteNonQuery();
+
+			conn.Close();
 		}
 	}
 }

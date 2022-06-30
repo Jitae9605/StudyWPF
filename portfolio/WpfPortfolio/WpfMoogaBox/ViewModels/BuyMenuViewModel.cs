@@ -17,162 +17,21 @@ namespace WpfMoogaBox.ViewModels
 	{
 		public BuyMenuViewModel(string Get_ID)
 		{
-			ID = Get_ID;
-			MenuImageSource = new BindableCollection<string>();
-			MenuName = new BindableCollection<string>();
-			MenuNum = new BindableCollection<string>();
-			MenuPrice = new BindableCollection<string>();
-			IsSnackListNull = new BindableCollection<bool>();
-			MenuSelect = new BindableCollection<bool>();
-			MenuInfo_Name = new BindableCollection<string>();
-			MenuInfo_Price = new BindableCollection<string>();
-			MenuInfo_Num = new BindableCollection<string>();
-			Sum_All_Food_Price = "합계 : 0 원";
-			Name_Num_Link = new Dictionary<string, string>();
-			datagridData = new BindableCollection<Snack_Info>();
+			InitBuyMenuPage(Get_ID);
 
-			// 서버에서 snack에서 다들고 오기
-			string ConnString = "Data Source=PC01;Initial Catalog=MoogaBox;Integrated Security=True";
-			SqlConnection conn = new SqlConnection(ConnString);
-
-			conn.Open();
-
-			string SqlQuery = @"SELECT  SnackName
-									  , SnackNum
-									  , SnackPrice
-								   FROM Snack";
-
-			SqlCommand cmd = new SqlCommand(SqlQuery, conn);
-
-			SqlDataReader reader = cmd.ExecuteReader();
-
-			while (reader.Read())
-			{
-				string SnackName = reader["SnackName"].ToString();
-				string SnackNum = reader["SnackNum"].ToString();
-				string SnackPrice = reader["SnackPrice"].ToString();
-
-				MenuInfo_Name.Add(SnackName);
-				MenuInfo_Num.Add(SnackNum);
-				MenuInfo_Price.Add(SnackPrice);
-				Name_Num_Link.Add(SnackName, SnackNum);
-			}
-
-			// 처음 상태 = 팝콘 눌려져있는 상태
-			MenuSelect.Add(true);
-			MenuSelect.Add(false);
-			MenuSelect.Add(false);
-
-			for (int i = 0; i < 8; i++)
-			{
-				MenuName.Add(MenuInfo_Name[i]);
-				MenuNum.Add(MenuInfo_Num[i]);
-				MenuPrice.Add(MenuInfo_Price[i]);
-				string imagepath = "\\Resources\\";
-				imagepath += MenuName[i] + ".png";
-				MenuImageSource.Add(imagepath);
-			}
-
-			for (int j = 8; j < 12; j++)
-			{
-				string imagepath = "\\Resources\\No_Picture.jpg";
-				MenuImageSource.Add(imagepath);
-			}
-
-			for (int k = 0; k < 4; k++)
-			{
-				IsSnackListNull.Add(true);
-			}
-
-			reader.Close();
-			conn.Close();
+			GetDataFromDb_Snack();
 		}
 
 		public void CanclePayment_BuySnack(object sender, MouseButtonEventArgs e)
-		{ 
-
+		{
+			IWindowManager wManager = new WindowManager();
+			var result = wManager.ShowWindowAsync(new MainScreenViewModel());
+			TryCloseAsync();
 		}
 
 		public void LetsPay_BuySnack(object sender, MouseButtonEventArgs e)
 		{
-			string ConnString = "Data Source=PC01;Initial Catalog=MoogaBox;Integrated Security=True";
-			SqlConnection conn = new SqlConnection(ConnString);
-
-			conn.Open();
-
-			foreach(var item in datagridData)
-			{
-				string SqlQuery = @"SELECT SnackCount
-								      FROM Maejum
-									 WHERE SnackNum = @SnackNum";
-
-
-				SqlCommand cmd = new SqlCommand(SqlQuery, conn);
-
-				SqlParameter parmSnackNum1 = new SqlParameter("@SnackNum", item.SnackNum);
-				cmd.Parameters.Add(parmSnackNum1);
-
-				SqlDataReader reader = cmd.ExecuteReader();
-
-				if(reader.Read())
-				{
-					int SnackCount = Convert.ToInt32(reader["SnackCount"].ToString());
-
-					if (SnackCount < item.Count)
-					{
-						string message = $"{item.SnackName}의 재고가 부족합니다.\n 현재 재고 : {SnackCount}";
-						Commons.ShowMessageAsync("재고부족", message);
-
-						conn.Close();
-						reader.Close();
-						return;
-					}
-				}
-				//conn.Close();
-				reader.Close();
-
-				//conn.Open();
-
-				 SqlQuery = @"INSERT INTO  TmpBuySnack
-									       ( ID
-									       , SnackName
-									       , SnackNum
-									       , BuyPrice
-									       , BuyCount
-									       , SnackPrice)
-									 VALUES	 
-									       ( @ID
-									       , @SnackName
-									       , @SnackNum
-									       , @BuyPrice
-									       , @BuyCount
-									       , @SnackPrice)";
-
-				cmd = new SqlCommand(SqlQuery, conn);
-
-				SqlParameter parmID = new SqlParameter("@ID", ID);
-				cmd.Parameters.Add(parmID);
-
-				SqlParameter parSnackName = new SqlParameter("@SnackName", item.SnackName);
-				cmd.Parameters.Add(parSnackName);
-
-				SqlParameter parmSnackNum = new SqlParameter("@SnackNum", item.SnackNum);
-				cmd.Parameters.Add(parmSnackNum);
-
-				SqlParameter parmBuyPrice = new SqlParameter("@BuyPrice", Convert.ToInt32(item.Sum));
-				cmd.Parameters.Add(parmBuyPrice);
-
-				SqlParameter parmBuyCount = new SqlParameter("@BuyCount", Convert.ToInt32(item.Count));
-				cmd.Parameters.Add(parmBuyCount);
-
-				SqlParameter parmSnackPrice = new SqlParameter("@SnackPrice", Convert.ToInt32(item.SnackPrice));
-				cmd.Parameters.Add(parmSnackPrice);
-
-				cmd.ExecuteNonQuery();
-			}
-
-			
-			conn.Close();
+			CheckStockAndInsertTmpTbl();
 
 			this.TryCloseAsync();
 
@@ -197,114 +56,22 @@ namespace WpfMoogaBox.ViewModels
 
 		public void Click_SnackButton(object sender, MouseButtonEventArgs e)
 		{
-			int Itemcount = 1;
-			Button button = sender as Button;
-			Grid grid = button.Content as Grid;
-			Label MenuNamelv = grid.Children[1] as Label;
-			Label MenuPricelv = grid.Children[2] as Label;
-			string ItemName = MenuNamelv.Content.ToString();
-			string ItemNum =  Name_Num_Link[MenuNamelv.Content.ToString()];
-			int Itemprice = Convert.ToInt32(MenuPricelv.Content.ToString());
-
-			foreach(var item in datagridData)
-			{
-				if (item.SnackNum == ItemNum)
-				{
-					Itemcount = item.Count + 1;
-					datagridData.Remove(item);
-					break;
-				}
-			}
-			
-			Snack_Info Snack_Info = new Snack_Info(ItemName, ItemNum, Itemprice, Itemcount);
-			datagridData.Add(Snack_Info);
-
-			int temp_sum = 0;
-			foreach (var item in datagridData)
-			{
-				temp_sum += item.Sum;
-			}
-			Sum_All_Food_Price = "합계 : ";
-			Sum_All_Food_Price += temp_sum.ToString();
-			Sum_All_Food_Price += " 원";
-
+			AddDataGrid(sender);
 		}
 
 		public void SnackMenuSelectButton_Popcorn_Click(object sender, MouseButtonEventArgs e)
 		{
-			MenuSelect[0] = true;
-			MenuSelect[1] = false;
-			MenuSelect[2] = false;
-
-			for(int i = 0; i < 8; i++)
-			{
-				MenuName[i] = MenuInfo_Name[i];
-				MenuNum[i] = MenuInfo_Num[i];
-				MenuPrice[i] = MenuInfo_Price[i];
-				string imagepath = "\\Resources\\";
-				imagepath += MenuName[i] + ".png";
-				MenuImageSource[i] = imagepath;
-			}
-			for(int j = 8; j < 12; j++)
-			{
-				string imagepath = "\\Resources\\No_Picture.jpg";
-				MenuImageSource[j] = imagepath;
-			}
-			for (int k = 0; k < 4; k++)
-			{
-				IsSnackListNull[k] = true;
-			}
+			SnackMenuSelect_Popcorn();
 		}
+		
 		public void SnackMenuSelectButton_Drink_Click(object sender, MouseButtonEventArgs e)
 		{
-			MenuSelect[0] = false;
-			MenuSelect[1] = true;
-			MenuSelect[2] = false;
-
-			for (int i = 0; i < 8; i++)
-			{
-				MenuName[i] = MenuInfo_Name[i+8];
-				MenuNum[i] = MenuInfo_Num[i+8];
-				MenuPrice[i] = MenuInfo_Price[i+8];
-				string imagepath = "\\Resources\\";
-				imagepath += "콜라.png";
-				MenuImageSource[i] = imagepath;
-			}
-			for (int j = 8; j < 12; j++)
-			{
-				string imagepath = "\\Resources\\No_Picture.jpg";
-				MenuImageSource[j] = imagepath;
-			}
-
-			for(int k = 0; k < 4; k++)
-			{
-				IsSnackListNull[k] = true;
-			}
+			SnackMenuSelect_Drink();
 		}
+
 		public void SnackMenuSelectButton_Set_Click(object sender, MouseButtonEventArgs e)
 		{
-			MenuSelect[0] = false;
-			MenuSelect[1] = false;
-			MenuSelect[2] = true;
-
-			for (int i = 0; i < 4; i++)
-			{
-				MenuName[i] = MenuInfo_Name[i + 16];
-				MenuNum[i] = MenuInfo_Num[i + 16];
-				MenuPrice[i] = MenuInfo_Price[i + 16];
-				string imagepath = "\\Resources\\";
-				imagepath += MenuName[i] + ".png";
-				MenuImageSource[i] = imagepath;
-			}
-			for (int j = 4; j < 8; j++)
-			{
-				MenuName[j] = "";
-				MenuNum[j] = "";
-				MenuPrice[j] = "";
-				string imagepath = "\\Resources\\No_Picture.jpg";
-				MenuImageSource[j] = imagepath;
-				IsSnackListNull[j - 4] = false;
-			}
+			SnackMenuSelect_Set();
 		}
 
 		
@@ -457,6 +224,299 @@ namespace WpfMoogaBox.ViewModels
 
 		public Snack_Info Snack_Info { get; set; }
 		public string ID { get; set; }
+
+		/// <summary>
+		/// DB의 Snack 테이블의 데이터를 모두 가져와 저장
+		/// </summary>
+		public void GetDataFromDb_Snack()
+		{
+			string ConnString = "Data Source=PC01;Initial Catalog=MoogaBox;Integrated Security=True";
+			SqlConnection conn = new SqlConnection(ConnString);
+
+			conn.Open();
+
+			string SqlQuery = @"SELECT  SnackName
+									  , SnackNum
+									  , SnackPrice
+								   FROM Snack";
+
+			SqlCommand cmd = new SqlCommand(SqlQuery, conn);
+
+			SqlDataReader reader = cmd.ExecuteReader();
+
+			while (reader.Read())
+			{
+				string SnackName = reader["SnackName"].ToString();
+				string SnackNum = reader["SnackNum"].ToString();
+				string SnackPrice = reader["SnackPrice"].ToString();
+
+				MenuInfo_Name.Add(SnackName);
+				MenuInfo_Num.Add(SnackNum);
+				MenuInfo_Price.Add(SnackPrice);
+				Name_Num_Link.Add(SnackName, SnackNum);
+			}
+
+			// 처음 상태 = 팝콘 눌려져있는 상태
+			MenuSelect.Add(true);
+			MenuSelect.Add(false);
+			MenuSelect.Add(false);
+
+			for (int i = 0; i < 8; i++)
+			{
+				MenuName.Add(MenuInfo_Name[i]);
+				MenuNum.Add(MenuInfo_Num[i]);
+				MenuPrice.Add(MenuInfo_Price[i]);
+				string imagepath = "\\Resources\\";
+				imagepath += MenuName[i] + ".png";
+				MenuImageSource.Add(imagepath);
+			}
+
+			for (int j = 8; j < 12; j++)
+			{
+				string imagepath = "\\Resources\\No_Picture.jpg";
+				MenuImageSource.Add(imagepath);
+			}
+
+			for (int k = 0; k < 4; k++)
+			{
+				IsSnackListNull.Add(true);
+			}
+
+			reader.Close();
+			conn.Close();
+		}
+
+		/// <summary>
+		/// 콜렉션 및 ID값 초기화
+		/// </summary>
+		/// <param name="Get_ID"></param>
+		public void InitBuyMenuPage(string Get_ID)
+		{
+			ID = Get_ID;
+			MenuImageSource = new BindableCollection<string>();
+			MenuName = new BindableCollection<string>();
+			MenuNum = new BindableCollection<string>();
+			MenuPrice = new BindableCollection<string>();
+			IsSnackListNull = new BindableCollection<bool>();
+			MenuSelect = new BindableCollection<bool>();
+			MenuInfo_Name = new BindableCollection<string>();
+			MenuInfo_Price = new BindableCollection<string>();
+			MenuInfo_Num = new BindableCollection<string>();
+			Sum_All_Food_Price = "합계 : 0 원";
+			Name_Num_Link = new Dictionary<string, string>();
+			datagridData = new BindableCollection<Snack_Info>();
+		}
+
+		/// <summary>
+		/// 저장된 Snack목록중 Popcorn만 가져와 이미지 및 정보 게시, 버튼 비활성화
+		/// </summary>
+		public void SnackMenuSelect_Popcorn()
+		{
+			MenuSelect[0] = true;
+			MenuSelect[1] = false;
+			MenuSelect[2] = false;
+
+			for (int i = 0; i < 8; i++)
+			{
+				MenuName[i] = MenuInfo_Name[i];
+				MenuNum[i] = MenuInfo_Num[i];
+				MenuPrice[i] = MenuInfo_Price[i];
+				string imagepath = "\\Resources\\";
+				imagepath += MenuName[i] + ".png";
+				MenuImageSource[i] = imagepath;
+			}
+			for (int j = 8; j < 12; j++)
+			{
+				string imagepath = "\\Resources\\No_Picture.jpg";
+				MenuImageSource[j] = imagepath;
+			}
+			for (int k = 0; k < 4; k++)
+			{
+				IsSnackListNull[k] = true;
+			}
+		}
+
+		/// <summary>
+		/// 저장된 Snack목록중 Drink만 가져와 이미지 및 정보 게시, 버튼 비활성화
+		/// </summary>
+		public void SnackMenuSelect_Drink()
+		{
+			MenuSelect[0] = false;
+			MenuSelect[1] = true;
+			MenuSelect[2] = false;
+
+			for (int i = 0; i < 8; i++)
+			{
+				MenuName[i] = MenuInfo_Name[i + 8];
+				MenuNum[i] = MenuInfo_Num[i + 8];
+				MenuPrice[i] = MenuInfo_Price[i + 8];
+				string imagepath = "\\Resources\\";
+				imagepath += "콜라.png";
+				MenuImageSource[i] = imagepath;
+			}
+			for (int j = 8; j < 12; j++)
+			{
+				string imagepath = "\\Resources\\No_Picture.jpg";
+				MenuImageSource[j] = imagepath;
+			}
+
+			for (int k = 0; k < 4; k++)
+			{
+				IsSnackListNull[k] = true;
+			}
+		}
+
+		/// <summary>
+		/// 저장된 Snack목록중 Set만 가져와 이미지 및 정보 게시, 버튼 비활성화
+		/// </summary>
+		public void SnackMenuSelect_Set()
+		{
+			MenuSelect[0] = false;
+			MenuSelect[1] = false;
+			MenuSelect[2] = true;
+
+			for (int i = 0; i < 4; i++)
+			{
+				MenuName[i] = MenuInfo_Name[i + 16];
+				MenuNum[i] = MenuInfo_Num[i + 16];
+				MenuPrice[i] = MenuInfo_Price[i + 16];
+				string imagepath = "\\Resources\\";
+				imagepath += MenuName[i] + ".png";
+				MenuImageSource[i] = imagepath;
+			}
+			for (int j = 4; j < 8; j++)
+			{
+				MenuName[j] = "";
+				MenuNum[j] = "";
+				MenuPrice[j] = "";
+				string imagepath = "\\Resources\\No_Picture.jpg";
+				MenuImageSource[j] = imagepath;
+				IsSnackListNull[j - 4] = false;
+			}
+		}
+
+		/// <summary>
+		/// 클릭된 버튼의 정보와 눌린 횟수 데이터그리드에 목록화 해 표시
+		/// </summary>
+		/// <param name="sender"></param>
+		public void AddDataGrid(object sender)
+		{
+			int Itemcount = 1;
+			Button button = sender as Button;
+			Grid grid = button.Content as Grid;
+			Label MenuNamelv = grid.Children[1] as Label;
+			Label MenuPricelv = grid.Children[2] as Label;
+			string ItemName = MenuNamelv.Content.ToString();
+			string ItemNum = Name_Num_Link[MenuNamelv.Content.ToString()];
+			int Itemprice = Convert.ToInt32(MenuPricelv.Content.ToString());
+
+			foreach (var item in datagridData)
+			{
+				if (item.SnackNum == ItemNum)
+				{
+					Itemcount = item.Count + 1;
+					datagridData.Remove(item);
+					break;
+				}
+			}
+
+			Snack_Info Snack_Info = new Snack_Info(ItemName, ItemNum, Itemprice, Itemcount);
+			datagridData.Add(Snack_Info);
+
+			int temp_sum = 0;
+			foreach (var item in datagridData)
+			{
+				temp_sum += item.Sum;
+			}
+			Sum_All_Food_Price = "합계 : ";
+			Sum_All_Food_Price += temp_sum.ToString();
+			Sum_All_Food_Price += " 원";
+		}
+
+		/// <summary>
+		/// 선택된 상품 수량과 재고수량확인후, 이상없으면면 선택내용 Tmp 테이블에 insert수행
+		/// </summary>
+		public void CheckStockAndInsertTmpTbl()
+		{
+			string ConnString = "Data Source=PC01;Initial Catalog=MoogaBox;Integrated Security=True";
+			SqlConnection conn = new SqlConnection(ConnString);
+
+			conn.Open();
+
+			foreach (var item in datagridData)
+			{
+				string SqlQuery = @"SELECT SnackCount
+								      FROM Maejum
+									 WHERE SnackNum = @SnackNum";
+
+
+				SqlCommand cmd = new SqlCommand(SqlQuery, conn);
+
+				SqlParameter parmSnackNum1 = new SqlParameter("@SnackNum", item.SnackNum);
+				cmd.Parameters.Add(parmSnackNum1);
+
+				SqlDataReader reader = cmd.ExecuteReader();
+
+				if (reader.Read())
+				{
+					int SnackCount = Convert.ToInt32(reader["SnackCount"].ToString());
+
+					if (SnackCount < item.Count)
+					{
+						string message = $"{item.SnackName}의 재고가 부족합니다.\n 현재 재고 : {SnackCount}";
+						Commons.ShowMessageAsync("재고부족", message);
+
+						conn.Close();
+						reader.Close();
+						return;
+					}
+				}
+				//conn.Close();
+				reader.Close();
+
+				//conn.Open();
+
+				SqlQuery = @"INSERT INTO  TmpBuySnack
+									       ( ID
+									       , SnackName
+									       , SnackNum
+									       , BuyPrice
+									       , BuyCount
+									       , SnackPrice)
+									 VALUES	 
+									       ( @ID
+									       , @SnackName
+									       , @SnackNum
+									       , @BuyPrice
+									       , @BuyCount
+									       , @SnackPrice)";
+
+				cmd = new SqlCommand(SqlQuery, conn);
+
+				SqlParameter parmID = new SqlParameter("@ID", ID);
+				cmd.Parameters.Add(parmID);
+
+				SqlParameter parSnackName = new SqlParameter("@SnackName", item.SnackName);
+				cmd.Parameters.Add(parSnackName);
+
+				SqlParameter parmSnackNum = new SqlParameter("@SnackNum", item.SnackNum);
+				cmd.Parameters.Add(parmSnackNum);
+
+				SqlParameter parmBuyPrice = new SqlParameter("@BuyPrice", Convert.ToInt32(item.Sum));
+				cmd.Parameters.Add(parmBuyPrice);
+
+				SqlParameter parmBuyCount = new SqlParameter("@BuyCount", Convert.ToInt32(item.Count));
+				cmd.Parameters.Add(parmBuyCount);
+
+				SqlParameter parmSnackPrice = new SqlParameter("@SnackPrice", Convert.ToInt32(item.SnackPrice));
+				cmd.Parameters.Add(parmSnackPrice);
+
+				cmd.ExecuteNonQuery();
+			}
+
+
+			conn.Close();
+		}
 
 
 	}
