@@ -14,10 +14,10 @@ namespace WpfNaverMovieFinder
 		/// <param name="message"></param>
 		/// <param name="style"></param>
 		/// <returns></returns>
-		public static async Task<MessageDialogResult> ShowMessageAsync(
+		public static Task<MessageDialogResult> ShowMessageAsync(
 			string title, string message, MessageDialogStyle style = MessageDialogStyle.Affirmative)
 		{
-			return await ((MetroWindow)Application.Current.MainWindow).ShowMessageAsync(title, message, style, null);
+			return ((MetroWindow)Application.Current.MainWindow).ShowMessageAsync(title, message, style, null);
 		}
 	}
 }

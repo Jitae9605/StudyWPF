@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
+using WpfMoogaBox.Helpers;
 using WpfMoogaBox.Models;
 
 namespace WpfMoogaBox.ViewModels
@@ -101,7 +102,38 @@ namespace WpfMoogaBox.ViewModels
 
 			foreach(var item in datagridData)
 			{
-				string SqlQuery = @"INSERT INTO  TmpBuySnack
+				string SqlQuery = @"SELECT SnackCount
+								      FROM Maejum
+									 WHERE SnackNum = @SnackNum";
+
+
+				SqlCommand cmd = new SqlCommand(SqlQuery, conn);
+
+				SqlParameter parmSnackNum1 = new SqlParameter("@SnackNum", item.SnackNum);
+				cmd.Parameters.Add(parmSnackNum1);
+
+				SqlDataReader reader = cmd.ExecuteReader();
+
+				if(reader.Read())
+				{
+					int SnackCount = Convert.ToInt32(reader["SnackCount"].ToString());
+
+					if (SnackCount < item.Count)
+					{
+						string message = $"{item.SnackName}의 재고가 부족합니다.\n 현재 재고 : {SnackCount}";
+						Commons.ShowMessageAsync("재고부족", message);
+
+						conn.Close();
+						reader.Close();
+						return;
+					}
+				}
+				//conn.Close();
+				reader.Close();
+
+				//conn.Open();
+
+				 SqlQuery = @"INSERT INTO  TmpBuySnack
 									       ( ID
 									       , SnackName
 									       , SnackNum
@@ -116,7 +148,7 @@ namespace WpfMoogaBox.ViewModels
 									       , @BuyCount
 									       , @SnackPrice)";
 
-				SqlCommand cmd = new SqlCommand(SqlQuery, conn);
+				cmd = new SqlCommand(SqlQuery, conn);
 
 				SqlParameter parmID = new SqlParameter("@ID", ID);
 				cmd.Parameters.Add(parmID);
@@ -138,6 +170,9 @@ namespace WpfMoogaBox.ViewModels
 
 				cmd.ExecuteNonQuery();
 			}
+
+			
+			conn.Close();
 
 			this.TryCloseAsync();
 
