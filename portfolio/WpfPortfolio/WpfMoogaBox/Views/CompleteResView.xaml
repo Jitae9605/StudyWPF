@@ -1,0 +1,50 @@
+﻿<mah:MetroWindow 
+    x:Class="WpfMoogaBox.Views.CompleteResView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:cal="http://caliburnmicro.com"
+    xmlns:local="clr-namespace:WpfMoogaBox.Views"
+    mc:Ignorable="d"
+    Title="CompleteResView" Height="350" Width="400" Background="Black" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition/>
+            <RowDefinition Height="80"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="80"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"
+               Content="예매완료" Foreground="White" FontSize="25" FontWeight="Bold"/>
+        <StackPanel Grid.Row="1" Grid.Column="0" >
+            <Label Content="영화이름 : " Foreground="White" FontSize="11" FontWeight="Bold" HorizontalAlignment="Right" Margin="5"/>
+            <Label Content="상영관 : "   Foreground="White" FontSize="11" FontWeight="Bold" HorizontalAlignment="Right" Margin="5"/>
+            <Label Content="시작시간 : " Foreground="White" FontSize="11" FontWeight="Bold" HorizontalAlignment="Right" Margin="5"/>
+            <Label Content="좌석번호 : " Foreground="White" FontSize="11" FontWeight="Bold" HorizontalAlignment="Right" Margin="5"/>
+            <Label Content="예매번호 : " Foreground="White" FontSize="15" FontWeight="Bold" HorizontalAlignment="Right" Margin="5"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="1">
+            <TextBox Text="{Binding SelectionInfo[1]}" Height="16" Margin="5" IsEnabled="False" Foreground="Black" FontSize="14" FontWeight="Bold"/>
+            <TextBox Text="{Binding SelectionInfo[2]}" Height="16" Margin="5" IsEnabled="False" Foreground="Black" FontSize="14" FontWeight="Bold"/>
+            <TextBox Text="{Binding SelectionInfo[3]}" Height="16" Margin="5" IsEnabled="False" Foreground="Black" FontSize="14" FontWeight="Bold"/>
+            <TextBox Text="{Binding SelectionInfo[4]}" Height="16" Margin="5" IsEnabled="False" Foreground="Black" FontSize="14" FontWeight="Bold"/>
+            <TextBox Text="{Binding SelectedSeatfortxtbox}" Height="18" Margin="5" IsEnabled="False" Foreground="Black" FontSize="16" FontWeight="Bold"/>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Width="100" Height="50" HorizontalAlignment="Center" 
+                    Content="확인" Margin="10" FontSize="16" Foreground="White"
+                    Style="{StaticResource MahApps.Styles.Button}" Background="#B71000" 
+                    cal:Message.Attach="[Event Click] = [Action Next3($source, $eventArgs)]"/>
+
+            <Button Width="100" Height="50" HorizontalAlignment="Center" 
+                    Content="취소" Margin="10" FontSize="16" Foreground="White"
+                    Style="{StaticResource MahApps.Styles.Button}" Background="#B71000" 
+                    cal:Message.Attach="[Event Click] = [Action Cancel3($source, $eventArgs)]"/>
+        </StackPanel>
+    </Grid>
+</mah:MetroWindow>

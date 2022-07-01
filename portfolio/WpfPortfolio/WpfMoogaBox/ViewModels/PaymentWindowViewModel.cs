@@ -28,154 +28,20 @@ namespace WpfMoogaBox.ViewModels
 		}
 
 
-		public async void LetsPay(object sender, MouseButtonEventHandler e)
+		public void LetsPay(object sender, MouseButtonEventHandler e)
 		{
-			string ConnString = "Data Source=PC01;Initial Catalog=MoogaBox;Integrated Security=True";
-			SqlConnection conn = new SqlConnection(ConnString);
-
-			conn.Open();
-			string SqlQuery = "";
-
-			// 매점 Tmp -> BuySnack
-			foreach (var item in datagridData_Snack)
-			{
-				SqlQuery = @"INSERT INTO  BuySnack
-								       ( ID
-								       , SnackName
-								       , SnackNum
-								       , BuyPrice
-								       , BuyCount
-								       , SnackPrice)
-								 VALUES	 
-								       ( @ID
-								       , @SnackName
-								       , @SnackNum
-								       , @BuyPrice
-								       , @BuyCount
-								       , @SnackPrice)";
-
-				SqlCommand cmd = new SqlCommand(SqlQuery, conn);
-
-				SqlParameter parmID = new SqlParameter("@ID", ID);
-				cmd.Parameters.Add(parmID);
-
-				SqlParameter parSnackName = new SqlParameter("@SnackName", item.SnackName);
-				cmd.Parameters.Add(parSnackName);
-
-				SqlParameter parmSnackNum = new SqlParameter("@SnackNum", item.SnackNum);
-				cmd.Parameters.Add(parmSnackNum);
-
-				SqlParameter parmBuyPrice = new SqlParameter("@BuyPrice", item.Sum);
-				cmd.Parameters.Add(parmBuyPrice);
-
-				SqlParameter parmBuyCount = new SqlParameter("@BuyCount", item.Count);
-				cmd.Parameters.Add(parmBuyCount);
-
-				SqlParameter parmSnackPrice = new SqlParameter("@SnackPrice", item.SnackPrice);
-				cmd.Parameters.Add(parmSnackPrice);
-
-				cmd.ExecuteNonQuery();
-
-				SqlQuery = @"UPDATE Maejum
-							    SET SnackCount = SnackCount - @SnackCount2
-							  WHERE SnackNum = @SnackNum2";
-
-				cmd = new SqlCommand(SqlQuery, conn);
-
-				SqlParameter parmBuyCount2 = new SqlParameter("@SnackCount2", item.Count);
-				cmd.Parameters.Add(parmBuyCount2);
-
-				SqlParameter parmSnackNum2 = new SqlParameter("@SnackNum2", item.SnackNum);
-				cmd.Parameters.Add(parmSnackNum2);
-
-				cmd.ExecuteNonQuery();
-			}
-
-			// 영화 Tmp -> Res..
-			SqlQuery = "";
-
-			foreach (var item in DatagridData_Mv)
-			{
-				SqlQuery = @"INSERT INTO  Reservation
-							   	        ( ID
-							   	        , MvName
-							   	        , MvNum
-							   	        , Hall
-							   	        , SeatNum
-							   	        , StartTime
-							   	        , Ccount
-							   	        , Mmoney)
-							   	  VALUES	 
-							   	        ( @ID
-							   	        , @MvName
-							   	        , @MvNum
-							   	        , @Hall
-							   	        , @SeatNum
-							   	        , @StartTime
-							   	        , @Ccount
-							   	        , @Mmoney)";
-
-				SqlCommand cmd = new SqlCommand(SqlQuery, conn);
-
-				SqlParameter parmID = new SqlParameter("@ID", ID);
-				cmd.Parameters.Add(parmID);
-
-				SqlParameter parMvName = new SqlParameter("@MvName", item.MvName);
-				cmd.Parameters.Add(parMvName);
-
-				SqlParameter parMvNum = new SqlParameter("@MvNum", item.MvNum);
-				cmd.Parameters.Add(parMvNum);
-
-				SqlParameter parmHall = new SqlParameter("@Hall", item.Hall);
-				cmd.Parameters.Add(parmHall);
-
-				SqlParameter parmSeatNum = new SqlParameter("@SeatNum", item.Seat);
-				cmd.Parameters.Add(parmSeatNum);
-
-				SqlParameter parmStartTime = new SqlParameter("@StartTime", DateTime.Parse(item.StartTime));
-				cmd.Parameters.Add(parmStartTime);
-
-				SqlParameter parmCcount = new SqlParameter("@Ccount", item.Count);
-				cmd.Parameters.Add(parmCcount);
-
-				SqlParameter parmMmoney = new SqlParameter("@Mmoney", item.Count * item.MvPrice);
-				cmd.Parameters.Add(parmMmoney);
-
-				cmd.ExecuteNonQuery();
-
-				string[] Seat = item.Seat.Split(',');
-
-
-				for(int i = 0; i < Seat.Length; i++)
-				{
-					SqlQuery = @"UPDATE   CrJo
-								  SET Eempty = 0
-								WHERE MvName = @MvName2
-								  AND MvNum = @MvNum2
-								  AND SeatNum = @SeatNum";
-
-
-
-					cmd = new SqlCommand(SqlQuery, conn);
-
-					SqlParameter parMvName2 = new SqlParameter("@MvName2", item.MvName);
-					cmd.Parameters.Add(parMvName2);
-
-					SqlParameter parmMvNum2 = new SqlParameter("@MvNum2", item.MvNum);
-					cmd.Parameters.Add(parmMvNum2);
-
-					SqlParameter parmSeat = new SqlParameter("@SeatNum", Seat[i]);
-					cmd.Parameters.Add(parmSeat);
-
-					cmd.ExecuteNonQuery();
-				}
-			}
+			PaymentProcess_Sncak();
+			PaymentProcess_Mv();
 
 			MessageBox.Show("결제가 완료되었습니다.", "결제완료");
 
-			CanclePayment(sender, e);
-		}
+			IWindowManager wManager = new WindowManager();
+			var result = wManager.ShowWindowAsync(new CompleteResViewModel());
 
+			// CanclePayment(sender, e);
+		}
+		
+		
 
 		public void CanclePayment(object sender, MouseButtonEventHandler e)
 		{
@@ -318,6 +184,8 @@ namespace WpfMoogaBox.ViewModels
 			string ConnString = "Data Source=PC01;Initial Catalog=MoogaBox;Integrated Security=True";
 			SqlConnection conn = new SqlConnection(ConnString);
 
+			conn.Open();
+
 			string SqlQuery = @"SELECT  ID
 						       , SnackName
 						       , SnackNum
@@ -349,6 +217,165 @@ namespace WpfMoogaBox.ViewModels
 			conn.Close();
 
 			return Sum_SNACK;
+		}
+
+		/// <summary>
+		/// Snack 결제진행(재고빼기, 결제내역에 값 삽입) 
+		/// </summary>
+		public void PaymentProcess_Sncak()
+		{
+			string ConnString = "Data Source=PC01;Initial Catalog=MoogaBox;Integrated Security=True";
+			SqlConnection conn = new SqlConnection(ConnString);
+
+			conn.Open();
+			string SqlQuery = "";
+
+			// 매점 Tmp -> BuySnack
+			foreach (var item in datagridData_Snack)
+			{
+				SqlQuery = @"INSERT INTO  BuySnack
+								       ( ID
+								       , SnackName
+								       , SnackNum
+								       , BuyPrice
+								       , BuyCount
+								       , SnackPrice)
+								 VALUES	 
+								       ( @ID
+								       , @SnackName
+								       , @SnackNum
+								       , @BuyPrice
+								       , @BuyCount
+								       , @SnackPrice)";
+
+				SqlCommand cmd = new SqlCommand(SqlQuery, conn);
+
+				SqlParameter parmID = new SqlParameter("@ID", ID);
+				cmd.Parameters.Add(parmID);
+
+				SqlParameter parSnackName = new SqlParameter("@SnackName", item.SnackName);
+				cmd.Parameters.Add(parSnackName);
+
+				SqlParameter parmSnackNum = new SqlParameter("@SnackNum", item.SnackNum);
+				cmd.Parameters.Add(parmSnackNum);
+
+				SqlParameter parmBuyPrice = new SqlParameter("@BuyPrice", item.Sum);
+				cmd.Parameters.Add(parmBuyPrice);
+
+				SqlParameter parmBuyCount = new SqlParameter("@BuyCount", item.Count);
+				cmd.Parameters.Add(parmBuyCount);
+
+				SqlParameter parmSnackPrice = new SqlParameter("@SnackPrice", item.SnackPrice);
+				cmd.Parameters.Add(parmSnackPrice);
+
+				cmd.ExecuteNonQuery();
+
+				SqlQuery = @"UPDATE Maejum
+							    SET SnackCount = SnackCount - @SnackCount2
+							  WHERE SnackNum = @SnackNum2";
+
+				cmd = new SqlCommand(SqlQuery, conn);
+
+				SqlParameter parmBuyCount2 = new SqlParameter("@SnackCount2", item.Count);
+				cmd.Parameters.Add(parmBuyCount2);
+
+				SqlParameter parmSnackNum2 = new SqlParameter("@SnackNum2", item.SnackNum);
+				cmd.Parameters.Add(parmSnackNum2);
+
+				cmd.ExecuteNonQuery();
+			}
+		}
+
+		/// <summary>
+		/// Mv 결제진행(결제내역에 값 삽입, 좌석예약상태 업데이트) 
+		/// </summary>
+		public void PaymentProcess_Mv()
+		{
+			string ConnString = "Data Source=PC01;Initial Catalog=MoogaBox;Integrated Security=True";
+			SqlConnection conn = new SqlConnection(ConnString);
+
+			conn.Open();
+			string SqlQuery = "";
+
+			// 영화 Tmp -> Res..
+			SqlQuery = "";
+
+			foreach (var item in DatagridData_Mv)
+			{
+				SqlQuery = @"INSERT INTO  Reservation
+							   	        ( ID
+							   	        , MvName
+							   	        , MvNum
+							   	        , Hall
+							   	        , SeatNum
+							   	        , StartTime
+							   	        , Ccount
+							   	        , Mmoney)
+							   	  VALUES	 
+							   	        ( @ID
+							   	        , @MvName
+							   	        , @MvNum
+							   	        , @Hall
+							   	        , @SeatNum
+							   	        , @StartTime
+							   	        , @Ccount
+							   	        , @Mmoney)";
+
+				SqlCommand cmd = new SqlCommand(SqlQuery, conn);
+
+				SqlParameter parmID = new SqlParameter("@ID", ID);
+				cmd.Parameters.Add(parmID);
+
+				SqlParameter parMvName = new SqlParameter("@MvName", item.MvName);
+				cmd.Parameters.Add(parMvName);
+
+				SqlParameter parMvNum = new SqlParameter("@MvNum", item.MvNum);
+				cmd.Parameters.Add(parMvNum);
+
+				SqlParameter parmHall = new SqlParameter("@Hall", item.Hall);
+				cmd.Parameters.Add(parmHall);
+
+				SqlParameter parmSeatNum = new SqlParameter("@SeatNum", item.Seat);
+				cmd.Parameters.Add(parmSeatNum);
+
+				SqlParameter parmStartTime = new SqlParameter("@StartTime", DateTime.Parse(item.StartTime));
+				cmd.Parameters.Add(parmStartTime);
+
+				SqlParameter parmCcount = new SqlParameter("@Ccount", item.Count);
+				cmd.Parameters.Add(parmCcount);
+
+				SqlParameter parmMmoney = new SqlParameter("@Mmoney", item.Count * item.MvPrice);
+				cmd.Parameters.Add(parmMmoney);
+
+				cmd.ExecuteNonQuery();
+
+				string[] Seat = item.Seat.Split(',');
+
+
+				for (int i = 0; i < Seat.Length; i++)
+				{
+					SqlQuery = @"UPDATE   CrJo
+								  SET Eempty = 0
+								WHERE MvName = @MvName2
+								  AND MvNum = @MvNum2
+								  AND SeatNum = @SeatNum";
+
+
+
+					cmd = new SqlCommand(SqlQuery, conn);
+
+					SqlParameter parMvName2 = new SqlParameter("@MvName2", item.MvName);
+					cmd.Parameters.Add(parMvName2);
+
+					SqlParameter parmMvNum2 = new SqlParameter("@MvNum2", item.MvNum);
+					cmd.Parameters.Add(parmMvNum2);
+
+					SqlParameter parmSeat = new SqlParameter("@SeatNum", Seat[i]);
+					cmd.Parameters.Add(parmSeat);
+
+					cmd.ExecuteNonQuery();
+				}
+			}
 		}
 
 	}
