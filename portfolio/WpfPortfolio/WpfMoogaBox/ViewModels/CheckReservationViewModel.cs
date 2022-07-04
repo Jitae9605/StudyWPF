@@ -6,6 +6,7 @@ namespace WpfMoogaBox.ViewModels
 	{
 		public CheckReservationViewModel()
 		{
+
 		}
 	}
 }

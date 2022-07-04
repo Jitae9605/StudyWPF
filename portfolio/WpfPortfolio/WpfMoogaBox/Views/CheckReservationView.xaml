@@ -1,13 +1,71 @@
-﻿<UserControl x:Class="WpfMoogaBox.Views.CheckReservationView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:WpfMoogaBox.Views"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" Background="Black">
+﻿<mah:MetroWindow
+    x:Class="WpfMoogaBox.Views.CheckReservationView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:local="clr-namespace:WpfMoogaBox.Views"
+    xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:cal="http://caliburnmicro.com"
+    xmlns:iconPakcs="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    mc:Ignorable="d" 
+    d:DesignHeight="300" d:DesignWidth="500" Background="Black" WindowStartupLocation="CenterScreen">
     <Grid>
-        <Label Content="예매확인" Foreground="white"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+        <Grid Margin="10,5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition/>
+                <RowDefinition Height="70"/>
+            </Grid.RowDefinitions>
+
+            <!--로고 및 뷰설명-->
+            <Image Source="/Resources/moogabox.png" Width="120" HorizontalAlignment="Left"/>
+            <Label Grid.Row="0" Grid.Column="0" Content="티켓 발권" FontWeight="Bold" 
+               Foreground="white" FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+            <Border Grid.Row="1" BorderBrush="#B71000" BorderThickness="3">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Margin="15,0" Content="예매번호 입력" Foreground="White" FontSize="20" VerticalAlignment="Bottom" FontWeight="Bold"/>
+                    <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="20,10" Style="{StaticResource MahApps.Styles.TextBox}" VerticalAlignment="Top"/>
+                </Grid>
+            </Border>
+
+            <!--확인, 취소버튼-->
+            <StackPanel Grid.Row="2" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Width="100" Height="50" HorizontalAlignment="Center" 
+                    Content="발권" Margin="10" FontSize="20"  Foreground="White"
+                    Style="{StaticResource MahApps.Styles.Button}" Background="#B71000" 
+                    cal:Message.Attach="[Event Click] = [Action PrintTicket($source, $eventArgs)]"
+                />
+
+                <Button Width="100" Height="50" HorizontalAlignment="Center" 
+                    Content="취소" Margin="10" FontSize="20" Foreground="White"
+                    Style="{StaticResource MahApps.Styles.Button}" Background="#B71000" 
+                    cal:Message.Attach="[Event Click] = [Action CancelToMainMenuFromCheckRes($source, $eventArgs)]"
+                />
+            </StackPanel>
+
+
+        </Grid>
+        <!--상태바-->
+        <StatusBar Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Background="#B71000">
+            <StatusBarItem Content="Moogabox v2.0"/>
+            <Separator Style="{StaticResource MahApps.Styles.Separator.StatusBar}"/>
+            <StatusBarItem x:Name="stsResult"/>
+        </StatusBar>
     </Grid>
-</UserControl>
+</mah:MetroWindow>
