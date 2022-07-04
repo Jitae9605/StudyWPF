@@ -29,11 +29,12 @@ namespace WpfMoogaBox.Models
 			Count = 0;
 		}
 
-		public Mv_Info(string mvName, string hall, DateTime startTime, string seat, int count, string mvnum)
+		public Mv_Info(string mvName, string hall, DateTime startTime, DateTime EndingTime, string seat, int count, string mvnum)
 		{
 			MvName = mvName;
 			Hall = hall;
 			StartTime = startTime.ToString("HH:mm");
+			EndTime = EndingTime.ToString("HH:mm");
 			MvNum = mvnum;
 			Seat = seat;
 			MvPrice = 8000;

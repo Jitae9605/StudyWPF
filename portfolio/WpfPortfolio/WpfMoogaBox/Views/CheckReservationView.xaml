@@ -10,7 +10,7 @@
     xmlns:cal="http://caliburnmicro.com"
     xmlns:iconPakcs="http://metro.mahapps.com/winfx/xaml/iconpacks"
     mc:Ignorable="d" 
-    d:DesignHeight="300" d:DesignWidth="500" Background="Black" WindowStartupLocation="CenterScreen">
+    Height="350" Width="480" Background="Black" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -40,7 +40,9 @@
                     </Grid.ColumnDefinitions>
 
                     <Label Margin="15,0" Content="예매번호 입력" Foreground="White" FontSize="20" VerticalAlignment="Bottom" FontWeight="Bold"/>
-                    <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="20,10" Style="{StaticResource MahApps.Styles.TextBox}" VerticalAlignment="Top"/>
+                    <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="20,10" Width="450" FontSize="20"
+                             Style="{StaticResource MahApps.Styles.TextBox}" VerticalAlignment="Top" Text="{Binding InputResNum}"
+                             mah:TextBoxHelper.Watermark="예매번호" mah:TextBoxHelper.UseFloatingWatermark="True"/>
                 </Grid>
             </Border>
 
@@ -62,7 +64,7 @@
 
         </Grid>
         <!--상태바-->
-        <StatusBar Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Background="#B71000">
+        <StatusBar Grid.Row="1" Grid.Column="0" Background="#B71000">
             <StatusBarItem Content="Moogabox v2.0"/>
             <Separator Style="{StaticResource MahApps.Styles.Separator.StatusBar}"/>
             <StatusBarItem x:Name="stsResult"/>

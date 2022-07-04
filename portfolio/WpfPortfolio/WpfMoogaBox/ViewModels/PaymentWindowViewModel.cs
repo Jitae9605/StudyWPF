@@ -28,17 +28,18 @@ namespace WpfMoogaBox.ViewModels
 		}
 
 
-		public void LetsPay(object sender, MouseButtonEventHandler e)
+		public async void LetsPay(object sender, MouseButtonEventHandler e)
 		{
 			PaymentProcess_Sncak();
 			PaymentProcess_Mv();
-
-			MessageBox.Show("결제가 완료되었습니다.", "결제완료");
+			
+			var res = await Commons.ShowMessageAsync("결제완료", "완료되었습니다");
+			while (!(res == MessageDialogResult.Affirmative));
 
 			IWindowManager wManager = new WindowManager();
 			var result = wManager.ShowWindowAsync(new CompleteResViewModel());
 
-			// CanclePayment(sender, e);
+			TryCloseAsync();
 		}
 		
 		
@@ -140,6 +141,7 @@ namespace WpfMoogaBox.ViewModels
 									 , Hall
 									 , SeatNum
 									 , StartTime
+									 , EndingTime
 									 , Ccount
 									 , Mmoney
 								  FROM TmpReservation";
@@ -156,9 +158,10 @@ namespace WpfMoogaBox.ViewModels
 				string Hall = reader["Hall"].ToString();
 				string Seat = reader["SeatNum"].ToString();
 				DateTime StartTime = DateTime.Parse(reader["StartTime"].ToString());
+				DateTime EndingTime = DateTime.Parse(reader["EndingTime"].ToString());
 				int Count = Convert.ToInt32(reader["Ccount"].ToString());
 
-				Mv_Info mv_Info = new Mv_Info(MvName, Hall, StartTime, Seat, Count, MvNum);
+				Mv_Info mv_Info = new Mv_Info(MvName, Hall, StartTime, EndingTime, Seat, Count, MvNum);
 				Sum_MV = mv_Info.Count * mv_Info.MvPrice;
 
 				Sum_Mv = Sum_MV.ToString();
@@ -309,6 +312,7 @@ namespace WpfMoogaBox.ViewModels
 							   	        , Hall
 							   	        , SeatNum
 							   	        , StartTime
+							   	        , EndingTime
 							   	        , Ccount
 							   	        , Mmoney)
 							   	  VALUES	 
@@ -318,6 +322,7 @@ namespace WpfMoogaBox.ViewModels
 							   	        , @Hall
 							   	        , @SeatNum
 							   	        , @StartTime
+							   	        , @EndingTime
 							   	        , @Ccount
 							   	        , @Mmoney)";
 
@@ -340,6 +345,9 @@ namespace WpfMoogaBox.ViewModels
 
 				SqlParameter parmStartTime = new SqlParameter("@StartTime", DateTime.Parse(item.StartTime));
 				cmd.Parameters.Add(parmStartTime);
+
+				SqlParameter parmEndingTime = new SqlParameter("@EndingTime", DateTime.Parse(item.EndTime));
+				cmd.Parameters.Add(parmEndingTime);
 
 				SqlParameter parmCcount = new SqlParameter("@Ccount", item.Count);
 				cmd.Parameters.Add(parmCcount);

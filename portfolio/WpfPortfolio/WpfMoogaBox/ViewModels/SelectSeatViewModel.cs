@@ -44,7 +44,14 @@ namespace WpfMoogaBox.ViewModels
 
 		public void Next2(object sender, MouseButtonEventArgs e)
 		{
-			for(int i = 0; i < SeatCount; i++)
+			// 선택사항 없으면 클릭이벤트 무시
+			if (SeatCount < 1)
+			{
+				Commons.ShowMessageAsync("선택좌석 없음", "선택된 좌석이 없습니다!");
+				return;
+			}
+
+			for (int i = 0; i < SeatCount; i++)
 			{
 				SelectedSeats[i] = CheckedSeat[i];
 			}
@@ -232,7 +239,7 @@ namespace WpfMoogaBox.ViewModels
 			{
 				button.IsChecked = false;
 				CountSeatNum = 4;
-				MessageBox.Show("좌석선택은 4개 까지 입니다.");
+				Commons.ShowMessageAsync("좌석선택제한", "한번에 선택가능한 좌석은 4개입니다");
 				return;
 			}
 

@@ -31,6 +31,12 @@ namespace WpfMoogaBox.ViewModels
 
 		public void LetsPay_BuySnack(object sender, MouseButtonEventArgs e)
 		{
+			if(datagridData.Count == 0)
+			{
+				Commons.ShowMessageAsync("선택된 메뉴 없음", "먼저 메뉴를 선택해주세요!");
+				return;
+			}
+
 			CheckStockAndInsertTmpTbl();
 
 			this.TryCloseAsync();
@@ -41,8 +47,13 @@ namespace WpfMoogaBox.ViewModels
 
 		public void Delete_Selected_SnackItem(object sender, object datagrid_in_BuyMenu, MouseButtonEventArgs e)
 		{
+			// 선택사항 없으면 클릭이벤트 무시
 
-			datagridData.Remove(datagrid_in_BuyMenu as Snack_Info);
+			if(!datagridData.Remove(datagrid_in_BuyMenu as Snack_Info))
+			{
+				Commons.ShowMessageAsync("선택된것 없음", "먼저 삭제하고자 하는 메뉴를 선택해주세요!");
+
+			}
 
 			int temp_sum = 0;
 			foreach (var item in datagridData)
@@ -438,6 +449,7 @@ namespace WpfMoogaBox.ViewModels
 		/// </summary>
 		public void CheckStockAndInsertTmpTbl()
 		{
+
 			string ConnString = "Data Source=PC01;Initial Catalog=MoogaBox;Integrated Security=True";
 			SqlConnection conn = new SqlConnection(ConnString);
 

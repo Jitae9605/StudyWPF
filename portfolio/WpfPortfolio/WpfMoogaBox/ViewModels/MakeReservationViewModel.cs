@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -40,11 +41,12 @@ namespace WpfMoogaBox.ViewModels
 			// 선택사항 없으면 클릭이벤트 무시
 			if(string.IsNullOrEmpty(seleted.MvName))
 			{
+				Commons.ShowMessageAsync("선택영화 없음", "선택된 영화 및 시간이 없습니다!");
 				return;
 			}
 
 			string[] Send_SelectedMVInfo = new string[] { ID, seleted.MvName, seleted.Hall, seleted.StartTime, seleted.EndTime, seleted.MvNum };
-			this.TryCloseAsync();
+			App.Current.Windows[0].Close();
 			LoadSelectSeatViewModel(Send_SelectedMVInfo);
 		}
 

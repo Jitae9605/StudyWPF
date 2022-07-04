@@ -51,6 +51,7 @@
                         <DataGridTextColumn Binding="{Binding MvName}" Header="영화제목" FontWeight="Bold"/>
                         <DataGridTextColumn Binding="{Binding Hall}" Header="상영관" />
                         <DataGridTextColumn Binding="{Binding StartTime}" Header="상영시작시간" />
+                        <DataGridTextColumn Binding="{Binding EndingTime}" Header="상영종료시간" />
                         <DataGridTextColumn Binding="{Binding Seat}" Header="선택 좌석" />
                         <DataGridTextColumn Binding="{Binding MvPrice}" Header="단가" />
                     </DataGrid.Columns>

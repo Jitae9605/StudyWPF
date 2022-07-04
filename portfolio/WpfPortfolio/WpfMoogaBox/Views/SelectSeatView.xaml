@@ -560,8 +560,10 @@
 
 
 
-        <StatusBar Grid.Row="1">
-
+        <StatusBar Grid.Row="1" Background="#B71000">
+            <StatusBarItem Content="Moogabox v2.0"/>
+            <Separator Style="{StaticResource MahApps.Styles.Separator.StatusBar}"/>
+            <StatusBarItem x:Name="stsResult"/>
         </StatusBar>
 
     </Grid>

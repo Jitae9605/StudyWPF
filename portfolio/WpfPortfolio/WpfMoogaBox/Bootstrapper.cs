@@ -17,6 +17,7 @@ namespace WpfMoogaBox
 
 		protected override void Configure()
 		{
+
 			container = new SimpleContainer();
 			container.Singleton<IWindowManager, WindowManager>();
 			container.PerRequest<MainScreenViewModel>();

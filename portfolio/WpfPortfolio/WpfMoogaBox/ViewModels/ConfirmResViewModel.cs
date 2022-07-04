@@ -155,6 +155,7 @@ namespace WpfMoogaBox.ViewModels
 								          , Hall
 								          , SeatNum
 								          , StartTime
+								          , EndingTime
 								          , Ccount
 								          , Mmoney)
 								   VALUES 	 
@@ -164,6 +165,7 @@ namespace WpfMoogaBox.ViewModels
 								          , @Hall
 								          , @SeatNum
 								          , @StartTime
+								          , @EndingTime
 								          , @Ccount
 								          , @Mmoney)";
 
@@ -187,6 +189,9 @@ namespace WpfMoogaBox.ViewModels
 
 			SqlParameter parmStartTime = new SqlParameter("@StartTime", SelectionInfo[3]);
 			cmd.Parameters.Add(parmStartTime);
+
+			SqlParameter parmEndingTime = new SqlParameter("@EndingTime", SelectionInfo[4]);
+			cmd.Parameters.Add(parmEndingTime);
 
 			SqlParameter parmCcount = new SqlParameter("@Ccount", SelectedSeatNum);
 			cmd.Parameters.Add(parmCcount);
