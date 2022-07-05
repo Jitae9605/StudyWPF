@@ -15,9 +15,9 @@ namespace WpfMoogaBox.Helpers
 		/// <param name="style"></param>
 		/// <returns></returns>
 		public static async Task<MessageDialogResult> ShowMessageAsync(
-			string title, string message, MessageDialogStyle style = MessageDialogStyle.Affirmative)
+			string title, string message, int i = 0, MessageDialogStyle style = MessageDialogStyle.Affirmative)
 		{
-			return await (Application.Current.Windows[0] as MetroWindow).ShowMessageAsync(title, message, style, null);
+			return await (Application.Current.Windows[i] as MetroWindow).ShowMessageAsync(title, message, style, null);
 		}
 	}
 }

@@ -36,13 +36,18 @@ namespace WpfMoogaBox.ViewModels
 			var res = await Commons.ShowMessageAsync("결제완료", "완료되었습니다");
 			while (!(res == MessageDialogResult.Affirmative));
 
-			IWindowManager wManager = new WindowManager();
-			var result = wManager.ShowWindowAsync(new CompleteResViewModel());
+			if (!(DatagridData_Mv.Count < 1))
+			{
+				IWindowManager wManager = new WindowManager();
+				var result = wManager.ShowWindowAsync(new CompleteResViewModel(ID, DatagridData_Mv[0]));
 
-			TryCloseAsync();
+			}
+			else
+			{
+				CanclePayment(sender, e);
+			}
 		}
-		
-		
+
 
 		public void CanclePayment(object sender, MouseButtonEventHandler e)
 		{

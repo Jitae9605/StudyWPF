@@ -14,6 +14,11 @@ namespace WpfMoogaBox.ViewModels
 			
 		}
 
+		public CheckReservationViewModel(string ID)
+		{
+			InputResNum = ID;
+		}
+
 		public void PrintTicket(object sender, MouseButtonEventArgs e)
 		{
 			if(string.IsNullOrEmpty(InputResNum))
