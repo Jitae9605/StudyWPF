@@ -20,7 +20,6 @@ namespace WpfMoogaBox.ViewModels
 		public Selection seleted = new Selection();
 		public MakeReservationViewModel(string Get_ID)
 		{
-
 			InitMVTimeList(Get_ID);
 		}
 
