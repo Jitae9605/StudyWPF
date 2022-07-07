@@ -73,3 +73,4 @@ C# WPF 학습리포지토리
     - MahApp.Metro Metro UI/Modern UI 
     - Caliburn.Micro
     - SQL Server
+    - Barcodelib
