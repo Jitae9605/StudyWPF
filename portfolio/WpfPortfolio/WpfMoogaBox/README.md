@@ -4,10 +4,10 @@
 
  |![WpfMoogaBox1](https://github.com/Jitae9605/StudyWPF/blob/main/capture/moogabox1.gif?raw=true)|
 |:---:|
- |**실행화면**|
+ |**고객_실행화면**|
 
  <br>
 
  |![WpfMoogaBox2](https://github.com/Jitae9605/StudyWPF/blob/main/capture/moogabox2.gif?raw=true)|
 |:---:|
-|**실행화면2**|
+|**고객_실행화면2**|
