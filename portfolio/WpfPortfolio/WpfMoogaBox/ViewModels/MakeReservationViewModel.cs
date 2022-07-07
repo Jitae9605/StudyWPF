@@ -162,7 +162,7 @@ namespace WpfMoogaBox.ViewModels
 			switch (SelectedMv.MvName)
 			{
 				case "닥터 스트레인지 : 대혼돈의 멀티버스":
-					SelectedMv_img = "\\Resources\\닥터new.png";
+					SelectedMv_img = "/Resources/닥터new.png";
 					break;
 				case "범죄도시2":
 					SelectedMv_img = "/Resources/범죄도시2.png";

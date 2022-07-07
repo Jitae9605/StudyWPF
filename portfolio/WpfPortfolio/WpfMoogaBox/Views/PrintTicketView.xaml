@@ -1,0 +1,66 @@
+﻿<mah:MetroWindow 
+    x:Class="WpfMoogaBox.Views.PrintTicketView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:cal="http://caliburnmicro.com"
+    xmlns:local="clr-namespace:WpfMoogaBox.Views"
+    mc:Ignorable="d"
+    Height="250" Width="700" Background="Black" WindowStyle="None" WindowStartupLocation="CenterScreen"
+    ResizeMode="NoResize" ShowTitleBar="False" ShowMinButton="False" ShowMaxRestoreButton="False">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Border BorderBrush="#B71000" BorderThickness="3">
+            <Grid Margin="10,5">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <!--로고 및 뷰설명-->
+                <Image Source="/Resources/moogabox.png" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,15,0,0"/>
+                <Label Grid.Row="0" Grid.Column="0" Content="Ticket" FontWeight="Bold" Margin="150,0,0,0"
+               Foreground="white" FontSize="30" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+
+                <!-- 절취선 -->
+                <StackPanel Grid.Row="0">
+                    <Label  Content="|" Foreground="White" FontSize="10" Margin="500,0,0,0"/>
+                    <Label  Content="|" Foreground="White" FontSize="10" Margin="500,0,0,0"/>
+                    <Label  Content="|" Foreground="White" FontSize="10" Margin="500,0,0,0"/>
+                </StackPanel>
+                <StackPanel Grid.Row="1">
+                    <Label  Content="|" Foreground="White" FontSize="10" Margin="500,0,0,0"/>
+                    <Label  Content="|" Foreground="White" FontSize="10" Margin="500,0,0,0"/>
+                    <Label  Content="|" Foreground="White" FontSize="10" Margin="500,0,0,0"/>
+                </StackPanel>
+                <StackPanel Grid.Row="2">
+                    <Label  Content="|" Foreground="White" FontSize="10" Margin="500,0,0,0"/>
+                    <Label  Content="|" Foreground="White" FontSize="10" Margin="500,0,0,0"/>
+                    <Label  Content="|" Foreground="White" FontSize="10" Margin="500,0,0,0"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="0" Grid.RowSpan="3" Margin="20,50,0,0" >
+                    <Label Content="{Binding Ticket_MvInfo[0]}" Foreground="White" FontSize="16"  />
+                    <Label Content="{Binding Ticket_MvInfo[1]}" Foreground="White" FontSize="16" />
+                    <Label Content="{Binding Ticket_MvInfo[2]}" Foreground="White" FontSize="16" />
+                    <Label Content="{Binding Ticket_MvInfo[3]}" Foreground="White" FontSize="16" />
+                    <Label Content="{Binding Ticket_MvInfo[4]}" Foreground="White" FontSize="16" />
+                </StackPanel>
+                <Image Grid.Row="0" Grid.RowSpan="3" Source="{Binding Mv_Poster_Img_Source}" Margin="350,0,180,0" Stretch="Fill"/>
+
+                <Image Grid.Row="0" Grid.RowSpan="3" Source="{Binding Mv_Barcode_Image}" Margin="525,0,10,0" Stretch="Uniform">
+                    <Image.RenderTransform>
+                        <RotateTransform Angle="90" CenterX="50" CenterY="0"/>
+                    </Image.RenderTransform>
+                </Image>
+                
+            </Grid>
+        </Border>
+    </Grid>
+</mah:MetroWindow>

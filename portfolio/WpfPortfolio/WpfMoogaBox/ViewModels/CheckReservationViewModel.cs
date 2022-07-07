@@ -49,16 +49,14 @@ namespace WpfMoogaBox.ViewModels
 				string SeatNum = reader["SeatNum"].ToString();
 				string StartTime = DateTime.Parse(reader["StartTime"].ToString()).ToString("HH:mm");
 				string EndTime = DateTime.Parse(reader["EndingTime"].ToString()).ToString("HH:mm");
-				MessageBox.Show(ID, "값");
-				MessageBox.Show(MvName, "값");
-				MessageBox.Show(Hall, "값");
-				MessageBox.Show(SeatNum, "값");
-				MessageBox.Show(StartTime, "값");
-				MessageBox.Show(EndTime, "값");
 			}
 
 			reader.Close();
 			conn.Close();
+
+			IWindowManager windowManager = new WindowManager();
+			windowManager.ShowWindowAsync(new PrintTicketViewModel(InputResNum));
+			TryCloseAsync();
 		}
 
 		public void CancelToMainMenuFromCheckRes(object sender, MouseButtonEventArgs e)
